@@ -25,7 +25,7 @@ jobs:
       - name: Check and auto-fix sync drift
         run: |
           set +e
-          python scripts/check_sync.py --fix | tee sync-report.txt
+          python scripts/check_sync.py --fix | tee "$RUNNER_TEMP/sync-report.txt"
           exit 0
 
       - name: Open PR with any fixes
@@ -33,6 +33,6 @@ jobs:
         with:
           commit-message: "Sync data/ with upstream MAVLink XML"
           title: "Sync stub data with upstream MAVLink XML"
-          body-path: sync-report.txt
+          body-path: ${{ runner.temp }}/sync-report.txt
           branch: sync-upstream-mavlink
           labels: automated
