@@ -1,0 +1,220 @@
+{
+  "$schema": "../../../../schema/message.schema.json",
+  "name": "CAMERA_FOV_STATUS",
+  "id": 271,
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "fields": [
+    {
+      "name": "time_boot_ms",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "lat_camera",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "lon_camera",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "alt_camera",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "lat_image",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "lon_image",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "alt_image",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "q",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "hfov",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "vfov",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "camera_device_id",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

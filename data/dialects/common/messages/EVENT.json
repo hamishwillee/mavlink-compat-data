@@ -1,0 +1,148 @@
+{
+  "$schema": "../../../../schema/message.schema.json",
+  "name": "EVENT",
+  "id": 410,
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "fields": [
+    {
+      "name": "destination_component",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "destination_system",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "id",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "event_time_boot_ms",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "sequence",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "log_levels",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "arguments",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

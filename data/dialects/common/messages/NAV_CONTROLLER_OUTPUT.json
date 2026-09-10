@@ -1,0 +1,166 @@
+{
+  "$schema": "../../../../schema/message.schema.json",
+  "name": "NAV_CONTROLLER_OUTPUT",
+  "id": 62,
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "fields": [
+    {
+      "name": "nav_roll",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "nav_pitch",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "nav_bearing",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "target_bearing",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "wp_dist",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "alt_error",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "aspd_error",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "xtrack_error",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

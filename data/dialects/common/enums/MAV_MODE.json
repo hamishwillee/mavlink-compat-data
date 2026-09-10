@@ -1,0 +1,219 @@
+{
+  "$schema": "../../../../schema/enum.schema.json",
+  "name": "MAV_MODE",
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "values": [
+    {
+      "name": "MAV_MODE_PREFLIGHT",
+      "value": 0,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_STABILIZE_DISARMED",
+      "value": 80,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_STABILIZE_ARMED",
+      "value": 208,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_MANUAL_DISARMED",
+      "value": 64,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_MANUAL_ARMED",
+      "value": 192,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_GUIDED_DISARMED",
+      "value": 88,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_GUIDED_ARMED",
+      "value": 216,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_AUTO_DISARMED",
+      "value": 92,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_AUTO_ARMED",
+      "value": 220,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_TEST_DISARMED",
+      "value": 66,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "MAV_MODE_TEST_ARMED",
+      "value": 194,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

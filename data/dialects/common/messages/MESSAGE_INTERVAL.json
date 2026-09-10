@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../../schema/message.schema.json",
+  "name": "MESSAGE_INTERVAL",
+  "id": 244,
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "fields": [
+    {
+      "name": "message_id",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "name": "interval_us",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

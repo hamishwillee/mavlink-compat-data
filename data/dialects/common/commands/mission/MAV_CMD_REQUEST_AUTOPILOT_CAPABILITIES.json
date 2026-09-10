@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../../../schema/command.schema.json",
+  "name": "MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES",
+  "value": 520,
+  "dialect": "common",
+  "context": "mission",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "params": [
+    {
+      "index": 1,
+      "name": "Version",
+      "enumRef": "MAV_BOOL",
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "name": "Reserved (all remaining params)",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

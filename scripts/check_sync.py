@@ -1,0 +1,252 @@
+#!/usr/bin/env python3
+"""Diffs data/ against a fresh parse of upstream MAVLink XML to catch drift —
+e.g. a command param that was "Empty"/reserved gaining a real name and
+meaning in a later MAVLink revision.
+
+Three categories of drift:
+  - new_entity:     a message/enum/MAV_CMD exists upstream but has no stub yet.
+                     Not fixed here — run generate_stubs.py.
+  - addition/rename: a field/value/param was added or renamed on an existing
+                     entity (e.g. a reserved param gaining a real name).
+                     Safe to auto-fix with --fix: only the identity field
+                     (name/enumRef) is patched, or the new sub-entity is
+                     appended with fresh "unknown" compatibility — every
+                     existing compatibility block is left untouched.
+  - removed/removed_entity: a field/value/param/entity that used to exist
+                     upstream no longer does. Never auto-fixed or deleted —
+                     flagged for a human to decide (record as removed, or
+                     archive), since deleting would destroy compat history.
+
+Usage:
+    python scripts/check_sync.py [--cache-dir DIR] [--fix]
+
+Exit code is non-zero if any drift remains unresolved after the run.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+import mavlink_xml
+from generate_stubs import DATA_DIR, REPO_ROOT, default_compatibility, load_vocab
+
+
+@dataclass
+class Drift:
+    category: str
+    path: Path
+    detail: str
+    fixed: bool = False
+
+
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text())
+
+
+def save_json(path: Path, doc: dict) -> None:
+    path.write_text(json.dumps(doc, indent=2, sort_keys=False) + "\n")
+
+
+def check_messages(dialect_name: str, messages, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+    base = DATA_DIR / dialect_name / "messages"
+    for msg in messages:
+        path = base / f"{msg.name}.json"
+        if not path.exists():
+            drifts.append(Drift("new_entity", path, f"message {msg.name} has no stub (run generate_stubs.py)"))
+            continue
+
+        doc = load_json(path)
+        stored_fields = doc.get("fields", [])
+        changed = False
+
+        for i, f in enumerate(msg.fields):
+            if i >= len(stored_fields):
+                drifts.append(Drift("addition", path, f"fields[{i}] {f.name!r} present upstream, missing locally", fixed=fix))
+                if fix:
+                    stored_fields.append({"name": f.name, "enumRef": f.enum_ref, "compatibility": default_compatibility(stacks)})
+                    changed = True
+                continue
+            sf = stored_fields[i]
+            if sf.get("name") != f.name:
+                drifts.append(Drift("rename", path, f"fields[{i}].name: {sf.get('name')!r} -> {f.name!r}", fixed=fix))
+                if fix:
+                    sf["name"] = f.name
+                    changed = True
+            if sf.get("enumRef") != f.enum_ref:
+                drifts.append(Drift("rename", path, f"fields[{i}].enumRef: {sf.get('enumRef')!r} -> {f.enum_ref!r}", fixed=fix))
+                if fix:
+                    sf["enumRef"] = f.enum_ref
+                    changed = True
+
+        for i in range(len(msg.fields), len(stored_fields)):
+            drifts.append(Drift("removed", path, f"fields[{i}] {stored_fields[i].get('name')!r} no longer present upstream"))
+
+        if changed:
+            doc["fields"] = stored_fields
+            save_json(path, doc)
+
+
+def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+    base = DATA_DIR / dialect_name / "enums"
+    for enum in enums:
+        path = base / f"{enum.name}.json"
+        if not path.exists():
+            drifts.append(Drift("new_entity", path, f"enum {enum.name} has no stub (run generate_stubs.py)"))
+            continue
+
+        doc = load_json(path)
+        stored_values = doc.get("values", [])
+        stored_by_value = {v["value"]: v for v in stored_values}
+        upstream_by_value = {v.value: v for v in enum.values}
+        changed = False
+
+        for val, u in upstream_by_value.items():
+            if val not in stored_by_value:
+                drifts.append(Drift("addition", path, f"values[value={val}] {u.name!r} present upstream, missing locally", fixed=fix))
+                if fix:
+                    stored_values.append({"name": u.name, "value": u.value, "compatibility": default_compatibility(stacks)})
+                    changed = True
+            elif stored_by_value[val].get("name") != u.name:
+                sv = stored_by_value[val]
+                drifts.append(Drift("rename", path, f"values[value={val}].name: {sv.get('name')!r} -> {u.name!r}", fixed=fix))
+                if fix:
+                    sv["name"] = u.name
+                    changed = True
+
+        for val, sv in stored_by_value.items():
+            if val not in upstream_by_value:
+                drifts.append(Drift("removed", path, f"values[value={val}] {sv.get('name')!r} no longer present upstream"))
+
+        if changed:
+            stored_values.sort(key=lambda v: v["value"])
+            doc["values"] = stored_values
+            save_json(path, doc)
+
+
+def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+    for context in ("mission", "command"):
+        base = DATA_DIR / "common" / "commands" / context
+        for cmd in commands:
+            path = base / f"{cmd.name}.json"
+            if not path.exists():
+                drifts.append(Drift("new_entity", path, f"command {cmd.name} ({context}) has no stub (run generate_stubs.py)"))
+                continue
+
+            doc = load_json(path)
+            stored_params = doc.get("params", [])
+            stored_by_index = {p["index"]: p for p in stored_params}
+            upstream_by_index = {p.index: p for p in cmd.params}
+            changed = False
+
+            for idx, u in upstream_by_index.items():
+                if idx not in stored_by_index:
+                    drifts.append(Drift("addition", path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
+                    if fix:
+                        stored_params.append(
+                            {"index": u.index, "name": u.name, "enumRef": u.enum_ref, "compatibility": default_compatibility(stacks)}
+                        )
+                        changed = True
+                    continue
+                sp = stored_by_index[idx]
+                if sp.get("name") != u.name:
+                    drifts.append(Drift("rename", path, f"params[index={idx}].name: {sp.get('name')!r} -> {u.name!r}", fixed=fix))
+                    if fix:
+                        sp["name"] = u.name
+                        changed = True
+                if sp.get("enumRef") != u.enum_ref:
+                    drifts.append(Drift("rename", path, f"params[index={idx}].enumRef: {sp.get('enumRef')!r} -> {u.enum_ref!r}", fixed=fix))
+                    if fix:
+                        sp["enumRef"] = u.enum_ref
+                        changed = True
+
+            for idx, sp in stored_by_index.items():
+                if idx not in upstream_by_index:
+                    drifts.append(Drift("removed", path, f"params[index={idx}] {sp.get('name')!r} no longer present upstream"))
+
+            if changed:
+                stored_params.sort(key=lambda p: p["index"])
+                doc["params"] = stored_params
+                save_json(path, doc)
+
+
+def check_removed_entities(dialects: dict, drifts: list[Drift]) -> None:
+    for dialect_name, dialect in dialects.items():
+        base = DATA_DIR / dialect_name
+        upstream_messages = {m.name for m in dialect.messages}
+        upstream_enums = {e.name for e in dialect.enums}
+        for path in sorted((base / "messages").glob("*.json")):
+            if path.stem not in upstream_messages:
+                drifts.append(Drift("removed_entity", path, f"message {path.stem} no longer defined in {dialect_name}.xml"))
+        for path in sorted((base / "enums").glob("*.json")):
+            if path.stem not in upstream_enums:
+                drifts.append(Drift("removed_entity", path, f"enum {path.stem} no longer defined in {dialect_name}.xml"))
+
+    upstream_commands = {c.name for c in dialects["common"].commands}
+    for context in ("mission", "command"):
+        base = DATA_DIR / "common" / "commands" / context
+        if not base.exists():
+            continue
+        for path in sorted(base.glob("*.json")):
+            if path.stem not in upstream_commands:
+                drifts.append(Drift("removed_entity", path, f"command {path.stem} no longer defined in MAV_CMD"))
+
+
+CATEGORY_LABELS = {
+    "new_entity": "New entities upstream (run generate_stubs.py to add stubs)",
+    "addition": "New fields/params/values on existing entities",
+    "rename": "Renamed fields/params/values (e.g. a reserved param gaining a real name)",
+    "removed": "Fields/params/values no longer present upstream (needs manual review)",
+    "removed_entity": "Entities no longer present upstream (needs manual review)",
+}
+
+
+def report(drifts: list[Drift]) -> None:
+    if not drifts:
+        print("OK: no drift found between data/ and upstream MAVLink XML.")
+        return
+    by_category: dict[str, list[Drift]] = {}
+    for d in drifts:
+        by_category.setdefault(d.category, []).append(d)
+    for cat in ("new_entity", "addition", "rename", "removed", "removed_entity"):
+        items = by_category.get(cat)
+        if not items:
+            continue
+        print(f"\n{CATEGORY_LABELS[cat]}:")
+        for d in items:
+            marker = " [fixed]" if d.fixed else ""
+            print(f"  {d.path.relative_to(REPO_ROOT)}: {d.detail}{marker}")
+    unresolved = sum(1 for d in drifts if not d.fixed)
+    print(f"\n{len(drifts)} drift item(s), {unresolved} unresolved.")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--cache-dir", type=Path, default=None, help="Directory of pre-fetched dialect XML.")
+    parser.add_argument(
+        "--fix",
+        action="store_true",
+        help="Apply safe fixes (renames, additions within existing entities). Never deletes files or touches compatibility data.",
+    )
+    args = parser.parse_args()
+
+    vocab = load_vocab()
+    stacks = vocab["stacks"]
+    dialects = mavlink_xml.load_all_dialects(args.cache_dir)
+
+    drifts: list[Drift] = []
+    for dialect_name, dialect in dialects.items():
+        check_messages(dialect_name, dialect.messages, stacks, args.fix, drifts)
+        check_enums(dialect_name, dialect.enums, stacks, args.fix, drifts)
+        if dialect_name == "common":
+            check_commands(dialect.commands, stacks, args.fix, drifts)
+    check_removed_entities(dialects, drifts)
+
+    report(drifts)
+    sys.exit(1 if any(not d.fixed for d in drifts) else 0)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../../../schema/command.schema.json",
+  "name": "MAV_CMD_ARM_AUTHORIZATION_REQUEST",
+  "value": 3001,
+  "dialect": "common",
+  "context": "mission",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "supported": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "params": [
+    {
+      "index": 1,
+      "name": "System ID",
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": null,
+            "basis": "unknown"
+          }
+        }
+      }
+    }
+  ]
+}

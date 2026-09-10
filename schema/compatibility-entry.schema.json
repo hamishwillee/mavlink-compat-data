@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "compatibility-entry.schema.json",
+  "$defs": {
+    "versionOrTrue": {
+      "oneOf": [
+        { "const": true },
+        { "const": "main" },
+        { "type": "string", "pattern": "^\\d+(\\.\\d+){0,2}$" }
+      ]
+    },
+    "versionOrMain": {
+      "oneOf": [
+        { "const": "main" },
+        { "type": "string", "pattern": "^\\d+(\\.\\d+){0,2}$" }
+      ]
+    },
+    "supported": {
+      "oneOf": [
+        { "const": false },
+        { "const": null },
+        { "const": "not-applicable" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["added_version"],
+          "properties": {
+            "added_version": { "$ref": "#/$defs/versionOrTrue" },
+            "deprecated_version": { "$ref": "#/$defs/versionOrMain" },
+            "removed_version": { "$ref": "#/$defs/versionOrMain" },
+            "partial_implementation": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "supportStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported", "basis"],
+      "properties": {
+        "supported": { "$ref": "#/$defs/supported" },
+        "basis": {
+          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        },
+        "notes": { "type": "string", "minLength": 1 },
+        "impl_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        }
+      }
+    },
+    "supportStatementOrHistory": {
+      "oneOf": [
+        { "$ref": "#/$defs/supportStatement" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/supportStatement" },
+          "minItems": 1
+        }
+      ]
+    },
+    "compatibility": {
+      "description": "Object keyed by stack, then by 'default' or a variant name. Stack/variant key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "minProperties": 1,
+        "additionalProperties": { "$ref": "#/$defs/supportStatementOrHistory" }
+      }
+    }
+  }
+}

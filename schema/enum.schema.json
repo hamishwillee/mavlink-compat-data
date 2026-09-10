@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "enum.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "dialect", "compatibility", "values"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+    "dialect": { "enum": ["minimal", "common", "standard"] },
+    "notes": { "type": "string", "minLength": 1 },
+    "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
+    "values": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value", "compatibility"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "value": { "type": "integer" },
+          "notes": { "type": "string", "minLength": 1 },
+          "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
+        }
+      }
+    }
+  }
+}

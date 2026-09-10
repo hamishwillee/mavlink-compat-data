@@ -1,0 +1,38 @@
+name: Sync check
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Generate stubs for new upstream entities
+        run: python scripts/generate_stubs.py
+
+      - name: Check and auto-fix sync drift
+        run: |
+          set +e
+          python scripts/check_sync.py --fix | tee sync-report.txt
+          exit 0
+
+      - name: Open PR with any fixes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Sync data/ with upstream MAVLink XML"
+          title: "Sync stub data with upstream MAVLink XML"
+          body-path: sync-report.txt
+          branch: sync-upstream-mavlink
+          labels: automated

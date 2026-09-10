@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "message.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "id", "dialect", "compatibility", "fields"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+    "id": { "type": "integer", "minimum": 0 },
+    "dialect": { "enum": ["minimal", "common", "standard"] },
+    "notes": { "type": "string", "minLength": 1 },
+    "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "enumRef", "compatibility"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "enumRef": { "type": ["string", "null"] },
+          "notes": { "type": "string", "minLength": 1 },
+          "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
+        }
+      }
+    }
+  }
+}

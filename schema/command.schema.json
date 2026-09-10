@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "command.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "value", "dialect", "context", "compatibility", "params"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "pattern": "^MAV_CMD_[A-Z0-9_]*$" },
+    "value": { "type": "integer", "minimum": 0 },
+    "dialect": { "const": "common" },
+    "context": { "enum": ["mission", "command"] },
+    "notes": { "type": "string", "minLength": 1 },
+    "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
+    "params": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "name", "enumRef", "compatibility"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 1, "maximum": 7 },
+          "name": { "type": "string", "minLength": 1 },
+          "enumRef": { "type": ["string", "null"] },
+          "notes": { "type": "string", "minLength": 1 },
+          "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
+        }
+      }
+    }
+  }
+}
