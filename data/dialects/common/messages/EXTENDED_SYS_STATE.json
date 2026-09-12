@@ -20,39 +20,11 @@
   "fields": [
     {
       "name": "vtol_state",
-      "enumRef": "MAV_VTOL_STATE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_VTOL_STATE"
     },
     {
       "name": "landed_state",
-      "enumRef": "MAV_LANDED_STATE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_LANDED_STATE"
     }
   ]
 }

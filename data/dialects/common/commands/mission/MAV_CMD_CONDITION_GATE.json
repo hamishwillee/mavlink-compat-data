@@ -12,7 +12,10 @@
           "partial_implementation": true
         },
         "basis": "testing",
-        "notes": ["Tested v1.17", "Alt not used (UseAltitude=false)"]
+        "notes": [
+          "Tested v1.17",
+          "Alt not used (UseAltitude=false)"
+        ]
       }
     },
     "ardupilot": {
@@ -35,12 +38,6 @@
             },
             "basis": "testing"
           }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
         }
       }
     },
@@ -53,12 +50,6 @@
           "default": {
             "supported": false,
             "basis": "testing"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
           }
         }
       }
@@ -73,12 +64,6 @@
             "supported": null,
             "basis": "unknown"
           }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
         }
       }
     },
@@ -88,12 +73,6 @@
       "enumRef": null,
       "compatibility": {
         "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
           "default": {
             "supported": null,
             "basis": "unknown"
@@ -113,12 +92,6 @@
             },
             "basis": "testing"
           }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
         }
       }
     },
@@ -134,12 +107,6 @@
             },
             "basis": "testing"
           }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
         }
       }
     },
@@ -153,12 +120,6 @@
             "supported": false,
             "basis": "testing",
             "notes": "Ignored (UseAltitude always false)"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
           }
         }
       }

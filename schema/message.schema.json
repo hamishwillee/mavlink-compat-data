@@ -16,7 +16,7 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "enumRef", "compatibility"],
+        "required": ["name", "enumRef"],
         "properties": {
           "name": { "type": "string", "minLength": 1 },
           "enumRef": { "type": ["string", "null"] },

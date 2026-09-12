@@ -19,21 +19,7 @@
   "values": [
     {
       "name": "MAV_EVENT_ERROR_REASON_UNAVAILABLE",
-      "value": 0,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 0
     }
   ]
 }

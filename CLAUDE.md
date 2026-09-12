@@ -42,6 +42,8 @@
 
 **Omit vs. explicit `null` convention**: omit a field (`notes`, `impl_url`, `deprecated_version`, `removed_version`, `partial_implementation`) when nobody has entered that information yet. Use explicit `null` only for a fact tooling actually determined — e.g. a param's `enumRef: null` means "confirmed: no enum reference," not "unknown."
 
+**Sub-entity (field/param/value) compatibility is gated by its parent.** A field/param/value carries a `compatibility` entry for a given `(stack, variant)` **only if** the parent message/command/enum's effective `supported` there is an implemented object (`true`/version/partial) — resolving `default`→variant inheritance the same way the parent itself does. When the parent's effective status there is `false`, `null`, or `"not-applicable"`, the sub-entity must **omit** that `(stack, variant)` entirely (not write `unknown`) — there's nothing to evaluate until the parent is known. `compatibility` itself is optional on a sub-entity and omitted altogether once nothing qualifies. `scripts/validate.py` enforces both directions: missing-when-required and present-when-not-required are both errors. `generate_stubs.py` never pre-populates sub-entity compatibility on a brand-new entity (its parent always starts unknown); `check_sync.py --fix` only stubs a newly-added sub-entity's compatibility for stacks the parent already confirms implemented.
+
 **Enums referenced by a field/param are not duplicated.** A message field or command param that takes its values from an enum carries `enumRef: "<ENUM_NAME>"` (or `null`). The enum's own value-level compatibility lives once in its own `enums/<ENUM_NAME>.json`.
 
 ## ArduPilot versioning

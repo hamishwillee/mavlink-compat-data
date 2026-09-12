@@ -19,21 +19,7 @@
   "values": [
     {
       "name": "ENGINE_CONTROL_OPTIONS_ALLOW_START_WHILE_DISARMED",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     }
   ]
 }

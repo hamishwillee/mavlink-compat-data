@@ -85,6 +85,56 @@ def check_supported_object(supported: dict, stack: str, versions: dict, errors: 
             errors.append(f"{where}: added_version={added!r} is not a known {stack} release (see schema/versions.json)")
 
 
+def _last_statement(statement_or_history):
+    if isinstance(statement_or_history, list):
+        return statement_or_history[-1] if statement_or_history else None
+    return statement_or_history
+
+
+def _is_implemented(statement_or_history) -> bool:
+    """True iff the (possibly historical) statement's current entry is a
+    confirmed-implemented object, as opposed to false/null/not-applicable."""
+    statement = _last_statement(statement_or_history)
+    return isinstance(statement, dict) and isinstance(statement.get("supported"), dict)
+
+
+def _effective_statement(by_variant: dict, variant: str):
+    """Resolves a variant against its stack's "default", per the propagation
+    rule: a variant with no key of its own inherits "default"."""
+    if variant in by_variant:
+        return by_variant[variant]
+    return by_variant.get("default")
+
+
+def check_sub_entity_gating(entity_compat: dict, sub_items: list[dict], sub_key: str, errors: list[str], where: str) -> None:
+    """Enforces CLAUDE.md's sub-entity gating rule: a field/param/value may
+    carry a compatibility entry for a given (stack, variant) iff the parent's
+    effective status there is a confirmed-implemented object. Checks both
+    directions — required-but-missing, and present-but-not-warranted.
+
+    Note: this resolves each (stack, variant) independently by looking only
+    at keys actually present on each side (falling back to that side's own
+    "default"). A sub-entity that inherits its own unqualified "default" can
+    therefore appear to satisfy a parent variant override that diverges from
+    the parent's default in the false/not-implemented direction; that
+    combination doesn't occur anywhere in the data today and is a known,
+    accepted rough edge rather than something worth extra machinery for.
+    """
+    for i, item in enumerate(sub_items):
+        item_label = f"{where}: {sub_key}[{i}] ({item.get('name')!r})"
+        child_compat = item.get("compatibility") or {}
+        for stack in set(entity_compat) | set(child_compat):
+            parent_by_variant = entity_compat.get(stack, {})
+            child_by_variant = child_compat.get(stack, {})
+            for variant in set(parent_by_variant) | set(child_by_variant):
+                parent_implemented = _is_implemented(_effective_statement(parent_by_variant, variant))
+                child_present = _effective_statement(child_by_variant, variant) is not None
+                if parent_implemented and not child_present:
+                    errors.append(f"{item_label}: missing compatibility for {stack}.{variant} (parent is implemented there)")
+                elif not parent_implemented and child_present:
+                    errors.append(f"{item_label}: has compatibility for {stack}.{variant} but parent is not implemented there (should be omitted, not 'unknown')")
+
+
 def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[str], where: str, allow_not_applicable: bool) -> None:
     for stack, by_variant in compat.items():
         if stack not in vocab["stacks"]:
@@ -150,13 +200,16 @@ def main() -> int:
         if isinstance(compat, dict):
             check_compatibility(compat, vocab, versions, errors, f"{rel}: compatibility", kind in ("mission", "command"))
         for sub_key in ("fields", "values", "params"):
-            for i, item in enumerate(doc.get(sub_key, [])):
+            sub_items = doc.get(sub_key, [])
+            for i, item in enumerate(sub_items):
                 sub_compat = item.get("compatibility")
                 if isinstance(sub_compat, dict):
                     check_compatibility(
                         sub_compat, vocab, versions, errors,
                         f"{rel}: {sub_key}[{i}] ({item.get('name')})", kind in ("mission", "command"),
                     )
+            if isinstance(compat, dict) and sub_items:
+                check_sub_entity_gating(compat, sub_items, sub_key, errors, str(rel))
 
     if errors:
         for e in errors:
