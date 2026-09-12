@@ -10,7 +10,7 @@
     "value": { "type": "integer", "minimum": 0 },
     "dialect": { "const": "common" },
     "context": { "enum": ["mission", "command"] },
-    "notes": { "type": "string", "minLength": 1 },
+    "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
     "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
     "params": {
       "type": "array",
@@ -22,7 +22,7 @@
           "index": { "type": "integer", "minimum": 1, "maximum": 7 },
           "name": { "type": "string", "minLength": 1 },
           "enumRef": { "type": ["string", "null"] },
-          "notes": { "type": "string", "minLength": 1 },
+          "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
           "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
         }
       }

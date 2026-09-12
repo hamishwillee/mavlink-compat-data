@@ -9,7 +9,7 @@
     "name": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
     "id": { "type": "integer", "minimum": 0 },
     "dialect": { "enum": ["minimal", "common", "standard"] },
-    "notes": { "type": "string", "minLength": 1 },
+    "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
     "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
     "fields": {
       "type": "array",
@@ -20,7 +20,7 @@
         "properties": {
           "name": { "type": "string", "minLength": 1 },
           "enumRef": { "type": ["string", "null"] },
-          "notes": { "type": "string", "minLength": 1 },
+          "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
           "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
         }
       }

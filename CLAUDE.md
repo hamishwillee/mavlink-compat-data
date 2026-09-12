@@ -38,6 +38,8 @@
 - `basis`: `unknown` | `code-inspection` | `testing` | `verified` — orthogonal to `supported`.
 - `notes`, `impl_url`: optional, omitted when unset. `impl_url` is a single URL (tracking issue, PR, or doc).
 
+**Notes are extremely terse** — a fragment, ~10 words, no period. Say only what the structured fields can't. Cut restatements of `supported`/`basis`/`added_version`/`partial_implementation`, hedges, and cross-refs the reader can already see. Name the exception, not the working case: "Alt not used (UseAltitude=false)", not "Only lat/lon-based gating (UseAltitude=false) is implemented — see param compatibility for details." `notes` may be a single string or an **array** of strings — use the array when there are two-plus genuinely distinct facts, one fragment each, rather than fusing them with "; ".
+
 **Omit vs. explicit `null` convention**: omit a field (`notes`, `impl_url`, `deprecated_version`, `removed_version`, `partial_implementation`) when nobody has entered that information yet. Use explicit `null` only for a fact tooling actually determined — e.g. a param's `enumRef: null` means "confirmed: no enum reference," not "unknown."
 
 **Enums referenced by a field/param are not duplicated.** A message field or command param that takes its values from an enum carries `enumRef: "<ENUM_NAME>"` (or `null`). The enum's own value-level compatibility lives once in its own `enums/<ENUM_NAME>.json`.

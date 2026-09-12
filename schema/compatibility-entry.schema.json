@@ -2,6 +2,16 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "compatibility-entry.schema.json",
   "$defs": {
+    "notes": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        }
+      ]
+    },
     "versionOrTrue": {
       "oneOf": [
         { "const": true },
@@ -42,7 +52,7 @@
         "basis": {
           "enum": ["unknown", "code-inspection", "testing", "verified"]
         },
-        "notes": { "type": "string", "minLength": 1 },
+        "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
           "type": "string",
           "pattern": "^https?://"
