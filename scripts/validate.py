@@ -68,15 +68,28 @@ def iter_data_files():
         yield path, dialect, kind, context
 
 
-def check_version_field(val, field_name: str, stack: str, versions: dict, errors: list[str], where: str) -> None:
-    """Validates a version-string-or-'main' field (added_version, deprecated_
-    version, removed_version, last_checked_version): must be 'main' or a
-    known released version for that stack. Skips `true` (added_version's
+def check_version_field(
+    val, field_name: str, stack: str, versions: dict, errors: list[str], where: str, *, allow_main: bool = True
+) -> None:
+    """Validates a version-string(-or-'main') field. `allow_main=True` (the
+    default) covers added_version/deprecated_version/removed_version, where
+    'main' legitimately means "happened on the dev branch, not yet
+    released". `allow_main=False` covers last_checked_version, which must be
+    a specific released version: its job is to be a fixed baseline
+    comparable against future releases ("has a newer release shipped since
+    this was checked?"), and 'main' can't serve that purpose since it's a
+    moving target -- see schema/compatibility-entry.schema.json's
+    releasedVersion def. Either way, skips `true` (added_version's
     "implemented, version unknown" case) and None (field absent)."""
-    if val is None or val is True or val == "main":
+    if val is None or val is True:
+        return
+    if val == "main":
+        if not allow_main:
+            errors.append(f"{where}: {field_name}='main' is not allowed -- must be a specific released version")
         return
     if not VERSION_PATTERN.match(str(val)):
-        errors.append(f"{where}: {field_name}={val!r} is not 'main' or a version string")
+        expected = "a version string" if not allow_main else "'main' or a version string"
+        errors.append(f"{where}: {field_name}={val!r} is not {expected}")
     elif val not in versions.get(stack, []):
         errors.append(f"{where}: {field_name}={val!r} is not a known {stack} release (see schema/versions.json)")
 
@@ -166,6 +179,7 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
                 check_version_field(
                     statement.get("last_checked_version"), "last_checked_version",
                     stack, versions, errors, f"{where}: {stack}.{variant}",
+                    allow_main=False,
                 )
                 supported = statement.get("supported")
                 if supported == "not-applicable" and not allow_not_applicable:

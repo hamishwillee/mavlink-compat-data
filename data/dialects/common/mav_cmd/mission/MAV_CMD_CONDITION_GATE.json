@@ -11,9 +11,13 @@
           "added_version": "1.11.0",
           "partial_implementation": true
         },
-        "basis": "code-inspection",
-        "notes": "Alt not used (UseAltitude=false)",
-        "last_checked_version": "main"
+        "basis": "testing",
+        "notes": [
+          "Alt not used (UseAltitude=false)",
+          "1.11.0 confirmed via code-inspection only, not live-tested",
+          "Live-testable from 1.14.0 (no sihsim SITL before that)"
+        ],
+        "last_checked_version": "1.17.0"
       }
     },
     "ardupilot": {
