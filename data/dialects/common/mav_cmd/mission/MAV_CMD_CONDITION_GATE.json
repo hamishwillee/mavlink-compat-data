@@ -37,9 +37,10 @@
         "px4": {
           "default": {
             "supported": {
-              "added_version": true
+              "added_version": "1.11.0"
             },
-            "basis": "testing"
+            "basis": "testing",
+            "notes": "1.11.0 via code-inspection, not live-tested"
           }
         }
       }
@@ -75,9 +76,10 @@
         "px4": {
           "default": {
             "supported": {
-              "added_version": true
+              "added_version": "1.11.0"
             },
-            "basis": "testing"
+            "basis": "testing",
+            "notes": "1.11.0 via code-inspection, not live-tested"
           }
         }
       }
@@ -90,9 +92,10 @@
         "px4": {
           "default": {
             "supported": {
-              "added_version": true
+              "added_version": "1.11.0"
             },
-            "basis": "testing"
+            "basis": "testing",
+            "notes": "1.11.0 via code-inspection, not live-tested"
           }
         }
       }
