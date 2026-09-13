@@ -12,10 +12,8 @@
           "partial_implementation": true
         },
         "basis": "testing",
-        "notes": [
-          "Tested v1.17",
-          "Alt not used (UseAltitude=false)"
-        ]
+        "notes": "Alt not used (UseAltitude=false)",
+        "last_checked_version": "1.17.0"
       }
     },
     "ardupilot": {
