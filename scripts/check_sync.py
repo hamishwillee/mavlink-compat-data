@@ -139,7 +139,7 @@ def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: 
 
 def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
     for context in ("mission", "command"):
-        base = DATA_DIR / "common" / "commands" / context
+        base = DATA_DIR / "common" / "mav_cmd" / context
         for cmd in commands:
             path = base / f"{cmd.name}.json"
             if not path.exists():
@@ -199,7 +199,7 @@ def check_removed_entities(dialects: dict, drifts: list[Drift]) -> None:
 
     upstream_commands = {c.name for c in dialects["common"].commands}
     for context in ("mission", "command"):
-        base = DATA_DIR / "common" / "commands" / context
+        base = DATA_DIR / "common" / "mav_cmd" / context
         if not base.exists():
             continue
         for path in sorted(base.glob("*.json")):

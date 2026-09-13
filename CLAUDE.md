@@ -4,7 +4,7 @@
 
 - `data/dialects/<minimal|common|standard>/messages/<NAME>.json` — one MAVLink message per file.
 - `data/dialects/<minimal|common|standard>/enums/<NAME>.json` — one enum per file. `MAV_CMD` is **not** here — see commands below.
-- `data/dialects/common/commands/mission/<MAV_CMD_NAME>.json` and `.../command/<MAV_CMD_NAME>.json` — each `MAV_CMD_*` entry gets two independent files, one for mission-item usage, one for direct-command usage. `commands/` only exists under `common` (MAV_CMD is defined there).
+- `data/dialects/common/mav_cmd/mission/<MAV_CMD_NAME>.json` and `.../command/<MAV_CMD_NAME>.json` — each `MAV_CMD_*` entry gets two independent files, one for mission-item usage, one for direct-command usage. `mav_cmd/` only exists under `common` (MAV_CMD is defined there).
 - `schema/*.schema.json` — JSON Schema per doc type; `compatibility-entry.schema.json` holds the shared `compatibility`/`supported` definitions, `$ref`'d by the other three.
 - `schema/vocab.json` — controlled vocab: `stacks`, `variants` (per stack), `basis`, `dialects`.
 - `schema/versions.json` — known released version numbers per stack, used to validate concrete version strings.

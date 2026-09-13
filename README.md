@@ -8,8 +8,8 @@ Structured, machine-validated data on which MAVLink messages/fields/enums/enum-v
 data/dialects/<minimal|common|standard>/
   messages/<NAME>.json
   enums/<NAME>.json
-  commands/mission/<MAV_CMD_NAME>.json   # common only — MAV_CMD used as a mission item
-  commands/command/<MAV_CMD_NAME>.json   # common only — MAV_CMD used as a direct command
+  mav_cmd/mission/<MAV_CMD_NAME>.json    # common only — MAV_CMD used as a mission item
+  mav_cmd/command/<MAV_CMD_NAME>.json    # common only — MAV_CMD used as a direct command
 schema/       # JSON Schema + controlled vocab (vocab.json) + known releases (versions.json)
 scripts/      # generation, sync-check, and CI validation
 ```
