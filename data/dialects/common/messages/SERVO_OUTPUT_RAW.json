@@ -20,327 +20,75 @@
   "fields": [
     {
       "name": "time_usec",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "port",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo1_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo2_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo3_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo4_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo5_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo6_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo7_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo8_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo9_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo10_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo11_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo12_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo13_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo14_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo15_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "servo16_raw",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     }
   ]
 }

@@ -20,309 +20,71 @@
   "fields": [
     {
       "name": "id",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "battery_function",
-      "enumRef": "MAV_BATTERY_FUNCTION",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_BATTERY_FUNCTION"
     },
     {
       "name": "type",
-      "enumRef": "MAV_BATTERY_TYPE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_BATTERY_TYPE"
     },
     {
       "name": "capacity_full_specification",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "capacity_full",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "cycle_count",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "serial_number",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "device_name",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "weight",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "discharge_minimum_voltage",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "charging_minimum_voltage",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "resting_minimum_voltage",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "charging_maximum_voltage",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "cells_in_series",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "discharge_maximum_current",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "discharge_maximum_burst_current",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "manufacture_date",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     }
   ]
 }

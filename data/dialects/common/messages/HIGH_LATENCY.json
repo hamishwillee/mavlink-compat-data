@@ -20,435 +20,99 @@
   "fields": [
     {
       "name": "base_mode",
-      "enumRef": "MAV_MODE_FLAG",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_MODE_FLAG"
     },
     {
       "name": "custom_mode",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "landed_state",
-      "enumRef": "MAV_LANDED_STATE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_LANDED_STATE"
     },
     {
       "name": "roll",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "pitch",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "heading",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "throttle",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "heading_sp",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "latitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "longitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "altitude_amsl",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "altitude_sp",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "airspeed",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "airspeed_sp",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "groundspeed",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "climb_rate",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "gps_nsat",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "gps_fix_type",
-      "enumRef": "GPS_FIX_TYPE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "GPS_FIX_TYPE"
     },
     {
       "name": "battery_remaining",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "temperature",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "temperature_air",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "failsafe",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "wp_num",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "wp_distance",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     }
   ]
 }

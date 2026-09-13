@@ -20,39 +20,11 @@
   "fields": [
     {
       "name": "seqnr",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "data",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     }
   ]
 }

@@ -7,14 +7,22 @@
   "compatibility": {
     "px4": {
       "default": {
-        "supported": null,
-        "basis": "unknown"
+        "supported": {
+          "added_version": true,
+          "partial_implementation": true
+        },
+        "basis": "testing",
+        "notes": [
+          "Tested v1.17",
+          "Alt not used (UseAltitude=false)"
+        ]
       }
     },
     "ardupilot": {
       "default": {
-        "supported": null,
-        "basis": "unknown"
+        "supported": false,
+        "basis": "verified",
+        "last_checked_version": "4.7.0"
       }
     }
   },
@@ -26,14 +34,10 @@
       "compatibility": {
         "px4": {
           "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
+            "supported": {
+              "added_version": true
+            },
+            "basis": "testing"
           }
         }
       }
@@ -45,14 +49,8 @@
       "compatibility": {
         "px4": {
           "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
+            "supported": false,
+            "basis": "testing"
           }
         }
       }
@@ -63,12 +61,6 @@
       "enumRef": null,
       "compatibility": {
         "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
           "default": {
             "supported": null,
             "basis": "unknown"
@@ -86,12 +78,6 @@
             "supported": null,
             "basis": "unknown"
           }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
         }
       }
     },
@@ -102,14 +88,10 @@
       "compatibility": {
         "px4": {
           "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
+            "supported": {
+              "added_version": true
+            },
+            "basis": "testing"
           }
         }
       }
@@ -121,14 +103,10 @@
       "compatibility": {
         "px4": {
           "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
+            "supported": {
+              "added_version": true
+            },
+            "basis": "testing"
           }
         }
       }
@@ -140,14 +118,9 @@
       "compatibility": {
         "px4": {
           "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
+            "supported": false,
+            "basis": "testing",
+            "notes": "Ignored (UseAltitude always false)"
           }
         }
       }

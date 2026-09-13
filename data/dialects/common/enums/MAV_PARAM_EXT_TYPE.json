@@ -19,201 +19,47 @@
   "values": [
     {
       "name": "MAV_PARAM_EXT_TYPE_UINT8",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_INT8",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_UINT16",
-      "value": 3,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 3
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_INT16",
-      "value": 4,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 4
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_UINT32",
-      "value": 5,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 5
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_INT32",
-      "value": 6,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 6
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_UINT64",
-      "value": 7,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 7
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_INT64",
-      "value": 8,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 8
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_REAL32",
-      "value": 9,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 9
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_REAL64",
-      "value": 10,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 10
     },
     {
       "name": "MAV_PARAM_EXT_TYPE_CUSTOM",
-      "value": 11,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 11
     }
   ]
 }

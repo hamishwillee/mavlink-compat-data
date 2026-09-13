@@ -20,39 +20,11 @@
   "fields": [
     {
       "name": "sequence",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": null
     },
     {
       "name": "flags",
-      "enumRef": "MAV_EVENT_CURRENT_SEQUENCE_FLAGS",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "MAV_EVENT_CURRENT_SEQUENCE_FLAGS"
     }
   ]
 }

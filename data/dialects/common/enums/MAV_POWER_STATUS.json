@@ -19,111 +19,27 @@
   "values": [
     {
       "name": "MAV_POWER_STATUS_BRICK_VALID",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "MAV_POWER_STATUS_SERVO_VALID",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     },
     {
       "name": "MAV_POWER_STATUS_USB_CONNECTED",
-      "value": 4,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 4
     },
     {
       "name": "MAV_POWER_STATUS_PERIPH_OVERCURRENT",
-      "value": 8,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 8
     },
     {
       "name": "MAV_POWER_STATUS_PERIPH_HIPOWER_OVERCURRENT",
-      "value": 16,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 16
     },
     {
       "name": "MAV_POWER_STATUS_CHANGED",
-      "value": 32,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 32
     }
   ]
 }

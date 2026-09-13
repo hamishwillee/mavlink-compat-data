@@ -19,39 +19,11 @@
   "values": [
     {
       "name": "TUNE_FORMAT_QBASIC1_1",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "TUNE_FORMAT_MML_MODERN",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     }
   ]
 }

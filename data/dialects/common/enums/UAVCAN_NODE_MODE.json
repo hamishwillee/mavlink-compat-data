@@ -19,93 +19,23 @@
   "values": [
     {
       "name": "UAVCAN_NODE_MODE_OPERATIONAL",
-      "value": 0,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 0
     },
     {
       "name": "UAVCAN_NODE_MODE_INITIALIZATION",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "UAVCAN_NODE_MODE_MAINTENANCE",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     },
     {
       "name": "UAVCAN_NODE_MODE_SOFTWARE_UPDATE",
-      "value": 3,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 3
     },
     {
       "name": "UAVCAN_NODE_MODE_OFFLINE",
-      "value": 7,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 7
     }
   ]
 }

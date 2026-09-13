@@ -19,381 +19,87 @@
   "values": [
     {
       "name": "MAV_PROTOCOL_CAPABILITY_MISSION_FLOAT",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_PARAM_FLOAT",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_MISSION_INT",
-      "value": 4,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 4
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_COMMAND_INT",
-      "value": 8,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 8
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_BYTEWISE",
-      "value": 16,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 16
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_FTP",
-      "value": 32,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 32
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_SET_ATTITUDE_TARGET",
-      "value": 64,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 64
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_LOCAL_NED",
-      "value": 128,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 128
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_SET_POSITION_TARGET_GLOBAL_INT",
-      "value": 256,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 256
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_TERRAIN",
-      "value": 512,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 512
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_RESERVED3",
-      "value": 1024,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1024
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_FLIGHT_TERMINATION",
-      "value": 2048,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2048
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_COMPASS_CALIBRATION",
-      "value": 4096,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 4096
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_MAVLINK2",
-      "value": 8192,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 8192
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_MISSION_FENCE",
-      "value": 16384,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 16384
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_MISSION_RALLY",
-      "value": 32768,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 32768
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_RESERVED2",
-      "value": 65536,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 65536
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_PARAM_ENCODE_C_CAST",
-      "value": 131072,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 131072
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_COMPONENT_IMPLEMENTS_GIMBAL_MANAGER",
-      "value": 262144,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 262144
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_COMPONENT_ACCEPTS_GCS_CONTROL",
-      "value": 524288,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 524288
     },
     {
       "name": "MAV_PROTOCOL_CAPABILITY_GRIPPER",
-      "value": 1048576,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1048576
     }
   ]
 }

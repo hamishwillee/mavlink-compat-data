@@ -10,8 +10,11 @@ Three categories of drift:
                      entity (e.g. a reserved param gaining a real name).
                      Safe to auto-fix with --fix: only the identity field
                      (name/enumRef) is patched, or the new sub-entity is
-                     appended with fresh "unknown" compatibility — every
-                     existing compatibility block is left untouched.
+                     appended with fresh "unknown" compatibility for whichever
+                     stacks the parent already confirms implemented (omitted
+                     entirely otherwise, per CLAUDE.md's sub-entity gating
+                     rule) — every existing compatibility block is left
+                     untouched.
   - removed/removed_entity: a field/value/param/entity that used to exist
                      upstream no longer does. Never auto-fixed or deleted —
                      flagged for a human to decide (record as removed, or
@@ -31,7 +34,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import mavlink_xml
-from generate_stubs import DATA_DIR, REPO_ROOT, default_compatibility, load_vocab
+from generate_stubs import DATA_DIR, REPO_ROOT, gated_sub_compatibility, load_vocab
 
 
 @dataclass
@@ -66,7 +69,11 @@ def check_messages(dialect_name: str, messages, stacks: list[str], fix: bool, dr
             if i >= len(stored_fields):
                 drifts.append(Drift("addition", path, f"fields[{i}] {f.name!r} present upstream, missing locally", fixed=fix))
                 if fix:
-                    stored_fields.append({"name": f.name, "enumRef": f.enum_ref, "compatibility": default_compatibility(stacks)})
+                    new_field = {"name": f.name, "enumRef": f.enum_ref}
+                    sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
+                    if sub_compat:
+                        new_field["compatibility"] = sub_compat
+                    stored_fields.append(new_field)
                     changed = True
                 continue
             sf = stored_fields[i]
@@ -107,7 +114,11 @@ def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: 
             if val not in stored_by_value:
                 drifts.append(Drift("addition", path, f"values[value={val}] {u.name!r} present upstream, missing locally", fixed=fix))
                 if fix:
-                    stored_values.append({"name": u.name, "value": u.value, "compatibility": default_compatibility(stacks)})
+                    new_value = {"name": u.name, "value": u.value}
+                    sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
+                    if sub_compat:
+                        new_value["compatibility"] = sub_compat
+                    stored_values.append(new_value)
                     changed = True
             elif stored_by_value[val].get("name") != u.name:
                 sv = stored_by_value[val]
@@ -145,9 +156,11 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
                 if idx not in stored_by_index:
                     drifts.append(Drift("addition", path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
                     if fix:
-                        stored_params.append(
-                            {"index": u.index, "name": u.name, "enumRef": u.enum_ref, "compatibility": default_compatibility(stacks)}
-                        )
+                        new_param = {"index": u.index, "name": u.name, "enumRef": u.enum_ref}
+                        sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
+                        if sub_compat:
+                            new_param["compatibility"] = sub_compat
+                        stored_params.append(new_param)
                         changed = True
                     continue
                 sp = stored_by_index[idx]

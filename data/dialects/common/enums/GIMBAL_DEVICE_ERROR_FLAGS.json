@@ -19,183 +19,43 @@
   "values": [
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_AT_ROLL_LIMIT",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_AT_PITCH_LIMIT",
-      "value": 2,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 2
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_AT_YAW_LIMIT",
-      "value": 4,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 4
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_ENCODER_ERROR",
-      "value": 8,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 8
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_POWER_ERROR",
-      "value": 16,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 16
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_MOTOR_ERROR",
-      "value": 32,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 32
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_SOFTWARE_ERROR",
-      "value": 64,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 64
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_COMMS_ERROR",
-      "value": 128,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 128
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_CALIBRATION_RUNNING",
-      "value": 256,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 256
     },
     {
       "name": "GIMBAL_DEVICE_ERROR_FLAGS_NO_MANAGER",
-      "value": 512,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 512
     }
   ]
 }

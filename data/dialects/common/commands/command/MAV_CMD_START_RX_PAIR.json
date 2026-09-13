@@ -22,40 +22,12 @@
     {
       "index": 1,
       "name": "RC Type",
-      "enumRef": "RC_TYPE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "RC_TYPE"
     },
     {
       "index": 2,
       "name": "RC Sub Type",
-      "enumRef": "RC_SUB_TYPE",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "enumRef": "RC_SUB_TYPE"
     }
   ]
 }

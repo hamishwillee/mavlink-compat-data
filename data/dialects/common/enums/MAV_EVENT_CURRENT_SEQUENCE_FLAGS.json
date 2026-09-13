@@ -19,21 +19,7 @@
   "values": [
     {
       "name": "MAV_EVENT_CURRENT_SEQUENCE_FLAGS_RESET",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     }
   ]
 }

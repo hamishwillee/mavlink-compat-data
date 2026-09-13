@@ -19,21 +19,7 @@
   "values": [
     {
       "name": "HIL_ACTUATOR_CONTROLS_FLAGS_LOCKSTEP",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     }
   ]
 }

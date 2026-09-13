@@ -29,6 +29,32 @@ def default_compatibility(stacks: list[str]) -> dict:
     return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks}
 
 
+def _is_implemented(statement) -> bool:
+    """True iff a support-statement (or the last entry of a history array) is
+    a confirmed-implemented object, as opposed to false/null/not-applicable."""
+    if isinstance(statement, list):
+        statement = statement[-1] if statement else None
+    return isinstance(statement, dict) and isinstance(statement.get("supported"), dict)
+
+
+def is_stack_implemented(entity_compat: dict, stack: str) -> bool:
+    """True iff entity_compat's *default* variant for this stack is confirmed
+    implemented. Used to decide whether a sub-entity (field/param/value) may
+    carry its own compatibility for this stack — see CLAUDE.md's sub-entity
+    gating rule. Only looks at "default"; deliberate variant overrides are a
+    human judgment call made when filling in the data, not something the
+    generators infer."""
+    return _is_implemented((entity_compat.get(stack) or {}).get("default"))
+
+
+def gated_sub_compatibility(entity_compat: dict, stacks: list[str]) -> dict:
+    """default_compatibility(), filtered to stacks the parent already confirms
+    implemented. A sub-entity gets no entry (and no "compatibility" key at
+    all, if this comes back empty) for a stack the parent hasn't confirmed —
+    there's nothing to evaluate yet."""
+    return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks if is_stack_implemented(entity_compat, stack)}
+
+
 def message_stub(msg: mavlink_xml.Message, dialect: str, stacks: list[str]) -> dict:
     return {
         "$schema": "../../../../schema/message.schema.json",
@@ -40,7 +66,6 @@ def message_stub(msg: mavlink_xml.Message, dialect: str, stacks: list[str]) -> d
             {
                 "name": f.name,
                 "enumRef": f.enum_ref,
-                "compatibility": default_compatibility(stacks),
             }
             for f in msg.fields
         ],
@@ -57,7 +82,6 @@ def enum_stub(enum: mavlink_xml.Enum, dialect: str, stacks: list[str]) -> dict:
             {
                 "name": v.name,
                 "value": v.value,
-                "compatibility": default_compatibility(stacks),
             }
             for v in enum.values
         ],
@@ -77,7 +101,6 @@ def command_stub(cmd: mavlink_xml.Command, context: str, stacks: list[str]) -> d
                 "index": p.index,
                 "name": p.name,
                 "enumRef": p.enum_ref,
-                "compatibility": default_compatibility(stacks),
             }
             for p in cmd.params
         ],

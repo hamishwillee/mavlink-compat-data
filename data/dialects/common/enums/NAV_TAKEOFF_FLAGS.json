@@ -19,21 +19,7 @@
   "values": [
     {
       "name": "NAV_TAKEOFF_FLAGS_HORIZONTAL_POSITION_NOT_REQUIRED",
-      "value": 1,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        },
-        "ardupilot": {
-          "default": {
-            "supported": null,
-            "basis": "unknown"
-          }
-        }
-      }
+      "value": 1
     }
   ]
 }
