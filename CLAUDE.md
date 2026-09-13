@@ -37,6 +37,7 @@
     - `partial_implementation` (optional bool, **omitted** when false): present-but-incomplete/WIP as of `added_version`. Describe specifics in `notes`.
 - `basis`: `unknown` | `code-inspection` | `testing` | `verified` — orthogonal to `supported`.
 - `notes`, `impl_url`: optional, omitted when unset. `impl_url` is a single URL (tracking issue, PR, or doc).
+- `last_checked_version` (optional, sibling of `supported`/`basis`/`notes`/`impl_url` — not nested inside `supported`, since `supported` is a bare scalar for `false`/`null`/`"not-applicable"`): `"main"` | `"X.Y.Z"`, the version this statement was last confirmed against. Records when a fact might go stale (most useful on `supported: false` — implemented-ness can change in a later release), not when it was introduced (`added_version`'s job). Recommended whenever `basis` is `code-inspection`/`testing`/`verified` and `supported` is `false`; omit when not tracked.
 
 **Notes are extremely terse** — a fragment, ~10 words, no period. Say only what the structured fields can't. Cut restatements of `supported`/`basis`/`added_version`/`partial_implementation`, hedges, and cross-refs the reader can already see. Name the exception, not the working case: "Alt not used (UseAltitude=false)", not "Only lat/lon-based gating (UseAltitude=false) is implemented — see param compatibility for details." `notes` may be a single string or an **array** of strings — use the array when there are two-plus genuinely distinct facts, one fragment each, rather than fusing them with "; ".
 

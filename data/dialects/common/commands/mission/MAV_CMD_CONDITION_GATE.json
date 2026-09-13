@@ -20,8 +20,9 @@
     },
     "ardupilot": {
       "default": {
-        "supported": null,
-        "basis": "unknown"
+        "supported": false,
+        "basis": "verified",
+        "last_checked_version": "4.7.0"
       }
     }
   },

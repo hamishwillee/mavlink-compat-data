@@ -56,7 +56,8 @@
         "impl_url": {
           "type": "string",
           "pattern": "^https?://"
-        }
+        },
+        "last_checked_version": { "$ref": "#/$defs/versionOrMain" }
       }
     },
     "supportStatementOrHistory": {

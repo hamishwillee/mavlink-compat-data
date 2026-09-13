@@ -68,21 +68,22 @@ def iter_data_files():
         yield path, dialect, kind, context
 
 
+def check_version_field(val, field_name: str, stack: str, versions: dict, errors: list[str], where: str) -> None:
+    """Validates a version-string-or-'main' field (added_version, deprecated_
+    version, removed_version, last_checked_version): must be 'main' or a
+    known released version for that stack. Skips `true` (added_version's
+    "implemented, version unknown" case) and None (field absent)."""
+    if val is None or val is True or val == "main":
+        return
+    if not VERSION_PATTERN.match(str(val)):
+        errors.append(f"{where}: {field_name}={val!r} is not 'main' or a version string")
+    elif val not in versions.get(stack, []):
+        errors.append(f"{where}: {field_name}={val!r} is not a known {stack} release (see schema/versions.json)")
+
+
 def check_supported_object(supported: dict, stack: str, versions: dict, errors: list[str], where: str) -> None:
-    added = supported.get("added_version")
-    for field_name in ("deprecated_version", "removed_version"):
-        val = supported.get(field_name)
-        if val is None:
-            continue
-        if val != "main" and not VERSION_PATTERN.match(str(val)):
-            errors.append(f"{where}: {field_name}={val!r} is not 'main' or a version string")
-        elif val != "main" and val not in versions.get(stack, []):
-            errors.append(f"{where}: {field_name}={val!r} is not a known {stack} release (see schema/versions.json)")
-    if isinstance(added, str) and added != "main":
-        if not VERSION_PATTERN.match(added):
-            errors.append(f"{where}: added_version={added!r} is not 'main', true, or a version string")
-        elif added not in versions.get(stack, []):
-            errors.append(f"{where}: added_version={added!r} is not a known {stack} release (see schema/versions.json)")
+    for field_name in ("added_version", "deprecated_version", "removed_version"):
+        check_version_field(supported.get(field_name), field_name, stack, versions, errors, where)
 
 
 def _last_statement(statement_or_history):
@@ -154,6 +155,10 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
                 impl_url = statement.get("impl_url")
                 if impl_url is not None and not URL_PATTERN.match(impl_url):
                     errors.append(f"{where}: {stack}.{variant}: impl_url {impl_url!r} is not http(s)")
+                check_version_field(
+                    statement.get("last_checked_version"), "last_checked_version",
+                    stack, versions, errors, f"{where}: {stack}.{variant}",
+                )
                 supported = statement.get("supported")
                 if supported == "not-applicable" and not allow_not_applicable:
                     errors.append(f"{where}: {stack}.{variant}: 'not-applicable' only valid in command docs")
