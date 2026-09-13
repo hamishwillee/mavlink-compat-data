@@ -124,6 +124,14 @@ def check_sub_entity_gating(entity_compat: dict, sub_items: list[dict], sub_key:
     for i, item in enumerate(sub_items):
         item_label = f"{where}: {sub_key}[{i}] ({item.get('name')!r})"
         child_compat = item.get("compatibility") or {}
+        if sub_key == "params" and item.get("name") == "Empty":
+            # A reserved/undocumented upstream param slot (mavlink_xml.py's
+            # own sentinel name for "no label in the XML") isn't a feature
+            # any stack could support or not — exempt from gating entirely,
+            # not merely "not yet required". Never carries compatibility.
+            if child_compat:
+                errors.append(f"{item_label}: reserved param ('Empty') must not carry compatibility")
+            continue
         for stack in set(entity_compat) | set(child_compat):
             parent_by_variant = entity_compat.get(stack, {})
             child_by_variant = child_compat.get(stack, {})
