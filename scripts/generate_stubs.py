@@ -143,7 +143,7 @@ def generate(cache_dir: Path | None, dry_run: bool) -> None:
 
         for cmd in dialect.commands:
             for context in ("mission", "command"):
-                path = base / "commands" / context / f"{cmd.name}.json"
+                path = base / "mav_cmd" / context / f"{cmd.name}.json"
                 if write_if_missing(path, command_stub(cmd, context, stacks), dry_run):
                     created += 1
                 else:

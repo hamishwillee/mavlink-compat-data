@@ -4,7 +4,7 @@
 
 - `data/dialects/<minimal|common|standard>/messages/<NAME>.json` — one MAVLink message per file.
 - `data/dialects/<minimal|common|standard>/enums/<NAME>.json` — one enum per file. `MAV_CMD` is **not** here — see commands below.
-- `data/dialects/common/commands/mission/<MAV_CMD_NAME>.json` and `.../command/<MAV_CMD_NAME>.json` — each `MAV_CMD_*` entry gets two independent files, one for mission-item usage, one for direct-command usage. `commands/` only exists under `common` (MAV_CMD is defined there).
+- `data/dialects/common/mav_cmd/mission/<MAV_CMD_NAME>.json` and `.../command/<MAV_CMD_NAME>.json` — each `MAV_CMD_*` entry gets two independent files, one for mission-item usage, one for direct-command usage. `mav_cmd/` only exists under `common` (MAV_CMD is defined there).
 - `schema/*.schema.json` — JSON Schema per doc type; `compatibility-entry.schema.json` holds the shared `compatibility`/`supported` definitions, `$ref`'d by the other three.
 - `schema/vocab.json` — controlled vocab: `stacks`, `variants` (per stack), `basis`, `dialects`.
 - `schema/versions.json` — known released version numbers per stack, used to validate concrete version strings.
@@ -53,13 +53,17 @@ ArduPilot ships separate firmware per vehicle (Copter/Plane/Rover/Sub/Tracker/Bl
 
 ## `schema/versions.json`
 
-Flat list of released `X.Y.Z` numbers per stack (ArduPilot: whole-project numbers, not per-vehicle tags like `Copter-4.5.0`). Maintained by hand — append new releases as they ship. Any concrete version string used in `supported.added_version`/`deprecated_version`/`removed_version` must appear here for its stack.
+Flat list of released `X.Y.Z` numbers per stack (ArduPilot: whole-project numbers, not per-vehicle tags like `Copter-4.5.0`). Maintained by hand — append new releases as they ship. Any concrete version string used in `supported.added_version`/`deprecated_version`/`removed_version`/`last_checked_version` must appear here for its stack.
 
 ## Sync drift categories (`scripts/check_sync.py`)
 
 - **New entity upstream** — no stub file yet. Not fixed by this script; run `generate_stubs.py`.
-- **Addition/rename within an existing entity** — a `name`/`enumRef` differs from upstream, or upstream declares a field/param/value not yet in the doc. **Auto-fixable** with `--fix`: patches the identity field or appends the new sub-entity with fresh `unknown` compatibility; existing `compatibility` data is never touched.
+- **Addition/rename within an existing entity** — a `name`/`enumRef` differs from upstream, or upstream declares a field/param/value not yet in the doc. **Auto-fixable** with `--fix`: patches the identity field or appends the new sub-entity, with fresh `unknown` compatibility for whichever stacks the parent already confirms implemented (per the sub-entity gating rule — omitted otherwise); existing `compatibility` data is never touched.
 - **Removed upstream** — a field/param/value/entity no longer exists upstream. **Never auto-fixed or deleted** — flagged for manual review, since deleting would destroy compat history.
+
+## Keeping `README.md` in sync
+
+`README.md` duplicates parts of this file for a public-facing audience: the layout tree, the entity doc shape example, the `compatibility` field reference, the scripts list, and the validation checklist. Any change here that changes what one of those says — a new/changed `compatibility` field, a new gating/validation rule, a script's behavior, a new sync-drift category — **must** update the matching part of `README.md` in the same change, not as a follow-up. Check it before calling a schema/script/convention change done, whether or not the user asked for README specifically.
 
 ## Working with stub data
 

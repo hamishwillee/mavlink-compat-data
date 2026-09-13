@@ -55,11 +55,11 @@ def build_validators() -> dict[str, Draft202012Validator]:
 def iter_data_files():
     for path in sorted(DATA_DIR.rglob("*.json")):
         rel_parts = path.relative_to(DATA_DIR).parts
-        # <dialect>/(messages|enums)/<name>.json  or  <dialect>/commands/<mission|command>/<name>.json
+        # <dialect>/(messages|enums)/<name>.json  or  <dialect>/mav_cmd/<mission|command>/<name>.json
         if len(rel_parts) == 3:
             dialect, kind, _ = rel_parts
             context = None
-        elif len(rel_parts) == 4 and rel_parts[1] == "commands":
+        elif len(rel_parts) == 4 and rel_parts[1] == "mav_cmd":
             dialect, _, context, _ = rel_parts
             kind = context
         else:
