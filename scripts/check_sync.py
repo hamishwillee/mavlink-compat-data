@@ -157,9 +157,12 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
                     drifts.append(Drift("addition", path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
                     if fix:
                         new_param = {"index": u.index, "name": u.name, "enumRef": u.enum_ref}
-                        sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
-                        if sub_compat:
-                            new_param["compatibility"] = sub_compat
+                        if u.name != "Empty":
+                            # A reserved/undocumented slot never carries compatibility,
+                            # regardless of parent status — see CLAUDE.md.
+                            sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
+                            if sub_compat:
+                                new_param["compatibility"] = sub_compat
                         stored_params.append(new_param)
                         changed = True
                     continue
