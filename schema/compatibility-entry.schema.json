@@ -25,6 +25,11 @@
         { "type": "string", "pattern": "^\\d+(\\.\\d+){0,2}$" }
       ]
     },
+    "releasedVersion": {
+      "description": "A specific released version only -- not 'main'. Used where the value must be a fixed baseline comparable against future releases (see last_checked_version below), unlike added_version/deprecated_version/removed_version where 'main' legitimately means 'happened on the dev branch, not yet released'.",
+      "type": "string",
+      "pattern": "^\\d+(\\.\\d+){0,2}$"
+    },
     "supported": {
       "oneOf": [
         { "const": false },
@@ -57,7 +62,7 @@
           "type": "string",
           "pattern": "^https?://"
         },
-        "last_checked_version": { "$ref": "#/$defs/versionOrMain" }
+        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
       }
     },
     "supportStatementOrHistory": {

@@ -39,7 +39,7 @@ One JSON file per message/enum/command. Fields, enum values, and command params 
   - `added_version`: `true` (implemented, version unknown) | `"main"` (dev branch only) | `"X.Y.Z"`.
   - Optional fields are **omitted**, not `null`, when unset.
 - `basis`: `"unknown" | "code-inspection" | "testing" | "verified"`.
-- `last_checked_version`: optional, `"main"` | `"X.Y.Z"` — the version a `false` (or other) statement was last confirmed against, so staleness is checkable later. Distinct from `added_version`.
+- `last_checked_version`: optional, `"X.Y.Z"` only (never `"main"` — it must be a fixed baseline to check staleness against future releases) — the version a `false` (or other) statement was last confirmed against. Distinct from `added_version`.
 - `notes`, `impl_url`: optional. `notes` is a single terse fragment or an array of them (one per distinct fact) — see CLAUDE.md for the terseness rule. `impl_url` is a tracking-issue or PR link.
 - A field/param/value only carries `compatibility` for a `(stack, variant)` where the parent entity is confirmed implemented there — otherwise it's omitted entirely, not `unknown`.
 - A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — it never carries `compatibility` at all, for any stack, until upstream gives it a real name.
@@ -70,7 +70,7 @@ python scripts/check_sync.py [--fix]    # report (or fix) drift vs upstream MAVL
 - Every `compatibility` stack key is in `schema/vocab.json`; every variant key is `"default"` or valid for that stack.
 - Every `basis` value is in `schema/vocab.json`.
 - `supported` is exactly `false`, `null`, `"not-applicable"`, or a valid object; `"not-applicable"` only in command docs.
-- `added_version`/`deprecated_version`/`removed_version`/`last_checked_version` are `true`/`"main"`/a version string as applicable, and any concrete version exists in `schema/versions.json` for that stack.
+- `added_version`/`deprecated_version`/`removed_version` are `true`/`"main"`/a version string as applicable; `last_checked_version` is a version string only (`"main"` not allowed there). Any concrete version exists in `schema/versions.json` for that stack.
 - `impl_url`, if present, is a well-formed `http(s)://` URL.
 - A field/param/value's `compatibility` is present for a `(stack, variant)` if and only if the parent entity is confirmed implemented there — both missing-when-required and present-when-not-required are errors.
 - A param named `"Empty"` (reserved/undocumented upstream) never has `compatibility` at all.
