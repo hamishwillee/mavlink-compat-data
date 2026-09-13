@@ -7,14 +7,31 @@
   "compatibility": {
     "px4": {
       "default": {
-        "supported": null,
-        "basis": "unknown"
+        "supported": {
+          "added_version": true,
+          "partial_implementation": true
+        },
+        "basis": "verified",
+        "notes": [
+          "Pitch (param1) has no field in the internal mission-item message -- structurally never stored",
+          "Yaw (param4) stored/wrapped correctly but discarded at takeoff execution (forced to NaN)",
+          "param2 (Empty): NaN accepted; non-default value now rejected outright (mask-validated)"
+        ],
+        "last_checked_version": "1.17.0"
       }
     },
     "ardupilot": {
       "default": {
-        "supported": null,
-        "basis": "unknown"
+        "supported": {
+          "added_version": true,
+          "partial_implementation": true
+        },
+        "basis": "verified",
+        "notes": [
+          "Flags/Yaw (params 3/4) never stored on any vehicle type; see params for Pitch (vehicle-dependent)",
+          "param2 (Empty): NaN rejected -- spec violation (blanket sanity-check nan mask)"
+        ],
+        "last_checked_version": "4.7.1"
       }
     }
   },
@@ -22,7 +39,30 @@
     {
       "index": 1,
       "name": "Pitch",
-      "enumRef": null
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": false,
+            "basis": "verified",
+            "notes": "No field in the internal mission-item message; never stored, any vehicle type"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": false,
+            "basis": "verified",
+            "notes": "Stored faithfully but never read at takeoff (multicopter-specific, per XML)"
+          },
+          "plane": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified",
+            "notes": "Used as climb-out minimum pitch"
+          }
+        }
+      }
     },
     {
       "index": 2,
@@ -32,27 +72,119 @@
     {
       "index": 3,
       "name": "Flags",
-      "enumRef": "NAV_TAKEOFF_FLAGS"
+      "enumRef": "NAV_TAKEOFF_FLAGS",
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": false,
+            "basis": "verified",
+            "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": false,
+            "basis": "verified",
+            "notes": "Never stored, any vehicle type"
+          }
+        }
+      }
     },
     {
       "index": 4,
       "name": "Yaw",
-      "enumRef": null
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": {
+              "added_version": true,
+              "partial_implementation": true
+            },
+            "basis": "verified",
+            "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": false,
+            "basis": "verified",
+            "notes": "Never stored, any vehicle type"
+          }
+        }
+      }
     },
     {
       "index": 5,
       "name": "Latitude",
-      "enumRef": null
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified",
+            "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+          }
+        }
+      }
     },
     {
       "index": 6,
       "name": "Longitude",
-      "enumRef": null
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified",
+            "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+          }
+        }
+      }
     },
     {
       "index": 7,
       "name": "Altitude",
-      "enumRef": null
+      "enumRef": null,
+      "compatibility": {
+        "px4": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified",
+            "notes": "NaN (\"use default altitude\") accepted"
+          }
+        },
+        "ardupilot": {
+          "default": {
+            "supported": {
+              "added_version": true
+            },
+            "basis": "verified"
+          }
+        }
+      }
     }
   ]
 }
