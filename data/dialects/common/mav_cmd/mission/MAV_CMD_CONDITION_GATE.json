@@ -8,12 +8,12 @@
     "px4": {
       "default": {
         "supported": {
-          "added_version": true,
+          "added_version": "1.11.0",
           "partial_implementation": true
         },
-        "basis": "testing",
+        "basis": "code-inspection",
         "notes": "Alt not used (UseAltitude=false)",
-        "last_checked_version": "1.17.0"
+        "last_checked_version": "main"
       }
     },
     "ardupilot": {
