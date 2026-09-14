@@ -12,7 +12,17 @@
           },
           "basis": "verified",
           "earliest_checked_version": "1.17.0",
-          "notes": "param2 (Empty): NaN accepted; non-default value now rejected outright (mask-validated)",
+          "sentinel_compliance": {
+            "default": {
+              "supported": {
+                "added_version": true
+              }
+            },
+            "2_Empty": {
+              "supported": false,
+              "notes": "Accepts non-sentinel value -- spec violation (bug)"
+            }
+          },
           "params": {
             "1_Pitch": {
               "supported": false,
@@ -23,20 +33,16 @@
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
-              "supported": {
-                "added_version": true
-              },
-              "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
+              "supported": false,
+              "notes": "Stored/wrapped to [0,360) correctly, but forced to NaN at execution -- confirmed no effect on heading (commanded 137°, actual 9.1°)"
             },
             "5_Latitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": false,
+              "notes": "Sentinel (use current position) honored; explicit target ignored (stays near home)"
             },
             "6_Longitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": false,
+              "notes": "Sentinel (use current position) honored; explicit target ignored (stays near home)"
             },
             "7_Altitude": {
               "supported": {
@@ -52,7 +58,6 @@
           },
           "basis": "verified",
           "earliest_checked_version": "1.17.0",
-          "notes": "param2 (Empty): NaN accepted; non-default value now rejected outright (mask-validated)",
           "params": {
             "1_Pitch": {
               "supported": false,
@@ -63,20 +68,19 @@
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
-              "supported": {
-                "added_version": true
-              },
-              "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "5_Latitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "6_Longitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "7_Altitude": {
               "supported": {
@@ -92,7 +96,6 @@
           },
           "basis": "verified",
           "earliest_checked_version": "1.17.0",
-          "notes": "param2 (Empty): NaN accepted; non-default value now rejected outright (mask-validated)",
           "params": {
             "1_Pitch": {
               "supported": false,
@@ -103,20 +106,19 @@
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
-              "supported": {
-                "added_version": true
-              },
-              "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "5_Latitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "6_Longitude": {
-              "supported": {
-                "added_version": true
-              }
+              "supported": null,
+              "basis": "unknown",
+              "notes": "Prior claim retracted (was assumed same as multicopter)"
             },
             "7_Altitude": {
               "supported": {
