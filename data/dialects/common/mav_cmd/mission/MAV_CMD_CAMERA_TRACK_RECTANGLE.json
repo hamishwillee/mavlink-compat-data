@@ -6,43 +6,27 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Top left corner x",
+  "params": {
+    "1_Top left corner x": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Top left corner y",
+    "2_Top left corner y": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Bottom right corner x",
+    "3_Bottom right corner x": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Bottom right corner y",
+    "4_Bottom right corner y": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Target Camera ID",
+    "5_Target Camera ID": {
       "enumRef": null
     }
-  ]
+  }
 }

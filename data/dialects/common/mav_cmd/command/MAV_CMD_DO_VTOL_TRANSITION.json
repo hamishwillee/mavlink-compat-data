@@ -6,28 +6,18 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "State",
+  "params": {
+    "1_State": {
       "enumRef": "MAV_VTOL_STATE"
     },
-    {
-      "index": 2,
-      "name": "Immediate",
+    "2_Immediate": {
       "enumRef": null
     }
-  ]
+  }
 }

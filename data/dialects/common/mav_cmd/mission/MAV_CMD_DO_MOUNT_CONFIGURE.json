@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Mode",
+  "params": {
+    "1_Mode": {
       "enumRef": "MAV_MOUNT_MODE"
     },
-    {
-      "index": 2,
-      "name": "Stabilize Roll",
+    "2_Stabilize Roll": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 3,
-      "name": "Stabilize Pitch",
+    "3_Stabilize Pitch": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 4,
-      "name": "Stabilize Yaw",
+    "4_Stabilize Yaw": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 5,
-      "name": "Roll Input Mode",
+    "5_Roll Input Mode": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Pitch Input Mode",
+    "6_Pitch Input Mode": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Yaw Input Mode",
+    "7_Yaw Input Mode": {
       "enumRef": null
     }
-  ]
+  }
 }

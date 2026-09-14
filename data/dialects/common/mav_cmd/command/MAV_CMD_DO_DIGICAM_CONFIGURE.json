@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Mode",
+  "params": {
+    "1_Mode": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Shutter Speed",
+    "2_Shutter Speed": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Aperture",
+    "3_Aperture": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "ISO",
+    "4_ISO": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Exposure",
+    "5_Exposure": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Command Identity",
+    "6_Command Identity": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Engine Cut-off",
+    "7_Engine Cut-off": {
       "enumRef": null
     }
-  ]
+  }
 }

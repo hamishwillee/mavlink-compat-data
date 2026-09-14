@@ -6,28 +6,18 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "First Item",
+  "params": {
+    "1_First Item": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Last Item",
+    "2_Last Item": {
       "enumRef": null
     }
-  ]
+  }
 }

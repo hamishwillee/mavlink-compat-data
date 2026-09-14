@@ -55,6 +55,57 @@ def gated_sub_compatibility(entity_compat: dict, stacks: list[str]) -> dict:
     return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks if is_stack_implemented(entity_compat, stack)}
 
 
+def command_default_compatibility(stacks: list[str]) -> dict:
+    """Every command stack starts fully untested -- frames: {} -- since there's
+    no per-frame FrameStatus to write yet for a brand-new command."""
+    return {stack: {"frames": {}} for stack in stacks}
+
+
+def is_frame_implemented(frame_status: dict | None) -> bool:
+    return isinstance((frame_status or {}).get("supported"), dict)
+
+
+def gated_command_param_stub_targets(entity_compat: dict) -> list[tuple[str, str]]:
+    """(stack, frame_name) pairs where the frame is already confirmed
+    implemented -- i.e. where a newly-discovered param must be stubbed into
+    frames.<frame>.params. A stack with frames == {} or frames == False
+    contributes nothing (no per-frame breakdown to attach to); a frame not yet
+    mentioned under an object 'frames' contributes nothing either — absence
+    always means untested, never inherited."""
+    targets = []
+    for stack, stack_status in (entity_compat or {}).items():
+        frames = (stack_status or {}).get("frames")
+        if isinstance(frames, dict):
+            targets += [(stack, f) for f, fs in frames.items() if is_frame_implemented(fs)]
+    return targets
+
+
+def rename_command_param_key(doc: dict, index: int, old_name: str, new_name: str) -> bool:
+    """Rewrites '<index>_<old_name>' -> '<index>_<new_name>' everywhere it
+    appears in this one doc: doc["params"] itself, plus every
+    compatibility.<stack>.frames.<frame>.params and .sentinel_compliance map.
+    One helper covers both the top-level identity and every nested reference,
+    since both now share the same key format. Returns True iff anything
+    changed."""
+    old_key, new_key = f"{index}_{old_name}", f"{index}_{new_name}"
+    changed = False
+    params = doc.get("params", {})
+    if old_key in params:
+        params[new_key] = params.pop(old_key)
+        changed = True
+    for stack_status in doc.get("compatibility", {}).values():
+        frames = (stack_status or {}).get("frames")
+        if not isinstance(frames, dict):
+            continue
+        for frame_status in frames.values():
+            for block_key in ("params", "sentinel_compliance"):
+                block = (frame_status or {}).get(block_key)
+                if isinstance(block, dict) and old_key in block:
+                    block[new_key] = block.pop(old_key)
+                    changed = True
+    return changed
+
+
 def message_stub(msg: mavlink_xml.Message, dialect: str, stacks: list[str]) -> dict:
     return {
         "$schema": "../../../../schema/message.schema.json",
@@ -95,15 +146,11 @@ def command_stub(cmd: mavlink_xml.Command, context: str, stacks: list[str]) -> d
         "value": cmd.value,
         "dialect": "common",
         "context": context,
-        "compatibility": default_compatibility(stacks),
-        "params": [
-            {
-                "index": p.index,
-                "name": p.name,
-                "enumRef": p.enum_ref,
-            }
+        "compatibility": command_default_compatibility(stacks),
+        "params": {
+            f"{p.index}_{p.name}": {"enumRef": p.enum_ref}
             for p in cmd.params
-        ],
+        },
     }
 
 

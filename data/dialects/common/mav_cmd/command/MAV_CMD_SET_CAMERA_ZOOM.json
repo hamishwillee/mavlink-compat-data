@@ -6,38 +6,24 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Zoom Type",
+  "params": {
+    "1_Zoom Type": {
       "enumRef": "CAMERA_ZOOM_TYPE"
     },
-    {
-      "index": 2,
-      "name": "Zoom Value",
+    "2_Zoom Value": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Target Camera ID",
+    "3_Target Camera ID": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Empty",
+    "4_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

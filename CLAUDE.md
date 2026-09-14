@@ -6,14 +6,14 @@
 - `data/dialects/<minimal|common|standard>/enums/<NAME>.json` — one enum per file. `MAV_CMD` is **not** here — see commands below.
 - `data/dialects/common/mav_cmd/mission/<MAV_CMD_NAME>.json` and `.../command/<MAV_CMD_NAME>.json` — each `MAV_CMD_*` entry gets two independent files, one for mission-item usage, one for direct-command usage. `mav_cmd/` only exists under `common` (MAV_CMD is defined there).
 - `schema/*.schema.json` — JSON Schema per doc type; `compatibility-entry.schema.json` holds the shared `compatibility`/`supported` definitions, `$ref`'d by the other three.
-- `schema/vocab.json` — controlled vocab: `stacks`, `variants` (per stack), `basis`, `dialects`.
+- `schema/vocab.json` — controlled vocab: `stacks`, `frames` (per stack), `basis`, `dialects`.
 - `schema/versions.json` — known released version numbers per stack, used to validate concrete version strings.
 - `scripts/mavlink_xml.py` — shared upstream MAVLink XML parser (used by both scripts below).
 - `scripts/generate_stubs.py` — creates missing stub files for new upstream entities. Idempotent, additive only.
 - `scripts/check_sync.py` — diffs `data/` against fresh upstream XML; `--fix` patches renames/additions in place.
 - `scripts/validate.py` — CI validation entrypoint (see README for the checklist).
 
-## `compatibility` field reference
+## `compatibility` field reference: messages and enums
 
 ```json
 "compatibility": {
@@ -25,35 +25,83 @@
 ```
 
 - `<stack>`: `px4` | `ardupilot` (from `vocab.json`).
-- `<variant>`: `"default"` (stack-wide, propagates to every variant with no key of its own) or a variant name from `vocab.json`. A variant key **overrides** `default` for that variant only — no explicit "propagates" marker needed.
+- `<variant>`: `"default"` (stack-wide, propagates to every variant with no key of its own) or a frame name from `vocab.json`'s `frames` list for that stack. A variant key **overrides** `default` for that variant only — no explicit "propagates" marker needed.
 - A leaf value is normally one support-statement object; it may be an **array** of them to represent an added→removed→re-added history.
 - `supported`:
   - `false` — confirmed not implemented.
   - `null` — not yet evaluated.
-  - `"not-applicable"` — **command docs only**: this `MAV_CMD` doesn't apply in this mission/command context for that stack/variant.
   - object — confirmed implemented:
     - `added_version` (required): `true` (implemented, version unknown) | `"main"` (dev branch only) | `"X.Y.Z"`.
     - `deprecated_version` / `removed_version` (optional, **omitted** when not applicable): `"main"` | `"X.Y.Z"`.
-    - `partial_implementation` (optional bool, **omitted** when false): present-but-incomplete/WIP as of `added_version`. Describe specifics in `notes`.
 - `basis`: `unknown` | `code-inspection` | `testing` | `verified` — orthogonal to `supported`.
 - `notes`, `impl_url`: optional, omitted when unset. `impl_url` is a single URL (tracking issue, PR, or doc).
-- `last_checked_version` (optional, sibling of `supported`/`basis`/`notes`/`impl_url` — not nested inside `supported`, since `supported` is a bare scalar for `false`/`null`/`"not-applicable"`): **`"X.Y.Z"` only — never `"main"`** (`schema/compatibility-entry.schema.json`'s `releasedVersion` def, distinct from `added_version`/`deprecated_version`/`removed_version`'s `versionOrMain`; enforced by both the schema and `scripts/validate.py`'s `check_version_field(..., allow_main=False)`). Its job is to be a fixed baseline comparable against `schema/versions.json`'s release list to decide "has a newer release shipped since this was checked, and does it need re-verification?" — `"main"` is a moving target and can't serve that purpose, unlike `added_version` etc. where "happened on the dev branch" is itself a meaningful fact. Records when a fact might go stale (most useful on `supported: false` — implemented-ness can change in a later release), not when it was introduced (`added_version`'s job). Recommended whenever `basis` is `code-inspection`/`testing`/`verified` and `supported` is `false`; omit when not tracked, and don't set it from a dev/pre-release build's testing — wait for an actual tagged release.
+- `last_checked_version` (optional, sibling of `supported`/`basis`/`notes`/`impl_url` — not nested inside `supported`, since `supported` is a bare scalar for `false`/`null`): **`"X.Y.Z"` only — never `"main"`** (`schema/compatibility-entry.schema.json`'s `releasedVersion` def, distinct from `added_version`/`deprecated_version`/`removed_version`'s `versionOrMain`; enforced by both the schema and `scripts/validate.py`'s `check_version_field(..., allow_main=False)`). Its job is to be a fixed baseline comparable against `schema/versions.json`'s release list to decide "has a newer release shipped since this was checked, and does it need re-verification?" — `"main"` is a moving target and can't serve that purpose, unlike `added_version` etc. where "happened on the dev branch" is itself a meaningful fact. Records when a fact might go stale (most useful on `supported: false` — implemented-ness can change in a later release), not when it was introduced (`added_version`'s job). Recommended whenever `basis` is `code-inspection`/`testing`/`verified` and `supported` is `false`; omit when not tracked, and don't set it from a dev/pre-release build's testing — wait for an actual tagged release.
 
-**Notes are extremely terse** — a fragment, ~10 words, no period. Say only what the structured fields can't. Cut restatements of `supported`/`basis`/`added_version`/`partial_implementation`, hedges, and cross-refs the reader can already see. Name the exception, not the working case: "Alt not used (UseAltitude=false)", not "Only lat/lon-based gating (UseAltitude=false) is implemented — see param compatibility for details." `notes` may be a single string or an **array** of strings — use the array when there are two-plus genuinely distinct facts, one fragment each, rather than fusing them with "; ".
+**Sub-entity (field/value) compatibility is gated by its parent.** A field/value carries a `compatibility` entry for a given `(stack, variant)` **only if** the parent message/enum's effective `supported` there is an implemented object — resolving `default`→variant inheritance the same way the parent itself does. When the parent's effective status there is `false` or `null`, the sub-entity must **omit** that `(stack, variant)` entirely (not write `unknown`) — there's nothing to evaluate until the parent is known. `compatibility` itself is optional on a sub-entity and omitted altogether once nothing qualifies. `scripts/validate.py` enforces both directions: missing-when-required and present-when-not-required are both errors. `generate_stubs.py` never pre-populates sub-entity compatibility on a brand-new entity (its parent always starts unknown); `check_sync.py --fix` only stubs a newly-added sub-entity's compatibility for stacks the parent already confirms implemented.
 
-**Mixed-confidence statements: keep one `basis`, push the weaker fact into `notes`.** `basis` describes the whole `supportStatement`, not a specific field — so when, say, `added_version` is only known via a weaker method than the rest of the statement (e.g. `supported`/`partial_implementation` are `testing`-confirmed on recent releases, but the *earliest* version is only known from `code-inspection` of old source), don't downgrade the shared `basis` to the weaker value — that understates the parts that really were tested. Set `basis` to the strongest method backing the statement's *current* facts, and add a terse `notes` fragment naming which specific field is weaker and why (see `MAV_CMD_CONDITION_GATE.json`'s px4 entry for a worked example: `basis: "testing"` with a note that `added_version` specifically is code-inspection-only, plus a note on the earliest version the project's test harness could actually exercise live).
+## `compatibility` field reference: commands (`MAV_CMD`)
 
-**Omit vs. explicit `null` convention**: omit a field (`notes`, `impl_url`, `deprecated_version`, `removed_version`, `partial_implementation`) when nobody has entered that information yet. Use explicit `null` only for a fact tooling actually determined — e.g. a param's `enumRef: null` means "confirmed: no enum reference," not "unknown."
+Commands use a different, per-vehicle-frame shape instead of `default`+variant-override — testing happens incrementally per vehicle (multicopter first, then fixed-wing, etc.), frames can support genuinely different combinations of params, and there's no assumed inheritance between frames.
 
-**Sub-entity (field/param/value) compatibility is gated by its parent.** A field/param/value carries a `compatibility` entry for a given `(stack, variant)` **only if** the parent message/command/enum's effective `supported` there is an implemented object (`true`/version/partial) — resolving `default`→variant inheritance the same way the parent itself does. When the parent's effective status there is `false`, `null`, or `"not-applicable"`, the sub-entity must **omit** that `(stack, variant)` entirely (not write `unknown`) — there's nothing to evaluate until the parent is known. `compatibility` itself is optional on a sub-entity and omitted altogether once nothing qualifies. `scripts/validate.py` enforces both directions: missing-when-required and present-when-not-required are both errors. `generate_stubs.py` never pre-populates sub-entity compatibility on a brand-new entity (its parent always starts unknown); `check_sync.py --fix` only stubs a newly-added sub-entity's compatibility for stacks the parent already confirms implemented.
+```json
+"compatibility": {
+  "<stack>": {
+    "frames": {},                              // untested -- nothing evaluated for any frame yet
+    "basis"?: ..., "notes"?: ..., "impl_url"?: ..., "last_checked_version"?: ...
+  }
+}
+```
+```json
+"compatibility": {
+  "<stack>": {
+    "frames": false,                           // confirmed unsupported on every frame (blanket fact)
+    "basis": "...", "last_checked_version"?: "..."
+  }
+}
+```
+```json
+"compatibility": {
+  "<stack>": {
+    "frames": {
+      "<frame>": {
+        "supported": ..., "basis": ..., "notes"?: ..., "impl_url"?: ...,
+        "last_checked_version"?: ..., "earliest_checked_version"?: ...,
+        "params"?: { "<index>_<name>": { "supported": ..., "basis": ..., ... } },
+        "sentinel_compliance"?: { "default": { ... }, "<index>_<name>"?: { ... } },
+        "mav_frames"?: { "supported"?: ["MAV_FRAME_..."], "rejects_unsupported"?: { ... }, "default_frame_command_long"?: "MAV_FRAME_..." }
+      }
+    }
+  }
+}
+```
 
-**A command param named `"Empty"` is exempt, not "unknown."** `scripts/mavlink_xml.py`'s `_param_name()` synthesizes the literal name `"Empty"` for a reserved/undocumented upstream param slot (no `label` attribute in the XML) — that's not a feature any stack could support or fail to support, so it never carries `compatibility`, for any stack, regardless of the command's own status. This is a stronger exemption than the general gating rule above: an ordinary param loses its entry only where the parent isn't implemented, but an `"Empty"` param never gets one at all. `scripts/validate.py` flags one if present. Once upstream assigns it a real label — already caught by `check_sync.py`'s rename detection — it's an ordinary param from that point on, and the normal gating rule (and `validate.py`'s enforcement of it) applies immediately; `check_sync.py --fix` never attaches compatibility when appending a newly-added param still named `"Empty"`.
+- `<frame>`: a name from `vocab.json`'s `frames` list for that stack (e.g. `plane`, `standard_quadplane`, `copter` for ArduPilot; `multicopter`, `fixedwing`, `vtol` for PX4). **No `default` fallback within `frames`** — every known/tested frame is written out in full, even when two frames share an identical result; absence of a frame key always means untested/unknown, nothing is ever inherited.
+- `supported` (a frame's own, or a param's within it): `false` | `null` | `"not-applicable"` (this `MAV_CMD` doesn't apply in this mission/command wire context for that stack, or a specific param doesn't apply within an otherwise-implemented frame) | `{ added_version, deprecated_version?, removed_version? }` — same union as messages/enums, minus `partial_implementation` (removed everywhere; infer partial support from the frame's own `params` breakdown instead).
+- `basis`/`notes`/`impl_url`/`last_checked_version` are only valid as siblings of `frames` when `frames` is `false` (describing that blanket claim); once `frames` is an object, each frame carries its own instead.
+- A command's top-level `params` object (`{"<index>_<name>": {"enumRef": ...}}`, identity only — see the entity doc shape below) is the single source of param identity; a frame's own `params.<index>_<name>` may exist **iff** that frame's `supported` is a confirmed-implemented object, and then every non-`"Empty"` param must appear — same gating spirit as the message/enum rule above, just internal to one frame instead of cross-referencing a separate array.
+- `earliest_checked_version` (**`"X.Y.Z"` only, never `"main"`** — same `releasedVersion` type as `last_checked_version`): scoped to a frame's own status only, not usable on messages/enums, not duplicated into params. Used when `added_version` is `true` to record "confirmed already present as of this checked release" as a floor/lower bound — distinct from `last_checked_version`, which records freshness of a negative fact. Dropped once a real `added_version` is discovered.
+- `sentinel_compliance`: does this frame correctly enforce the sentinel-value contract (an unused param NACKs any non-sentinel value; a used param tolerates the sentinel)? `default` (required) covers the common case; add a `<index>_<name>` override only for a param whose compliance genuinely diverges from the frame's `default` — this is the one place a `default`+override shortcut is still used *within* a frame, since it answers "is this true for all params if true for one," a narrower and more defensible assumption than inheriting across untested vehicle frames. Gated the same way as `params`.
+- `mav_frames`: coordinate-frame (`MAV_FRAME`) support — deliberately a separate key from the vehicle-type `frames` above (same English word, unrelated MAVLink concepts). `supported` is the list of accepted `MAV_FRAME_*` values (meaningful wherever the wire encoding carries a `frame` field — mission items via `MISSION_ITEM_INT`, and `COMMAND_INT`); `rejects_unsupported` is a support-statement answering "does it NACK an unsupported frame, and since when"; `default_frame_command_long` is a plain informational string (no pass/fail, no version) for when this command can also be sent as `COMMAND_LONG` (no frame field at all). Gated the same way as `params`.
+
+**A command param named `"Empty"` is exempt, not "unknown."** `scripts/mavlink_xml.py`'s `_param_name()` synthesizes the literal name `"Empty"` for a reserved/undocumented upstream param slot (no `label` attribute in the XML) — that's not a feature any stack could support or fail to support, so its key (`"<index>_Empty"`) never appears in any frame's `params`/`sentinel_compliance`, for any stack, regardless of the command's own status. `scripts/validate.py` flags one if present. Once upstream assigns it a real label — already caught by `check_sync.py`'s rename detection — it's an ordinary param from that point on, and the normal gating rule applies immediately; `check_sync.py --fix` never stubs compatibility in when appending a newly-added param still named `"Empty"`.
+
+**Terse notes, mixed-confidence statements, and the omit-vs-null convention apply equally to both shapes above.**
+
+**Notes are extremely terse** — a fragment, ~10 words, no period. Say only what the structured fields can't. Cut restatements of `supported`/`basis`/`added_version`, hedges, and cross-refs the reader can already see. Name the exception, not the working case: "Alt not used (UseAltitude=false)", not "Only lat/lon-based gating (UseAltitude=false) is implemented — see param compatibility for details." `notes` may be a single string or an **array** of strings — use the array when there are two-plus genuinely distinct facts, one fragment each, rather than fusing them with "; ".
+
+**Mixed-confidence statements: keep one `basis`, push the weaker fact into `notes`.** `basis` describes the whole support statement, not a specific field — so when, say, `added_version` is only known via a weaker method than the rest of the statement (e.g. `supported` is `testing`-confirmed on recent releases, but the *earliest* version is only known from `code-inspection` of old source), don't downgrade the shared `basis` to the weaker value — that understates the parts that really were tested. Set `basis` to the strongest method backing the statement's *current* facts, and add a terse `notes` fragment naming which specific field is weaker and why (see `MAV_CMD_CONDITION_GATE.json`'s px4 entry for a worked example: `basis: "testing"` with a note that `added_version` specifically is code-inspection-only, plus a note on the earliest version the project's test harness could actually exercise live).
+
+**Omit vs. explicit `null` convention**: omit a field (`notes`, `impl_url`, `deprecated_version`, `removed_version`) when nobody has entered that information yet. Use explicit `null` only for a fact tooling actually determined — e.g. a param's `enumRef: null` means "confirmed: no enum reference," not "unknown."
+
+**Don't record findings from an unreleased dev build as compatibility data.** `added_version: "main"` is legitimate for a durable code-presence fact (e.g. a merged PR or changelog entry: "landed on the dev branch, not yet released") — but don't set it, or write any `supported`/`notes` content, purely from testing a specific dev/pre-release snapshot (a particular git commit). "main" is a moving target with no stable identity across time — a test result from one day's build isn't a fact you can stand behind once the branch moves on, and there's no commit-pinned versioning scheme (e.g. `main+<hash>`) to make it comparable later. Same rule `last_checked_version`/`earliest_checked_version` already follow — wait for an actual tagged release before recording it.
 
 **Enums referenced by a field/param are not duplicated.** A message field or command param that takes its values from an enum carries `enumRef: "<ENUM_NAME>"` (or `null`). The enum's own value-level compatibility lives once in its own `enums/<ENUM_NAME>.json`.
 
 ## ArduPilot versioning
 
-ArduPilot ships separate firmware per vehicle (Copter/Plane/Rover/Sub/Tracker/Blimp) from one monorepo; stable releases land as a roughly coordinated `X.Y` wave but patch-level (`X.Y.Z`) cadence differs per vehicle, and not every vehicle gets every point release. `ardupilot.default` is therefore a **major.minor-level approximation of the shared implementation** (most MAVLink handling lives in `libraries/GCS_MAVLink`), not a claim about one vehicle's exact build. Add a variant override only for a real functional difference (unsupported on that vehicle, a different minor version, partial support) — not to chase per-vehicle patch numbers.
+ArduPilot ships separate firmware per vehicle (Copter/Plane/Rover/Sub/Tracker/Blimp) from one monorepo; stable releases land as a roughly coordinated `X.Y` wave but patch-level (`X.Y.Z`) cadence differs per vehicle, and not every vehicle gets every point release. For messages/enums, `ardupilot.default` is therefore a **major.minor-level approximation of the shared implementation** (most MAVLink handling lives in `libraries/GCS_MAVLink`), not a claim about one vehicle's exact build — add a variant override only for a real functional difference (unsupported on that vehicle, a different minor version, partial support), not to chase per-vehicle patch numbers. Commands have no such approximation: since `frames` has no `default` fallback, every command fact is scoped to the specific frame(s) actually evaluated.
+
+ArduPilot's own vehicle-type vocabulary also splits conventional fixed-wing (`plane`) from VTOL/quadplane (`standard_quadplane`) as two separate `frames` entries, even though both run "Plane" firmware — the flight behavior genuinely differs (e.g. takeoff), so they're tracked independently rather than one inheriting from the other.
 
 ## `schema/versions.json`
 
@@ -62,7 +110,9 @@ Flat list of released `X.Y.Z` numbers per stack (ArduPilot: whole-project number
 ## Sync drift categories (`scripts/check_sync.py`)
 
 - **New entity upstream** — no stub file yet. Not fixed by this script; run `generate_stubs.py`.
-- **Addition/rename within an existing entity** — a `name`/`enumRef` differs from upstream, or upstream declares a field/param/value not yet in the doc. **Auto-fixable** with `--fix`: patches the identity field or appends the new sub-entity, with fresh `unknown` compatibility for whichever stacks the parent already confirms implemented (per the sub-entity gating rule — omitted otherwise); existing `compatibility` data is never touched.
+- **Addition/rename within an existing entity**:
+  - Messages/enums — a `name`/`enumRef` differs from upstream, or upstream declares a field/value not yet in the doc. **Auto-fixable** with `--fix`: patches the identity field or appends the new sub-entity, with fresh `unknown` compatibility for whichever stacks the parent already confirms implemented (per the sub-entity gating rule — omitted otherwise); existing `compatibility` data is never touched.
+  - Commands — a param's `name`/`enumRef` differs from upstream, or upstream declares a param not yet in the doc. **Auto-fixable** with `--fix`: a rename rewrites the `"<index>_<name>"` key everywhere it appears (the top-level `params` object, and every frame's `params`/`sentinel_compliance` map) in one pass, since both now share the same key format; an addition inserts the new key into `params` and, for every `(stack, frame)` already confirmed implemented, stubs `{"supported": null, "basis": "unknown"}` into that frame's `params` too. `"Empty"` → a real name is identity-only, same as before — never proactively stubs compatibility into already-confirmed frames.
 - **Removed upstream** — a field/param/value/entity no longer exists upstream. **Never auto-fixed or deleted** — flagged for manual review, since deleting would destroy compat history.
 
 ## Keeping `README.md` in sync

@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Land Options",
+  "params": {
+    "1_Land Options": {
       "enumRef": "NAV_VTOL_LAND_OPTIONS"
     },
-    {
-      "index": 2,
-      "name": "Empty",
+    "2_Empty": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Approach Altitude",
+    "3_Approach Altitude": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Yaw",
+    "4_Yaw": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Latitude",
+    "5_Latitude": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Longitude",
+    "6_Longitude": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Ground Altitude",
+    "7_Ground Altitude": {
       "enumRef": null
     }
-  ]
+  }
 }

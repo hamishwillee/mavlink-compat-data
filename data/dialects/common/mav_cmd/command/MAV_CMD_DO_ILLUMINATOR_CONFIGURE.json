@@ -6,38 +6,24 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Mode",
+  "params": {
+    "1_Mode": {
       "enumRef": "ILLUMINATOR_MODE"
     },
-    {
-      "index": 2,
-      "name": "Brightness",
+    "2_Brightness": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Strobe Period",
+    "3_Strobe Period": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Strobe Duty",
+    "4_Strobe Duty": {
       "enumRef": null
     }
-  ]
+  }
 }

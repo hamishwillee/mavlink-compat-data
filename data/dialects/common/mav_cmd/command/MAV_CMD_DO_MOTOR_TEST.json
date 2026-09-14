@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Instance",
+  "params": {
+    "1_Instance": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Throttle Type",
+    "2_Throttle Type": {
       "enumRef": "MOTOR_TEST_THROTTLE_TYPE"
     },
-    {
-      "index": 3,
-      "name": "Throttle",
+    "3_Throttle": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Timeout",
+    "4_Timeout": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Motor Count",
+    "5_Motor Count": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Test Order",
+    "6_Test Order": {
       "enumRef": "MOTOR_TEST_ORDER"
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

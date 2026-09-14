@@ -6,48 +6,30 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Pitch angle",
+  "params": {
+    "1_Pitch angle": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Yaw angle",
+    "2_Yaw angle": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Pitch rate",
+    "3_Pitch rate": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Yaw rate",
+    "4_Yaw rate": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Gimbal manager flags",
+    "5_Gimbal manager flags": {
       "enumRef": "GIMBAL_MANAGER_FLAGS"
     },
-    {
-      "index": 7,
-      "name": "Gimbal device ID",
+    "7_Gimbal device ID": {
       "enumRef": null
     }
-  ]
+  }
 }

@@ -34,7 +34,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import mavlink_xml
-from generate_stubs import DATA_DIR, REPO_ROOT, gated_sub_compatibility, load_vocab
+from generate_stubs import (
+    DATA_DIR,
+    REPO_ROOT,
+    gated_command_param_stub_targets,
+    gated_sub_compatibility,
+    load_vocab,
+    rename_command_param_key,
+)
 
 
 @dataclass
@@ -147,8 +154,14 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
                 continue
 
             doc = load_json(path)
-            stored_params = doc.get("params", [])
-            stored_by_index = {p["index"]: p for p in stored_params}
+            params = doc.get("params", {})
+            # params is keyed "<index>_<name>" -- recover the (key, name) for
+            # each index so additions/renames/removals can be detected the
+            # same way as before.
+            stored_by_index: dict[int, tuple[str, str]] = {}
+            for key in params:
+                idx_str, _, name = key.partition("_")
+                stored_by_index[int(idx_str)] = (key, name)
             upstream_by_index = {p.index: p for p in cmd.params}
             changed = False
 
@@ -156,35 +169,38 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
                 if idx not in stored_by_index:
                     drifts.append(Drift("addition", path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
                     if fix:
-                        new_param = {"index": u.index, "name": u.name, "enumRef": u.enum_ref}
+                        new_key = f"{u.index}_{u.name}"
+                        params[new_key] = {"enumRef": u.enum_ref}
                         if u.name != "Empty":
                             # A reserved/undocumented slot never carries compatibility,
                             # regardless of parent status — see CLAUDE.md.
-                            sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
-                            if sub_compat:
-                                new_param["compatibility"] = sub_compat
-                        stored_params.append(new_param)
+                            for stack, frame_name in gated_command_param_stub_targets(doc.get("compatibility", {})):
+                                frame_status = doc["compatibility"][stack]["frames"][frame_name]
+                                frame_status.setdefault("params", {})[new_key] = {"supported": None, "basis": "unknown"}
+                        stored_by_index[idx] = (new_key, u.name)
                         changed = True
                     continue
-                sp = stored_by_index[idx]
-                if sp.get("name") != u.name:
-                    drifts.append(Drift("rename", path, f"params[index={idx}].name: {sp.get('name')!r} -> {u.name!r}", fixed=fix))
+                sk, sname = stored_by_index[idx]
+                if sname != u.name:
+                    drifts.append(Drift("rename", path, f"params[index={idx}].name: {sname!r} -> {u.name!r}", fixed=fix))
                     if fix:
-                        sp["name"] = u.name
+                        rename_command_param_key(doc, idx, sname, u.name)
+                        sk = f"{idx}_{u.name}"
+                        stored_by_index[idx] = (sk, u.name)
                         changed = True
+                sp = params[sk]
                 if sp.get("enumRef") != u.enum_ref:
                     drifts.append(Drift("rename", path, f"params[index={idx}].enumRef: {sp.get('enumRef')!r} -> {u.enum_ref!r}", fixed=fix))
                     if fix:
                         sp["enumRef"] = u.enum_ref
                         changed = True
 
-            for idx, sp in stored_by_index.items():
+            for idx, (sk, sname) in stored_by_index.items():
                 if idx not in upstream_by_index:
-                    drifts.append(Drift("removed", path, f"params[index={idx}] {sp.get('name')!r} no longer present upstream"))
+                    drifts.append(Drift("removed", path, f"params[index={idx}] {sname!r} no longer present upstream"))
 
             if changed:
-                stored_params.sort(key=lambda p: p["index"])
-                doc["params"] = stored_params
+                doc["params"] = params
                 save_json(path, doc)
 
 

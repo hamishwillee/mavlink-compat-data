@@ -6,28 +6,18 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 3,
-      "name": "alt rate-of-change",
+  "params": {
+    "3_alt rate-of-change": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "target alt",
+    "7_target alt": {
       "enumRef": null
     }
-  ]
+  }
 }

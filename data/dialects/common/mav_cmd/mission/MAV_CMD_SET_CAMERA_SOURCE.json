@@ -6,33 +6,21 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "device id",
+  "params": {
+    "1_device id": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "primary source",
+    "2_primary source": {
       "enumRef": "CAMERA_SOURCE"
     },
-    {
-      "index": 3,
-      "name": "secondary source",
+    "3_secondary source": {
       "enumRef": "CAMERA_SOURCE"
     }
-  ]
+  }
 }

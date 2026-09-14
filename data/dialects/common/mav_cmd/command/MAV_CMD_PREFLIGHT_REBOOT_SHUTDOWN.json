@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Autopilot",
+  "params": {
+    "1_Autopilot": {
       "enumRef": "REBOOT_SHUTDOWN_ACTION"
     },
-    {
-      "index": 2,
-      "name": "Companion",
+    "2_Companion": {
       "enumRef": "REBOOT_SHUTDOWN_ACTION"
     },
-    {
-      "index": 3,
-      "name": "Component Action",
+    "3_Component Action": {
       "enumRef": "REBOOT_SHUTDOWN_ACTION"
     },
-    {
-      "index": 4,
-      "name": "Component ID",
+    "4_Component ID": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Reserved (set to 0)",
+    "5_Reserved (set to 0)": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Conditions",
+    "6_Conditions": {
       "enumRef": "REBOOT_SHUTDOWN_CONDITIONS"
     },
-    {
-      "index": 7,
-      "name": "WIP: ID (e.g. camera ID -1 for all IDs)",
+    "7_WIP: ID (e.g. camera ID -1 for all IDs)": {
       "enumRef": null
     }
-  ]
+  }
 }

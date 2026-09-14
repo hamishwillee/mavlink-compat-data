@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Distance",
+  "params": {
+    "1_Distance": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Shutter",
+    "2_Shutter": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Min Interval",
+    "3_Min Interval": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Positions",
+    "4_Positions": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Roll Angle",
+    "5_Roll Angle": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Pitch Angle",
+    "6_Pitch Angle": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

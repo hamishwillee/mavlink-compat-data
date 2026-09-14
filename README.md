@@ -14,9 +14,11 @@ schema/       # JSON Schema + controlled vocab (vocab.json) + known releases (ve
 scripts/      # generation, sync-check, and CI validation
 ```
 
-One JSON file per message/enum/command. Fields, enum values, and command params are nested arrays/lists inside that file, not separate files.
+One JSON file per message/enum/command. Fields and enum values are nested arrays, and command params a nested object, inside that file — not separate files.
 
 ## Entity doc shape
+
+Messages and enums use a `default`+variant-override shape:
 
 ```json
 {
@@ -26,7 +28,7 @@ One JSON file per message/enum/command. Fields, enum values, and command params 
   "compatibility": {
     "ardupilot": {
       "default": { "supported": { "added_version": "4.3.0" }, "basis": "code-inspection" },
-      "copter":  { "supported": { "added_version": "4.3.0", "partial_implementation": true }, "basis": "testing", "notes": "..." }
+      "copter":  { "supported": { "added_version": "4.3.0" }, "basis": "testing", "notes": "..." }
     },
     "px4": { "default": { "supported": null, "basis": "unknown" } }
   },
@@ -34,16 +36,40 @@ One JSON file per message/enum/command. Fields, enum values, and command params 
 }
 ```
 
-- `compatibility` is keyed by stack, then `"default"` or a variant. A variant key overrides `default` for that variant only; no key means "inherits `default`".
-- `supported`: `false` (not implemented) | `null` (not yet evaluated) | `"not-applicable"` (command docs only) | `{ added_version, deprecated_version?, removed_version?, partial_implementation? }`.
+- `compatibility` is keyed by stack, then `"default"` or a variant name from `schema/vocab.json`'s `frames` list. A variant key overrides `default` for that variant only; no key means "inherits `default`".
+- `supported`: `false` (not implemented) | `null` (not yet evaluated) | `{ added_version, deprecated_version?, removed_version? }`.
   - `added_version`: `true` (implemented, version unknown) | `"main"` (dev branch only) | `"X.Y.Z"`.
   - Optional fields are **omitted**, not `null`, when unset.
 - `basis`: `"unknown" | "code-inspection" | "testing" | "verified"`.
 - `last_checked_version`: optional, `"X.Y.Z"` only (never `"main"` — it must be a fixed baseline to check staleness against future releases) — the version a `false` (or other) statement was last confirmed against. Distinct from `added_version`.
 - `notes`, `impl_url`: optional. `notes` is a single terse fragment or an array of them (one per distinct fact) — see CLAUDE.md for the terseness rule. `impl_url` is a tracking-issue or PR link.
-- A field/param/value only carries `compatibility` for a `(stack, variant)` where the parent entity is confirmed implemented there — otherwise it's omitted entirely, not `unknown`.
-- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — it never carries `compatibility` at all, for any stack, until upstream gives it a real name.
-- Full field reference and rationale: [CLAUDE.md](CLAUDE.md).
+- A field/value only carries `compatibility` for a `(stack, variant)` where the parent entity is confirmed implemented there — otherwise it's omitted entirely, not `unknown`.
+
+Commands (`MAV_CMD`) use a per-vehicle-frame shape instead — testing happens incrementally per vehicle, so there's no `default` fallback:
+
+```json
+{
+  "name": "MAV_CMD_NAV_TAKEOFF",
+  "value": 22,
+  "dialect": "common",
+  "context": "mission",
+  "compatibility": {
+    "ardupilot": {
+      "frames": {
+        "copter": { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": false, "basis": "verified" } } },
+        "plane":  { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": { "added_version": true }, "basis": "verified" } } }
+      }
+    },
+    "px4": { "frames": {} }
+  },
+  "params": { "1_Pitch": { "enumRef": null } }
+}
+```
+
+- `frames`: `{}` (untested) | `false` (confirmed unsupported on every frame) | an object keyed by frame name (from `schema/vocab.json`'s `frames` list) with **no fallback between frames** — every known frame is written out in full.
+- The top-level `params` object (`"<index>_<name>": {"enumRef": ...}`) is identity only, shared across stacks; a frame's own `params.<index>_<name>` may exist only if that frame's `supported` is confirmed-implemented, and then every non-`"Empty"` param must appear.
+- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — its key never appears in any frame's `params`, for any stack, until upstream gives it a real name.
+- Full field reference and rationale, including `sentinel_compliance`/`mav_frames`/`earliest_checked_version`: [CLAUDE.md](CLAUDE.md).
 
 ## Scripts
 
@@ -67,11 +93,21 @@ python scripts/check_sync.py [--fix]    # report (or fix) drift vs upstream MAVL
 
 - Every file under `data/` is valid JSON and matches its type's JSON Schema.
 - Filename matches the doc's `name`; `dialect`/`context` fields match their directory.
-- Every `compatibility` stack key is in `schema/vocab.json`; every variant key is `"default"` or valid for that stack.
 - Every `basis` value is in `schema/vocab.json`.
-- `supported` is exactly `false`, `null`, `"not-applicable"`, or a valid object; `"not-applicable"` only in command docs.
-- `added_version`/`deprecated_version`/`removed_version` are `true`/`"main"`/a version string as applicable; `last_checked_version` is a version string only (`"main"` not allowed there). Any concrete version exists in `schema/versions.json` for that stack.
+- `added_version`/`deprecated_version`/`removed_version` are `true`/`"main"`/a version string as applicable; `last_checked_version`/`earliest_checked_version` are a version string only (`"main"` not allowed there). Any concrete version exists in `schema/versions.json` for that stack.
 - `impl_url`, if present, is a well-formed `http(s)://` URL.
-- A field/param/value's `compatibility` is present for a `(stack, variant)` if and only if the parent entity is confirmed implemented there — both missing-when-required and present-when-not-required are errors.
-- A param named `"Empty"` (reserved/undocumented upstream) never has `compatibility` at all.
 - No duplicate entity files in the same directory.
+
+Messages/enums:
+- Every `compatibility` stack key is in `schema/vocab.json`; every variant key is `"default"` or a valid frame name for that stack.
+- `supported` is exactly `false`, `null`, or a valid object.
+- A field/value's `compatibility` is present for a `(stack, variant)` if and only if the parent entity is confirmed implemented there — both missing-when-required and present-when-not-required are errors.
+
+Commands (`MAV_CMD`):
+- Every `compatibility` stack key is in `schema/vocab.json`; every `frames` key is a valid frame name for that stack.
+- `basis`/`notes`/`impl_url`/`last_checked_version` are only present alongside `frames: false`, never alongside an object `frames`.
+- `supported` (frame's own, or a param's) is exactly `false`, `null`, `"not-applicable"`, or a valid object.
+- A frame's `params`/`sentinel_compliance` entries are present for a param if and only if that frame's own `supported` is confirmed implemented — same both-directions check as messages/enums, applied within one frame.
+- No two `params`/frame-`params` keys share the same `<index>` prefix.
+- `mav_frames.supported`/`default_frame_command_long` values are known `MAV_FRAME` enum names.
+- A param named `"Empty"` (reserved/undocumented upstream) never appears as a key in any frame's `params`/`sentinel_compliance`.

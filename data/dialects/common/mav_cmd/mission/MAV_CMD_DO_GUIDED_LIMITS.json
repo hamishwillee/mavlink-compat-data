@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Timeout",
+  "params": {
+    "1_Timeout": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Min Altitude",
+    "2_Min Altitude": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Max Altitude",
+    "3_Max Altitude": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Horiz. Move Limit",
+    "4_Horiz. Move Limit": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Empty",
+    "5_Empty": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Empty",
+    "6_Empty": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

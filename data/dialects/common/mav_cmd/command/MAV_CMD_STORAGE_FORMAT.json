@@ -6,38 +6,24 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Storage ID",
+  "params": {
+    "1_Storage ID": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Format",
+    "2_Format": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 3,
-      "name": "Reset Image Log",
+    "3_Reset Image Log": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 4,
-      "name": "Reserved (all remaining params)",
+    "4_Reserved (all remaining params)": {
       "enumRef": null
     }
-  ]
+  }
 }

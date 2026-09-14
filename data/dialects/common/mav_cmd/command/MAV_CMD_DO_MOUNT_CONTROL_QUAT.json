@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Q1",
+  "params": {
+    "1_Q1": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Q2",
+    "2_Q2": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Q3",
+    "3_Q3": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Q4",
+    "4_Q4": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Empty",
+    "5_Empty": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Empty",
+    "6_Empty": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

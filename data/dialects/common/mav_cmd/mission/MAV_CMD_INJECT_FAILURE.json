@@ -6,38 +6,24 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Failure unit",
+  "params": {
+    "1_Failure unit": {
       "enumRef": "FAILURE_UNIT"
     },
-    {
-      "index": 2,
-      "name": "Failure type",
+    "2_Failure type": {
       "enumRef": "FAILURE_TYPE"
     },
-    {
-      "index": 3,
-      "name": "Instance",
+    "3_Instance": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Instance bitmask",
+    "4_Instance bitmask": {
       "enumRef": null
     }
-  ]
+  }
 }

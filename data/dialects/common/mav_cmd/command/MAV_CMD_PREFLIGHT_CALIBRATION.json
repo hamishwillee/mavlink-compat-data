@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Gyro Temperature",
+  "params": {
+    "1_Gyro Temperature": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Magnetometer",
+    "2_Magnetometer": {
       "enumRef": "PREFLIGHT_CALIBRATION_MAGNETOMETER"
     },
-    {
-      "index": 3,
-      "name": "Ground Pressure",
+    "3_Ground Pressure": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 4,
-      "name": "Remote Control",
+    "4_Remote Control": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Accelerometer",
+    "5_Accelerometer": {
       "enumRef": "PREFLIGHT_CALIBRATION_ACCELEROMETER"
     },
-    {
-      "index": 6,
-      "name": "Compmot or Airspeed",
+    "6_Compmot or Airspeed": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "ESC or Baro",
+    "7_ESC or Baro": {
       "enumRef": null
     }
-  ]
+  }
 }

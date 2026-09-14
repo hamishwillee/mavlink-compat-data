@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Standard Mode",
+  "params": {
+    "1_Standard Mode": {
       "enumRef": "MAV_STANDARD_MODE"
     },
-    {
-      "index": 2,
-      "name": "Empty",
+    "2_Empty": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Empty",
+    "3_Empty": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Empty",
+    "4_Empty": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Empty",
+    "5_Empty": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Empty",
+    "6_Empty": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

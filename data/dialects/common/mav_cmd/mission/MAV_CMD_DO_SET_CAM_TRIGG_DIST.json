@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Distance",
+  "params": {
+    "1_Distance": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Shutter",
+    "2_Shutter": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Trigger",
+    "3_Trigger": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 4,
-      "name": "Target Camera ID",
+    "4_Target Camera ID": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Empty",
+    "5_Empty": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Empty",
+    "6_Empty": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

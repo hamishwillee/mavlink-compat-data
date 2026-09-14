@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Radius",
+  "params": {
+    "1_Radius": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Velocity",
+    "2_Velocity": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Yaw Behavior",
+    "3_Yaw Behavior": {
       "enumRef": "ORBIT_YAW_BEHAVIOUR"
     },
-    {
-      "index": 4,
-      "name": "Orbits",
+    "4_Orbits": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Latitude/X",
+    "5_Latitude/X": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Longitude/Y",
+    "6_Longitude/Y": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Altitude/Z",
+    "7_Altitude/Z": {
       "enumRef": null
     }
-  ]
+  }
 }

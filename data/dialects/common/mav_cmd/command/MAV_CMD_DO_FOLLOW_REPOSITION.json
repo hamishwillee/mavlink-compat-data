@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Camera Q1",
+  "params": {
+    "1_Camera Q1": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Camera Q2",
+    "2_Camera Q2": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Camera Q3",
+    "3_Camera Q3": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Camera Q4",
+    "4_Camera Q4": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Altitude Offset",
+    "5_Altitude Offset": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "X Offset",
+    "6_X Offset": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Y Offset",
+    "7_Y Offset": {
       "enumRef": null
     }
-  ]
+  }
 }

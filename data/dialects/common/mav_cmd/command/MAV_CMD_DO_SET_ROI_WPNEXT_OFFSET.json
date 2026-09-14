@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Gimbal device ID",
+  "params": {
+    "1_Gimbal device ID": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Empty",
+    "2_Empty": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Empty",
+    "3_Empty": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Empty",
+    "4_Empty": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Pitch Offset",
+    "5_Pitch Offset": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Roll Offset",
+    "6_Roll Offset": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Yaw Offset",
+    "7_Yaw Offset": {
       "enumRef": null
     }
-  ]
+  }
 }

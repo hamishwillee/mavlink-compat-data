@@ -6,43 +6,27 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "sysid primary control",
+  "params": {
+    "1_sysid primary control": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "compid primary control",
+    "2_compid primary control": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "sysid secondary control",
+    "3_sysid secondary control": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "compid secondary control",
+    "4_compid secondary control": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Gimbal device ID",
+    "7_Gimbal device ID": {
       "enumRef": null
     }
-  ]
+  }
 }

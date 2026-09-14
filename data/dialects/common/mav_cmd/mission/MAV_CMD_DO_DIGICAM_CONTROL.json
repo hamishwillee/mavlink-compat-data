@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Session Control",
+  "params": {
+    "1_Session Control": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Zoom Absolute",
+    "2_Zoom Absolute": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Zoom Relative",
+    "3_Zoom Relative": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Focus",
+    "4_Focus": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Shoot Command",
+    "5_Shoot Command": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Command Identity",
+    "6_Command Identity": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Shot ID",
+    "7_Shot ID": {
       "enumRef": null
     }
-  ]
+  }
 }

@@ -121,10 +121,12 @@ def _effective_statement(by_variant: dict, variant: str):
 
 
 def check_sub_entity_gating(entity_compat: dict, sub_items: list[dict], sub_key: str, errors: list[str], where: str) -> None:
-    """Enforces CLAUDE.md's sub-entity gating rule: a field/param/value may
-    carry a compatibility entry for a given (stack, variant) iff the parent's
-    effective status there is a confirmed-implemented object. Checks both
-    directions — required-but-missing, and present-but-not-warranted.
+    """Enforces CLAUDE.md's sub-entity gating rule for fields/values (messages/
+    enums): a field/value may carry a compatibility entry for a given (stack,
+    variant) iff the parent's effective status there is a confirmed-implemented
+    object. Checks both directions — required-but-missing, and
+    present-but-not-warranted. Commands/params are handled separately by
+    check_command_compatibility/check_frame_status instead.
 
     Note: this resolves each (stack, variant) independently by looking only
     at keys actually present on each side (falling back to that side's own
@@ -137,14 +139,6 @@ def check_sub_entity_gating(entity_compat: dict, sub_items: list[dict], sub_key:
     for i, item in enumerate(sub_items):
         item_label = f"{where}: {sub_key}[{i}] ({item.get('name')!r})"
         child_compat = item.get("compatibility") or {}
-        if sub_key == "params" and item.get("name") == "Empty":
-            # A reserved/undocumented upstream param slot (mavlink_xml.py's
-            # own sentinel name for "no label in the XML") isn't a feature
-            # any stack could support or not — exempt from gating entirely,
-            # not merely "not yet required". Never carries compatibility.
-            if child_compat:
-                errors.append(f"{item_label}: reserved param ('Empty') must not carry compatibility")
-            continue
         for stack in set(entity_compat) | set(child_compat):
             parent_by_variant = entity_compat.get(stack, {})
             child_by_variant = child_compat.get(stack, {})
@@ -162,7 +156,7 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
         if stack not in vocab["stacks"]:
             errors.append(f"{where}: unknown stack {stack!r} (not in schema/vocab.json)")
             continue
-        valid_variants = {"default", *vocab["variants"].get(stack, [])}
+        valid_variants = {"default", *vocab["frames"].get(stack, [])}
         for variant, statement_or_history in by_variant.items():
             if variant not in valid_variants:
                 errors.append(f"{where}: unknown variant {variant!r} for stack {stack!r}")
@@ -188,10 +182,123 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
                     check_supported_object(supported, stack, versions, errors, f"{where}: {stack}.{variant}")
 
 
+def _check_statement_or_history(statement_or_history, stack: str, versions: dict, errors: list[str], where: str, *, allow_not_applicable: bool) -> None:
+    statements = statement_or_history if isinstance(statement_or_history, list) else [statement_or_history]
+    for statement in statements:
+        basis = statement.get("basis")
+        if basis not in ("unknown", "code-inspection", "testing", "verified"):
+            errors.append(f"{where}: unknown basis {basis!r}")
+        impl_url = statement.get("impl_url")
+        if impl_url is not None and not URL_PATTERN.match(impl_url):
+            errors.append(f"{where}: impl_url {impl_url!r} is not http(s)")
+        check_version_field(statement.get("last_checked_version"), "last_checked_version", stack, versions, errors, where, allow_main=False)
+        supported = statement.get("supported")
+        if supported == "not-applicable" and not allow_not_applicable:
+            errors.append(f"{where}: 'not-applicable' only valid in command docs")
+        if isinstance(supported, dict):
+            check_supported_object(supported, stack, versions, errors, where)
+
+
+def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str], where: str, valid_param_keys: set[str], mav_frame_names: set[str]) -> None:
+    if frame.get("basis") not in ("unknown", "code-inspection", "testing", "verified"):
+        errors.append(f"{where}: unknown basis {frame.get('basis')!r}")
+    impl_url = frame.get("impl_url")
+    if impl_url is not None and not URL_PATTERN.match(impl_url):
+        errors.append(f"{where}: impl_url {impl_url!r} is not http(s)")
+    check_version_field(frame.get("last_checked_version"), "last_checked_version", stack, versions, errors, where, allow_main=False)
+    check_version_field(frame.get("earliest_checked_version"), "earliest_checked_version", stack, versions, errors, where, allow_main=False)
+
+    supported = frame.get("supported")
+    if isinstance(supported, dict):
+        check_supported_object(supported, stack, versions, errors, where)
+    added_true = isinstance(supported, dict) and supported.get("added_version") is True
+    if "earliest_checked_version" in frame and not added_true:
+        errors.append(f"{where}: earliest_checked_version only valid when supported.added_version is `true`")
+
+    frame_implemented = isinstance(supported, dict)
+
+    params = frame.get("params")
+    if params is not None:
+        for key, pstat in params.items():
+            if key not in valid_param_keys:
+                errors.append(f"{where}: params key {key!r} does not match a current non-reserved param")
+            _check_statement_or_history(pstat, stack, versions, errors, f"{where}: params.{key}", allow_not_applicable=True)
+        if frame_implemented:
+            for key in valid_param_keys - set(params):
+                errors.append(f"{where}: missing params[{key!r}] (frame is confirmed implemented)")
+    if not frame_implemented and params:
+        errors.append(f"{where}: has params entries but frame is not confirmed implemented")
+
+    sentinel = frame.get("sentinel_compliance")
+    if sentinel is not None:
+        if not frame_implemented:
+            errors.append(f"{where}: has sentinel_compliance but frame is not confirmed implemented")
+        else:
+            for key, sstat in sentinel.items():
+                if key != "default" and key not in valid_param_keys:
+                    errors.append(f"{where}: sentinel_compliance key {key!r} does not match a current non-reserved param")
+                _check_statement_or_history(sstat, stack, versions, errors, f"{where}: sentinel_compliance.{key}", allow_not_applicable=False)
+
+    mav_frames = frame.get("mav_frames")
+    if mav_frames is not None:
+        if not frame_implemented:
+            errors.append(f"{where}: has mav_frames but frame is not confirmed implemented")
+        for name in mav_frames.get("supported", []):
+            if name not in mav_frame_names:
+                errors.append(f"{where}: mav_frames.supported {name!r} is not a known MAV_FRAME value")
+        default_frame = mav_frames.get("default_frame_command_long")
+        if default_frame is not None and default_frame not in mav_frame_names:
+            errors.append(f"{where}: mav_frames.default_frame_command_long {default_frame!r} is not a known MAV_FRAME value")
+        rejects = mav_frames.get("rejects_unsupported")
+        if rejects is not None:
+            _check_statement_or_history(rejects, stack, versions, errors, f"{where}: mav_frames.rejects_unsupported", allow_not_applicable=False)
+
+
+def check_command_compatibility(compat: dict, params_obj: dict, vocab: dict, versions: dict, errors: list[str], where: str, mav_frame_names: set[str]) -> None:
+    # params_obj is doc["params"] itself (a dict keyed "<index>_<name>"). Duplicate
+    # indices (two keys sharing the same numeric prefix) can't be ruled out by the
+    # object-keyed schema alone, so check it here.
+    seen_indices: dict[str, str] = {}
+    for key in params_obj:
+        idx = key.split("_", 1)[0]
+        if idx in seen_indices:
+            errors.append(f"{where}: params keys {seen_indices[idx]!r} and {key!r} share index {idx}")
+        seen_indices[idx] = key
+    valid_param_keys = {k for k in params_obj if not k.endswith("_Empty")}
+
+    for stack, stack_status in compat.items():
+        if stack not in vocab["stacks"]:
+            errors.append(f"{where}: unknown stack {stack!r} (not in schema/vocab.json)")
+            continue
+        frames = stack_status.get("frames")
+        if frames is False:
+            if stack_status.get("basis") not in vocab["basis"]:
+                errors.append(f"{where}: {stack}: unknown basis {stack_status.get('basis')!r}")
+            impl_url = stack_status.get("impl_url")
+            if impl_url is not None and not URL_PATTERN.match(impl_url):
+                errors.append(f"{where}: {stack}: impl_url {impl_url!r} is not http(s)")
+            check_version_field(
+                stack_status.get("last_checked_version"), "last_checked_version",
+                stack, versions, errors, f"{where}: {stack}", allow_main=False,
+            )
+            continue
+        if any(k in stack_status for k in ("basis", "notes", "impl_url", "last_checked_version")):
+            errors.append(f"{where}: {stack}: basis/notes/impl_url/last_checked_version only valid when frames is false (each frame carries its own)")
+        valid_frames = set(vocab["frames"].get(stack, []))
+        for frame_name, frame_status in frames.items():
+            if frame_name not in valid_frames:
+                errors.append(f"{where}: {stack}: unknown frame {frame_name!r} (not in schema/vocab.json frames.{stack})")
+                continue
+            check_frame_status(frame_status, stack, versions, errors, f"{where}: {stack}.{frame_name}", valid_param_keys, mav_frame_names)
+
+
 def main() -> int:
     vocab = load_json(SCHEMA_DIR / "vocab.json")
     versions = load_json(SCHEMA_DIR / "versions.json")
     validators = build_validators()
+
+    mav_frame_path = DATA_DIR / "common" / "enums" / "MAV_FRAME.json"
+    mav_frame_names = {v["name"] for v in load_json(mav_frame_path).get("values", [])} if mav_frame_path.exists() else set()
 
     errors: list[str] = []
     seen_names: dict[tuple, Path] = {}
@@ -223,17 +330,22 @@ def main() -> int:
         else:
             seen_names[dup_key] = path
 
+        is_command = kind in ("mission", "command")
         compat = doc.get("compatibility")
         if isinstance(compat, dict):
-            check_compatibility(compat, vocab, versions, errors, f"{rel}: compatibility", kind in ("mission", "command"))
-        for sub_key in ("fields", "values", "params"):
+            if is_command:
+                check_command_compatibility(compat, doc.get("params", {}), vocab, versions, errors, f"{rel}: compatibility", mav_frame_names)
+            else:
+                check_compatibility(compat, vocab, versions, errors, f"{rel}: compatibility", allow_not_applicable=False)
+
+        for sub_key in ("fields", "values"):
             sub_items = doc.get(sub_key, [])
             for i, item in enumerate(sub_items):
                 sub_compat = item.get("compatibility")
                 if isinstance(sub_compat, dict):
                     check_compatibility(
                         sub_compat, vocab, versions, errors,
-                        f"{rel}: {sub_key}[{i}] ({item.get('name')})", kind in ("mission", "command"),
+                        f"{rel}: {sub_key}[{i}] ({item.get('name')})", allow_not_applicable=False,
                     )
             if isinstance(compat, dict) and sub_items:
                 check_sub_entity_gating(compat, sub_items, sub_key, errors, str(rel))

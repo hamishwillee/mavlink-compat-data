@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "ROI Mode",
+  "params": {
+    "1_ROI Mode": {
       "enumRef": "MAV_ROI"
     },
-    {
-      "index": 2,
-      "name": "WP Index",
+    "2_WP Index": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "ROI Index",
+    "3_ROI Index": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Empty",
+    "4_Empty": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "X",
+    "5_X": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Y",
+    "6_Y": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Z",
+    "7_Z": {
       "enumRef": null
     }
-  ]
+  }
 }

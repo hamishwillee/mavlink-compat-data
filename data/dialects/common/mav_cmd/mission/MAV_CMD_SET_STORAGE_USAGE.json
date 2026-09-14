@@ -6,28 +6,18 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Storage ID",
+  "params": {
+    "1_Storage ID": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Usage",
+    "2_Usage": {
       "enumRef": "STORAGE_USAGE_FLAG"
     }
-  ]
+  }
 }

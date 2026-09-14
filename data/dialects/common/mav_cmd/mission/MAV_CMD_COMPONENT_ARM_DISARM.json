@@ -6,28 +6,18 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Arm",
+  "params": {
+    "1_Arm": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 2,
-      "name": "Force",
+    "2_Force": {
       "enumRef": null
     }
-  ]
+  }
 }

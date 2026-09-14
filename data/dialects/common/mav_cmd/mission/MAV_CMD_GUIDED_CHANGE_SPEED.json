@@ -6,33 +6,21 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "speed type",
+  "params": {
+    "1_speed type": {
       "enumRef": "SPEED_TYPE"
     },
-    {
-      "index": 2,
-      "name": "speed target",
+    "2_speed target": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "speed rate-of-change",
+    "3_speed rate-of-change": {
       "enumRef": null
     }
-  ]
+  }
 }

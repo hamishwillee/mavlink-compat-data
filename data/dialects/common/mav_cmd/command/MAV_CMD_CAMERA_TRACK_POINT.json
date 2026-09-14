@@ -6,38 +6,24 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Point x",
+  "params": {
+    "1_Point x": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Point y",
+    "2_Point y": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Radius",
+    "3_Radius": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Target Camera ID",
+    "4_Target Camera ID": {
       "enumRef": null
     }
-  ]
+  }
 }

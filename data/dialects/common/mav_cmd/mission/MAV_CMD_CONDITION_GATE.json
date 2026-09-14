@@ -6,113 +6,38 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": {
-          "added_version": "1.11.0",
-          "partial_implementation": true
-        },
-        "basis": "testing",
-        "notes": [
-          "Alt not used (UseAltitude=false)",
-          "1.11.0 confirmed via code-inspection only, not live-tested",
-          "Live-testable from 1.14.0 (no sihsim SITL before that)"
-        ],
-        "last_checked_version": "1.17.0"
+      "frames": {
+        "multicopter": {
+          "supported": { "added_version": "1.11.0" },
+          "basis": "testing",
+          "last_checked_version": "1.17.0",
+          "notes": [
+            "1.11.0 confirmed via code-inspection only, not live-tested",
+            "Live-testable from 1.14.0 (no sihsim SITL before that)"
+          ],
+          "params": {
+            "1_Geometry": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
+            "2_UseAltitude": { "supported": false, "basis": "testing" },
+            "5_Latitude": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
+            "6_Longitude": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
+            "7_Altitude": { "supported": false, "basis": "testing", "notes": "Ignored (UseAltitude always false)" }
+          }
+        }
       }
     },
     "ardupilot": {
-      "default": {
-        "supported": false,
-        "basis": "verified",
-        "last_checked_version": "4.7.0"
-      }
+      "frames": false,
+      "basis": "verified",
+      "last_checked_version": "4.7.0"
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Geometry",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 2,
-      "name": "UseAltitude",
-      "enumRef": "MAV_BOOL",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": false,
-            "basis": "testing"
-          }
-        }
-      }
-    },
-    {
-      "index": 3,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Latitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 6,
-      "name": "Longitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 7,
-      "name": "Altitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": false,
-            "basis": "testing",
-            "notes": "Ignored (UseAltitude always false)"
-          }
-        }
-      }
-    }
-  ]
+  "params": {
+    "1_Geometry": { "enumRef": null },
+    "2_UseAltitude": { "enumRef": "MAV_BOOL" },
+    "3_Empty": { "enumRef": null },
+    "4_Empty": { "enumRef": null },
+    "5_Latitude": { "enumRef": null },
+    "6_Longitude": { "enumRef": null },
+    "7_Altitude": { "enumRef": null }
+  }
 }

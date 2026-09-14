@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "transmission_time",
+  "params": {
+    "1_transmission_time": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "processing_time",
+    "2_processing_time": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "accuracy",
+    "3_accuracy": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Empty",
+    "4_Empty": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Latitude",
+    "5_Latitude": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Longitude",
+    "6_Longitude": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Altitude",
+    "7_Altitude": {
       "enumRef": null
     }
-  ]
+  }
 }

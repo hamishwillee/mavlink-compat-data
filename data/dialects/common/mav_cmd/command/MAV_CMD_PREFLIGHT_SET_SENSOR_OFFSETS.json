@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Sensor Type",
+  "params": {
+    "1_Sensor Type": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "X Offset",
+    "2_X Offset": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Y Offset",
+    "3_Y Offset": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Z Offset",
+    "4_Z Offset": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "4th Dimension",
+    "5_4th Dimension": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "5th Dimension",
+    "6_5th Dimension": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "6th Dimension",
+    "7_6th Dimension": {
       "enumRef": null
     }
-  ]
+  }
 }

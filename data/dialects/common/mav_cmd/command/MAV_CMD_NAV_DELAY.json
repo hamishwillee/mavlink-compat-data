@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Delay",
+  "params": {
+    "1_Delay": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Hour",
+    "2_Hour": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Minute",
+    "3_Minute": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Second",
+    "4_Second": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Empty",
+    "5_Empty": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Empty",
+    "6_Empty": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Empty",
+    "7_Empty": {
       "enumRef": null
     }
-  ]
+  }
 }

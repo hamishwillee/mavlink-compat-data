@@ -6,38 +6,24 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Arc Angle",
+  "params": {
+    "1_Arc Angle": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Latitude",
+    "5_Latitude": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Longitude",
+    "6_Longitude": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Altitude",
+    "7_Altitude": {
       "enumRef": null
     }
-  ]
+  }
 }

@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Reserved",
+  "params": {
+    "1_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Reserved",
+    "2_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Reserved",
+    "3_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Reserved",
+    "4_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Reserved",
+    "5_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Reserved",
+    "6_Reserved": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Reserved",
+    "7_Reserved": {
       "enumRef": null
     }
-  ]
+  }
 }

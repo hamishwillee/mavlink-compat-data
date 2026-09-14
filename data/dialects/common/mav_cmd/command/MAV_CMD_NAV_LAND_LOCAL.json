@@ -6,53 +6,33 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Target",
+  "params": {
+    "1_Target": {
       "enumRef": null
     },
-    {
-      "index": 2,
-      "name": "Offset",
+    "2_Offset": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Descend Rate",
+    "3_Descend Rate": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Yaw",
+    "4_Yaw": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Y Position",
+    "5_Y Position": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "X Position",
+    "6_X Position": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Z Position",
+    "7_Z Position": {
       "enumRef": null
     }
-  ]
+  }
 }

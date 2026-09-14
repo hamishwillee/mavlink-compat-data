@@ -6,53 +6,33 @@
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
   },
-  "params": [
-    {
-      "index": 1,
-      "name": "Heading Required",
+  "params": {
+    "1_Heading Required": {
       "enumRef": "MAV_BOOL"
     },
-    {
-      "index": 2,
-      "name": "Radius",
+    "2_Radius": {
       "enumRef": null
     },
-    {
-      "index": 3,
-      "name": "Empty",
+    "3_Empty": {
       "enumRef": null
     },
-    {
-      "index": 4,
-      "name": "Xtrack Location",
+    "4_Xtrack Location": {
       "enumRef": null
     },
-    {
-      "index": 5,
-      "name": "Latitude",
+    "5_Latitude": {
       "enumRef": null
     },
-    {
-      "index": 6,
-      "name": "Longitude",
+    "6_Longitude": {
       "enumRef": null
     },
-    {
-      "index": 7,
-      "name": "Altitude",
+    "7_Altitude": {
       "enumRef": null
     }
-  ]
+  }
 }
