@@ -12,41 +12,45 @@
           },
           "basis": "verified",
           "earliest_checked_version": "1.17.0",
-          "sentinel_compliance": {
-            "default": {
-              "supported": {
-                "added_version": true
-              }
-            },
-            "2_Empty": {
-              "supported": false,
-              "notes": "Accepts non-sentinel value -- spec violation (bug)"
-            }
-          },
           "params": {
             "1_Pitch": {
-              "supported": false
+              "supported": false,
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": false
+            },
+            "2_Empty": {
+              "supported": "not-applicable",
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": false
             },
             "3_Flags": {
               "supported": false,
-              "notes": "Non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": true,
+              "notes": "Previously silently accepted and read back as zero"
             },
             "4_Yaw": {
-              "supported": false
+              "supported": false,
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": false
             },
             "5_Latitude": {
               "supported": false,
-              "notes": "Sentinel (use current position) honored; explicit target ignored (stays near home)"
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": false,
+              "notes": "Takes off at current position to specified altitude"
             },
             "6_Longitude": {
               "supported": false,
-              "notes": "Sentinel (use current position) honored; explicit target ignored (stays near home)"
+              "accept_nan_or_int32max": true,
+              "nacks_on_non_sentinel_value": false,
+              "notes": "Takes off at current position to specified altitude"
             },
             "7_Altitude": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "NaN (\"use default altitude\") accepted"
+                "added_version": true,
+                "accept_nan_or_int32max": true
+              }
             }
           }
         },
@@ -62,7 +66,8 @@
             },
             "3_Flags": {
               "supported": false,
-              "notes": "Non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
+              "nacks_on_non_sentinel_value": true,
+              "notes": "Previously silently accepted and read back as zero"
             },
             "4_Yaw": {
               "supported": null,
@@ -79,8 +84,7 @@
             "7_Altitude": {
               "supported": {
                 "added_version": true
-              },
-              "notes": "NaN (\"use default altitude\") accepted"
+              }
             }
           }
         }
@@ -94,10 +98,13 @@
           },
           "basis": "verified",
           "earliest_checked_version": "4.7.1",
-          "notes": "param2 (Empty): NaN rejected -- spec violation (blanket sanity-check nan mask)",
           "params": {
             "1_Pitch": {
               "supported": false
+            },
+            "2_Empty": {
+              "supported": "not-applicable",
+              "accept_nan_or_int32max": false
             },
             "3_Flags": {
               "supported": false
@@ -107,15 +114,15 @@
             },
             "5_Latitude": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+                "added_version": true,
+                "accept_nan_or_int32max": false
+              }
             },
             "6_Longitude": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+                "added_version": true,
+                "accept_nan_or_int32max": false
+              }
             },
             "7_Altitude": {
               "supported": {
@@ -130,13 +137,16 @@
           },
           "basis": "verified",
           "earliest_checked_version": "4.7.1",
-          "notes": "param2 (Empty): NaN rejected -- spec violation (blanket sanity-check nan mask)",
           "params": {
             "1_Pitch": {
               "supported": {
                 "added_version": true
               },
               "notes": "Used as climb-out minimum pitch"
+            },
+            "2_Empty": {
+              "supported": "not-applicable",
+              "accept_nan_or_int32max": false
             },
             "3_Flags": {
               "supported": false
@@ -146,15 +156,15 @@
             },
             "5_Latitude": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+                "added_version": true,
+                "accept_nan_or_int32max": false
+              }
             },
             "6_Longitude": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
+                "added_version": true,
+                "accept_nan_or_int32max": false
+              }
             },
             "7_Altitude": {
               "supported": {

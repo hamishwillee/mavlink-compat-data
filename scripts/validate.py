@@ -188,11 +188,11 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
 
 
 def _check_statement_or_history(statement_or_history, stack: str, versions: dict, errors: list[str], where: str, *, allow_not_applicable: bool, basis_required: bool = True) -> None:
-    """basis_required=False covers a command frame's params/sentinel_compliance/
-    mav_frames.rejects_unsupported entries, where a missing 'basis' means 'same
-    basis as the enclosing frame' -- a documentation convention this function
-    doesn't resolve, just permits (see CLAUDE.md and
-    schema/compatibility-entry.schema.json's frameSubStatement)."""
+    """basis_required=False covers a command frame's params/mav_frames.rejects_unsupported
+    entries, where a missing 'basis' means 'same basis as the enclosing frame'
+    -- a documentation convention this function doesn't resolve, just permits
+    (see CLAUDE.md and schema/compatibility-entry.schema.json's
+    frameSubStatement/paramStatement)."""
     statements = statement_or_history if isinstance(statement_or_history, list) else [statement_or_history]
     for statement in statements:
         basis = statement.get("basis")
@@ -210,6 +210,26 @@ def _check_statement_or_history(statement_or_history, stack: str, versions: dict
             errors.append(f"{where}: 'not-applicable' only valid in command docs")
         if isinstance(supported, dict):
             check_supported_object(supported, stack, versions, errors, where)
+
+
+def check_param_statement(key: str, statement_or_history, stack: str, versions: dict, errors: list[str], where: str) -> None:
+    """A param's own frameStatus.params.<key> entry. Reserved '<index>_Empty'
+    keys are allowed here (unlike an ordinary param) purely to carry
+    accept_nan_or_int32max/nacks_on_non_sentinel_value, with 'supported' fixed
+    to 'not-applicable' -- see schema/compatibility-entry.schema.json's
+    paramStatement and CLAUDE.md."""
+    _check_statement_or_history(statement_or_history, stack, versions, errors, where, allow_not_applicable=True, basis_required=False)
+    last = _last_statement(statement_or_history)
+    if not isinstance(last, dict):
+        return
+    supported = last.get("supported")
+    if key.endswith("_Empty") and supported != "not-applicable":
+        errors.append(f"{where}: reserved param ('Empty') must have supported == 'not-applicable'")
+    if isinstance(supported, dict):
+        if "nacks_on_non_sentinel_value" in last:
+            errors.append(f"{where}: nacks_on_non_sentinel_value only valid when supported is not a confirmed-implemented object")
+        if "accept_nan_or_int32max" in last:
+            errors.append(f"{where}: accept_nan_or_int32max belongs inside 'supported' when supported is a confirmed-implemented object, not as a top-level sibling")
 
 
 def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str], where: str, valid_param_keys: set[str], all_param_keys: set[str], mav_frame_names: set[str]) -> None:
@@ -233,28 +253,14 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
     params = frame.get("params")
     if params is not None:
         for key, pstat in params.items():
-            if key not in valid_param_keys:
-                errors.append(f"{where}: params key {key!r} does not match a current non-reserved param")
-            _check_statement_or_history(pstat, stack, versions, errors, f"{where}: params.{key}", allow_not_applicable=True, basis_required=False)
+            if key not in all_param_keys:
+                errors.append(f"{where}: params key {key!r} does not match a current param")
+            check_param_statement(key, pstat, stack, versions, errors, f"{where}: params.{key}")
         if frame_implemented:
             for key in valid_param_keys - set(params):
                 errors.append(f"{where}: missing params[{key!r}] (frame is confirmed implemented)")
     if not frame_implemented and params:
         errors.append(f"{where}: has params entries but frame is not confirmed implemented")
-
-    sentinel = frame.get("sentinel_compliance")
-    if sentinel is not None:
-        if not frame_implemented:
-            errors.append(f"{where}: has sentinel_compliance but frame is not confirmed implemented")
-        else:
-            # Unlike `params`, a reserved "Empty" param key IS a valid override
-            # here: its only legal value is the sentinel, so "does this frame
-            # correctly NACK a non-sentinel value here" is exactly the kind of
-            # fact sentinel_compliance exists to record for it.
-            for key, sstat in sentinel.items():
-                if key != "default" and key not in all_param_keys:
-                    errors.append(f"{where}: sentinel_compliance key {key!r} does not match a current param")
-                _check_statement_or_history(sstat, stack, versions, errors, f"{where}: sentinel_compliance.{key}", allow_not_applicable=False, basis_required=False)
 
     mav_frames = frame.get("mav_frames")
     if mav_frames is not None:
