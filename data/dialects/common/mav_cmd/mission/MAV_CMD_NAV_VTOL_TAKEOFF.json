@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_NAV_VTOL_TAKEOFF",
-  "value": 84,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Empty": {
-      "enumRef": null
-    },
-    "2_Transition Heading": {
-      "enumRef": "VTOL_TRANSITION_HEADING"
-    },
-    "3_Empty": {
-      "enumRef": null
-    },
-    "4_Yaw Angle": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Altitude": {
-      "enumRef": null
     }
   }
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL",
-  "value": 214,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Trigger Cycle": {
-      "enumRef": null
-    },
-    "2_Shutter Integration": {
-      "enumRef": null
-    },
-    "3_Target Camera ID": {
-      "enumRef": null
-    },
-    "4_Empty": {
-      "enumRef": null
-    },
-    "5_Empty": {
-      "enumRef": null
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

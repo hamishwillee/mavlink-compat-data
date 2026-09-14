@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_SET_CAM_TRIGG_DIST",
-  "value": 206,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Distance": {
-      "enumRef": null
-    },
-    "2_Shutter": {
-      "enumRef": null
-    },
-    "3_Trigger": {
-      "enumRef": "MAV_BOOL"
-    },
-    "4_Target Camera ID": {
-      "enumRef": null
-    },
-    "5_Empty": {
-      "enumRef": null
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

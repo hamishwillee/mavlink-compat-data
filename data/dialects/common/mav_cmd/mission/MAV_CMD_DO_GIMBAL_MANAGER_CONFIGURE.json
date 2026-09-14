@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_GIMBAL_MANAGER_CONFIGURE",
-  "value": 1001,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,23 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_sysid primary control": {
-      "enumRef": null
-    },
-    "2_compid primary control": {
-      "enumRef": null
-    },
-    "3_sysid secondary control": {
-      "enumRef": null
-    },
-    "4_compid secondary control": {
-      "enumRef": null
-    },
-    "7_Gimbal device ID": {
-      "enumRef": null
     }
   }
 }

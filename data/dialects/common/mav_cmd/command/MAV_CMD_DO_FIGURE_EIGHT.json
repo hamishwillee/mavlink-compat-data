@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_FIGURE_EIGHT",
-  "value": 35,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Major Radius": {
-      "enumRef": null
-    },
-    "2_Minor Radius": {
-      "enumRef": null
-    },
-    "3_Empty": {
-      "enumRef": null
-    },
-    "4_Orientation": {
-      "enumRef": null
-    },
-    "5_Latitude/X": {
-      "enumRef": null
-    },
-    "6_Longitude/Y": {
-      "enumRef": null
-    },
-    "7_Altitude/Z": {
-      "enumRef": null
     }
   }
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_REQUEST_STORAGE_INFORMATION",
-  "value": 525,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,17 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Storage ID": {
-      "enumRef": null
-    },
-    "2_Information": {
-      "enumRef": "MAV_BOOL"
-    },
-    "3_Reserved (all remaining params)": {
-      "enumRef": null
     }
   }
 }

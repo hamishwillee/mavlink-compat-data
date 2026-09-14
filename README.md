@@ -8,13 +8,14 @@ Structured, machine-validated data on which MAVLink messages/fields/enums/enum-v
 data/dialects/<minimal|common|standard>/
   messages/<NAME>.json
   enums/<NAME>.json
-  mav_cmd/mission/<MAV_CMD_NAME>.json    # common only — MAV_CMD used as a mission item
-  mav_cmd/command/<MAV_CMD_NAME>.json    # common only — MAV_CMD used as a direct command
+  mav_cmd/definitions/<MAV_CMD_NAME>.json  # common only — static identity (value, params), no compat data
+  mav_cmd/mission/<MAV_CMD_NAME>.json      # common only — MAV_CMD used as a mission item
+  mav_cmd/command/<MAV_CMD_NAME>.json      # common only — MAV_CMD used as a direct command
 schema/       # JSON Schema + controlled vocab (vocab.json) + known releases (versions.json)
 scripts/      # generation, sync-check, and CI validation
 ```
 
-One JSON file per message/enum/command. Fields and enum values are nested arrays, and command params a nested object, inside that file — not separate files.
+One JSON file per message/enum/command. Fields and enum values are nested arrays inside that file, not separate files. Commands split identity from compatibility: a shared `definitions/<NAME>.json` holds the static `value`/`params` roster (identical between mission and command usage, so not duplicated), while `mission/<NAME>.json` and `command/<NAME>.json` hold only compatibility data.
 
 ## Entity doc shape
 
@@ -45,12 +46,21 @@ Messages and enums use a `default`+variant-override shape:
 - `notes`, `impl_url`: optional. `notes` is a single terse fragment or an array of them (one per distinct fact) — see CLAUDE.md for the terseness rule. `impl_url` is a tracking-issue or PR link.
 - A field/value only carries `compatibility` for a `(stack, variant)` where the parent entity is confirmed implemented there — otherwise it's omitted entirely, not `unknown`.
 
-Commands (`MAV_CMD`) use a per-vehicle-frame shape instead — testing happens incrementally per vehicle, so there's no `default` fallback:
+Commands (`MAV_CMD`) use a per-vehicle-frame shape instead — testing happens incrementally per vehicle, so there's no `default` fallback. Identity (`value`, `params`) lives once in a shared `definitions/<NAME>.json`, since it's purely upstream-derived and identical between mission and command usage:
 
 ```json
+// mav_cmd/definitions/MAV_CMD_NAV_TAKEOFF.json
 {
   "name": "MAV_CMD_NAV_TAKEOFF",
   "value": 22,
+  "dialect": "common",
+  "params": { "1_Pitch": { "enumRef": null } }
+}
+```
+```json
+// mav_cmd/mission/MAV_CMD_NAV_TAKEOFF.json
+{
+  "name": "MAV_CMD_NAV_TAKEOFF",
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -61,14 +71,13 @@ Commands (`MAV_CMD`) use a per-vehicle-frame shape instead — testing happens i
       }
     },
     "px4": { "frames": {} }
-  },
-  "params": { "1_Pitch": { "enumRef": null } }
+  }
 }
 ```
 
 - `frames`: `{}` (untested) | `false` (confirmed unsupported on every frame) | an object keyed by frame name (from `schema/vocab.json`'s `frames` list) with **no fallback between frames** — every known frame is written out in full.
-- The top-level `params` object (`"<index>_<name>": {"enumRef": ...}`) is identity only, shared across stacks; a frame's own `params.<index>_<name>` may exist only if that frame's `supported` is confirmed-implemented, and then every non-`"Empty"` param must appear.
-- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — its key never appears in any frame's `params`, for any stack, until upstream gives it a real name.
+- A frame's own `params.<index>_<name>` (keyed the same way as the definitions doc's roster) may exist only if that frame's `supported` is confirmed-implemented, and then every non-`"Empty"` param must appear.
+- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — it still gets an entry in `definitions/<NAME>.json`, but its key never appears in any frame's `params`, for any stack, until upstream gives it a real name.
 - Full field reference and rationale, including `sentinel_compliance`/`mav_frames`/`earliest_checked_version`: [CLAUDE.md](CLAUDE.md).
 
 ## Scripts
@@ -104,10 +113,10 @@ Messages/enums:
 - A field/value's `compatibility` is present for a `(stack, variant)` if and only if the parent entity is confirmed implemented there — both missing-when-required and present-when-not-required are errors.
 
 Commands (`MAV_CMD`):
+- Every `mission/`/`command/` doc has a sibling `definitions/<NAME>.json` with the param roster; no two of its `params` keys share the same `<index>` prefix.
 - Every `compatibility` stack key is in `schema/vocab.json`; every `frames` key is a valid frame name for that stack.
 - `basis`/`notes`/`impl_url`/`last_checked_version` are only present alongside `frames: false`, never alongside an object `frames`.
 - `supported` (frame's own, or a param's) is exactly `false`, `null`, `"not-applicable"`, or a valid object.
-- A frame's `params`/`sentinel_compliance` entries are present for a param if and only if that frame's own `supported` is confirmed implemented — same both-directions check as messages/enums, applied within one frame.
-- No two `params`/frame-`params` keys share the same `<index>` prefix.
+- A frame's `params`/`sentinel_compliance` entries are present for a param if and only if that frame's own `supported` is confirmed implemented — same both-directions check as messages/enums, applied within one frame, cross-referencing the sibling `definitions/<NAME>.json` for the valid param set.
 - `mav_frames.supported`/`default_frame_command_long` values are known `MAV_FRAME` enum names.
-- A param named `"Empty"` (reserved/undocumented upstream) never appears as a key in any frame's `params`/`sentinel_compliance`.
+- A param named `"Empty"` (reserved/undocumented upstream) never appears as a key in any frame's `params` — but it may appear in `sentinel_compliance`, since a reserved slot's only legal value is the sentinel.

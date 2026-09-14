@@ -1,14 +1,15 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CONDITION_GATE",
-  "value": 4501,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
       "frames": {
         "multicopter": {
-          "supported": { "added_version": "1.11.0" },
+          "supported": {
+            "added_version": "1.11.0"
+          },
           "basis": "testing",
           "last_checked_version": "1.17.0",
           "notes": [
@@ -16,11 +17,36 @@
             "Live-testable from 1.14.0 (no sihsim SITL before that)"
           ],
           "params": {
-            "1_Geometry": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
-            "2_UseAltitude": { "supported": false, "basis": "testing" },
-            "5_Latitude": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
-            "6_Longitude": { "supported": { "added_version": "1.11.0" }, "basis": "testing", "notes": "1.11.0 via code-inspection, not live-tested" },
-            "7_Altitude": { "supported": false, "basis": "testing", "notes": "Ignored (UseAltitude always false)" }
+            "1_Geometry": {
+              "supported": {
+                "added_version": "1.11.0"
+              },
+              "basis": "testing",
+              "notes": "1.11.0 via code-inspection, not live-tested"
+            },
+            "2_UseAltitude": {
+              "supported": false,
+              "basis": "testing"
+            },
+            "5_Latitude": {
+              "supported": {
+                "added_version": "1.11.0"
+              },
+              "basis": "testing",
+              "notes": "1.11.0 via code-inspection, not live-tested"
+            },
+            "6_Longitude": {
+              "supported": {
+                "added_version": "1.11.0"
+              },
+              "basis": "testing",
+              "notes": "1.11.0 via code-inspection, not live-tested"
+            },
+            "7_Altitude": {
+              "supported": false,
+              "basis": "testing",
+              "notes": "Ignored (UseAltitude always false)"
+            }
           }
         }
       }
@@ -30,14 +56,5 @@
       "basis": "verified",
       "last_checked_version": "4.7.0"
     }
-  },
-  "params": {
-    "1_Geometry": { "enumRef": null },
-    "2_UseAltitude": { "enumRef": "MAV_BOOL" },
-    "3_Empty": { "enumRef": null },
-    "4_Empty": { "enumRef": null },
-    "5_Latitude": { "enumRef": null },
-    "6_Longitude": { "enumRef": null },
-    "7_Altitude": { "enumRef": null }
   }
 }

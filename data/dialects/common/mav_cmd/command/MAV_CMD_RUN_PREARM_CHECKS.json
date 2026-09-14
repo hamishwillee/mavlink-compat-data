@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_RUN_PREARM_CHECKS",
-  "value": 401,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -11,6 +10,5 @@
     "ardupilot": {
       "frames": {}
     }
-  },
-  "params": {}
+  }
 }

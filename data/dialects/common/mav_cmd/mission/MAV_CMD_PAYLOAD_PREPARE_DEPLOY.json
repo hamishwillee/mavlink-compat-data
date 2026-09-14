@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_PAYLOAD_PREPARE_DEPLOY",
-  "value": 30001,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Operation Mode": {
-      "enumRef": null
-    },
-    "2_Approach Vector": {
-      "enumRef": null
-    },
-    "3_Ground Speed": {
-      "enumRef": null
-    },
-    "4_Altitude Clearance": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Altitude": {
-      "enumRef": null
     }
   }
 }

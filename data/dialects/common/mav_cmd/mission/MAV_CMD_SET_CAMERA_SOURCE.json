@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_CAMERA_SOURCE",
-  "value": 534,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,17 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_device id": {
-      "enumRef": null
-    },
-    "2_primary source": {
-      "enumRef": "CAMERA_SOURCE"
-    },
-    "3_secondary source": {
-      "enumRef": "CAMERA_SOURCE"
     }
   }
 }

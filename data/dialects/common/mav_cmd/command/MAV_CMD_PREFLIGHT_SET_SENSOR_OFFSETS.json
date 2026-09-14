@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS",
-  "value": 242,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Sensor Type": {
-      "enumRef": null
-    },
-    "2_X Offset": {
-      "enumRef": null
-    },
-    "3_Y Offset": {
-      "enumRef": null
-    },
-    "4_Z Offset": {
-      "enumRef": null
-    },
-    "5_4th Dimension": {
-      "enumRef": null
-    },
-    "6_5th Dimension": {
-      "enumRef": null
-    },
-    "7_6th Dimension": {
-      "enumRef": null
     }
   }
 }

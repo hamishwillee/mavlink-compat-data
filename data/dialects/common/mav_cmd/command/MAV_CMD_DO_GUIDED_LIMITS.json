@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_GUIDED_LIMITS",
-  "value": 222,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Timeout": {
-      "enumRef": null
-    },
-    "2_Min Altitude": {
-      "enumRef": null
-    },
-    "3_Max Altitude": {
-      "enumRef": null
-    },
-    "4_Horiz. Move Limit": {
-      "enumRef": null
-    },
-    "5_Empty": {
-      "enumRef": null
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

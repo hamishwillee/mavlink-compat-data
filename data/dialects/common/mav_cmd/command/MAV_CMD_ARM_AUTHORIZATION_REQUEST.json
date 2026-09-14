@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_ARM_AUTHORIZATION_REQUEST",
-  "value": 3001,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,11 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_System ID": {
-      "enumRef": null
     }
   }
 }

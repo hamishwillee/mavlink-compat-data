@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_CAMERA_MODE",
-  "value": 530,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,23 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_id": {
-      "enumRef": null
-    },
-    "2_Camera Mode": {
-      "enumRef": "CAMERA_MODE"
-    },
-    "3_Empty": {
-      "enumRef": null
-    },
-    "4_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

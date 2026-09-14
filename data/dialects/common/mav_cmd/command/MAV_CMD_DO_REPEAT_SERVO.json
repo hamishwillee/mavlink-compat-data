@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_REPEAT_SERVO",
-  "value": 184,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Instance": {
-      "enumRef": null
-    },
-    "2_PWM": {
-      "enumRef": null
-    },
-    "3_Count": {
-      "enumRef": null
-    },
-    "4_Time": {
-      "enumRef": null
-    },
-    "5_Empty": {
-      "enumRef": null
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

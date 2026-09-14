@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_INJECT_FAILURE",
-  "value": 420,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,20 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Failure unit": {
-      "enumRef": "FAILURE_UNIT"
-    },
-    "2_Failure type": {
-      "enumRef": "FAILURE_TYPE"
-    },
-    "3_Instance": {
-      "enumRef": null
-    },
-    "4_Instance bitmask": {
-      "enumRef": null
     }
   }
 }

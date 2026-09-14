@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CAMERA_TRACK_POINT",
-  "value": 2004,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,20 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Point x": {
-      "enumRef": null
-    },
-    "2_Point y": {
-      "enumRef": null
-    },
-    "3_Radius": {
-      "enumRef": null
-    },
-    "4_Target Camera ID": {
-      "enumRef": null
     }
   }
 }

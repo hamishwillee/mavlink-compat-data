@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN",
-  "value": 246,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Autopilot": {
-      "enumRef": "REBOOT_SHUTDOWN_ACTION"
-    },
-    "2_Companion": {
-      "enumRef": "REBOOT_SHUTDOWN_ACTION"
-    },
-    "3_Component Action": {
-      "enumRef": "REBOOT_SHUTDOWN_ACTION"
-    },
-    "4_Component ID": {
-      "enumRef": null
-    },
-    "5_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "6_Conditions": {
-      "enumRef": "REBOOT_SHUTDOWN_CONDITIONS"
-    },
-    "7_WIP: ID (e.g. camera ID -1 for all IDs)": {
-      "enumRef": null
     }
   }
 }

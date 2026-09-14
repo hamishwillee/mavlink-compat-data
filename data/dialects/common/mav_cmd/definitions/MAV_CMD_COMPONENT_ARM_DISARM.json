@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_COMPONENT_ARM_DISARM",
+  "value": 400,
+  "dialect": "common",
+  "params": {
+    "1_Arm": {
+      "enumRef": "MAV_BOOL"
+    },
+    "2_Force": {
+      "enumRef": null
+    }
+  }
+}

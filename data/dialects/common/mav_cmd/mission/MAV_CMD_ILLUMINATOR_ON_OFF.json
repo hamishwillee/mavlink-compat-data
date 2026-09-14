@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_ILLUMINATOR_ON_OFF",
-  "value": 405,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,11 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Enable": {
-      "enumRef": "MAV_BOOL"
     }
   }
 }

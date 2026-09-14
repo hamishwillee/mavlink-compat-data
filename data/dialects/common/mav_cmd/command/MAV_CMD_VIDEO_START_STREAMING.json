@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_VIDEO_START_STREAMING",
-  "value": 2502,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Stream ID": {
-      "enumRef": null
-    },
-    "2_Target Camera ID": {
-      "enumRef": null
     }
   }
 }

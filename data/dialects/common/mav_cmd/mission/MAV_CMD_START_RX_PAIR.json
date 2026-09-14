@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_START_RX_PAIR",
-  "value": 500,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_RC Type": {
-      "enumRef": "RC_TYPE"
-    },
-    "2_RC Sub Type": {
-      "enumRef": "RC_SUB_TYPE"
     }
   }
 }

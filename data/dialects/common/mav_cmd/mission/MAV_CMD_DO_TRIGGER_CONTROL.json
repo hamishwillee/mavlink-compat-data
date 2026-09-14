@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_TRIGGER_CONTROL",
-  "value": 2003,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,20 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Enable": {
-      "enumRef": null
-    },
-    "2_Reset": {
-      "enumRef": null
-    },
-    "3_Pause": {
-      "enumRef": null
-    },
-    "4_Target Camera ID": {
-      "enumRef": null
     }
   }
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_USER_3",
-  "value": 31012,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_User defined": {
-      "enumRef": null
-    },
-    "2_User defined": {
-      "enumRef": null
-    },
-    "3_User defined": {
-      "enumRef": null
-    },
-    "4_User defined": {
-      "enumRef": null
-    },
-    "5_User defined": {
-      "enumRef": null
-    },
-    "6_User defined": {
-      "enumRef": null
-    },
-    "7_User defined": {
-      "enumRef": null
     }
   }
 }

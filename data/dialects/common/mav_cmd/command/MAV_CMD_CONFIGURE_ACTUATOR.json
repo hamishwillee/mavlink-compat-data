@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CONFIGURE_ACTUATOR",
-  "value": 311,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Configuration": {
-      "enumRef": "ACTUATOR_CONFIGURATION"
-    },
-    "2_Empty": {
-      "enumRef": null
-    },
-    "3_Empty": {
-      "enumRef": null
-    },
-    "4_Empty": {
-      "enumRef": null
-    },
-    "5_Output Function": {
-      "enumRef": "ACTUATOR_OUTPUT_FUNCTION"
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

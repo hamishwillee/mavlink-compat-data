@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_REQUEST_MESSAGE",
+  "value": 512,
+  "dialect": "common",
+  "params": {
+    "1_Message ID": {
+      "enumRef": null
+    },
+    "2_Req Param 1": {
+      "enumRef": null
+    },
+    "3_Req Param 2": {
+      "enumRef": null
+    },
+    "4_Req Param 3": {
+      "enumRef": null
+    },
+    "5_Req Param 4": {
+      "enumRef": null
+    },
+    "6_Req Param 5": {
+      "enumRef": null
+    },
+    "7_Response Target": {
+      "enumRef": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_FOLLOW",
+  "value": 25,
+  "dialect": "common",
+  "params": {
+    "1_Following": {
+      "enumRef": null
+    },
+    "2_Ground Speed": {
+      "enumRef": null
+    },
+    "3_Radius": {
+      "enumRef": null
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

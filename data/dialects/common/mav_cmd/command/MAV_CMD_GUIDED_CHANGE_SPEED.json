@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_GUIDED_CHANGE_SPEED",
-  "value": 43000,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,17 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_speed type": {
-      "enumRef": "SPEED_TYPE"
-    },
-    "2_speed target": {
-      "enumRef": null
-    },
-    "3_speed rate-of-change": {
-      "enumRef": null
     }
   }
 }

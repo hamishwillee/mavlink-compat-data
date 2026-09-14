@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_MOUNT_CONFIGURE",
+  "value": 204,
+  "dialect": "common",
+  "params": {
+    "1_Mode": {
+      "enumRef": "MAV_MOUNT_MODE"
+    },
+    "2_Stabilize Roll": {
+      "enumRef": "MAV_BOOL"
+    },
+    "3_Stabilize Pitch": {
+      "enumRef": "MAV_BOOL"
+    },
+    "4_Stabilize Yaw": {
+      "enumRef": "MAV_BOOL"
+    },
+    "5_Roll Input Mode": {
+      "enumRef": null
+    },
+    "6_Pitch Input Mode": {
+      "enumRef": null
+    },
+    "7_Yaw Input Mode": {
+      "enumRef": null
+    }
+  }
+}

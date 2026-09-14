@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_NAV_LAND",
-  "value": 21,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Abort Alt": {
-      "enumRef": null
-    },
-    "2_Land Mode": {
-      "enumRef": "PRECISION_LAND_MODE"
-    },
-    "3_Empty.": {
-      "enumRef": null
-    },
-    "4_Yaw Angle": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Altitude": {
-      "enumRef": null
     }
   }
 }

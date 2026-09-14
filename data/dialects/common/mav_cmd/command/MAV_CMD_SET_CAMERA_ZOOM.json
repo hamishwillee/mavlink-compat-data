@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_CAMERA_ZOOM",
-  "value": 531,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,20 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Zoom Type": {
-      "enumRef": "CAMERA_ZOOM_TYPE"
-    },
-    "2_Zoom Value": {
-      "enumRef": null
-    },
-    "3_Target Camera ID": {
-      "enumRef": null
-    },
-    "4_Empty": {
-      "enumRef": null
     }
   }
 }

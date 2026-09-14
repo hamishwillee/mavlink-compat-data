@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_LOGGING_STOP",
+  "value": 2511,
+  "dialect": "common",
+  "params": {
+    "1_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "2_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "3_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "4_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "5_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "6_Reserved (set to 0)": {
+      "enumRef": null
+    },
+    "7_Reserved (set to 0)": {
+      "enumRef": null
+    }
+  }
+}

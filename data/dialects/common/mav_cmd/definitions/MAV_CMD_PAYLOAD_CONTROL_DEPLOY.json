@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_PAYLOAD_CONTROL_DEPLOY",
+  "value": 30002,
+  "dialect": "common",
+  "params": {
+    "1_Operation Mode": {
+      "enumRef": null
+    },
+    "2_Reserved": {
+      "enumRef": null
+    },
+    "3_Reserved": {
+      "enumRef": null
+    },
+    "4_Reserved": {
+      "enumRef": null
+    },
+    "5_Reserved": {
+      "enumRef": null
+    },
+    "6_Reserved": {
+      "enumRef": null
+    },
+    "7_Reserved": {
+      "enumRef": null
+    }
+  }
+}

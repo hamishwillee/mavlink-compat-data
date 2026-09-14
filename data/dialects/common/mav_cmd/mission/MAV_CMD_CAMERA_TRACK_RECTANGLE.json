@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CAMERA_TRACK_RECTANGLE",
-  "value": 2005,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,23 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Top left corner x": {
-      "enumRef": null
-    },
-    "2_Top left corner y": {
-      "enumRef": null
-    },
-    "3_Bottom right corner x": {
-      "enumRef": null
-    },
-    "4_Bottom right corner y": {
-      "enumRef": null
-    },
-    "5_Target Camera ID": {
-      "enumRef": null
     }
   }
 }

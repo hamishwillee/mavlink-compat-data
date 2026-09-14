@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_AUTOTUNE_ENABLE",
-  "value": 212,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Enable": {
-      "enumRef": "MAV_BOOL"
-    },
-    "2_Axis": {
-      "enumRef": "AUTOTUNE_AXIS"
-    },
-    "3_Empty.": {
-      "enumRef": null
-    },
-    "4_Empty.": {
-      "enumRef": null
-    },
-    "5_Empty.": {
-      "enumRef": null
-    },
-    "6_Empty.": {
-      "enumRef": null
-    },
-    "7_Empty.": {
-      "enumRef": null
     }
   }
 }

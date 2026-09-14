@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_GET_HOME_POSITION",
-  "value": 410,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Reserved": {
-      "enumRef": null
-    },
-    "2_Reserved": {
-      "enumRef": null
-    },
-    "3_Reserved": {
-      "enumRef": null
-    },
-    "4_Reserved": {
-      "enumRef": null
-    },
-    "5_Reserved": {
-      "enumRef": null
-    },
-    "6_Reserved": {
-      "enumRef": null
-    },
-    "7_Reserved": {
-      "enumRef": null
     }
   }
 }

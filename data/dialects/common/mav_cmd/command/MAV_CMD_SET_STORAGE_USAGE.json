@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_STORAGE_USAGE",
-  "value": 533,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Storage ID": {
-      "enumRef": null
-    },
-    "2_Usage": {
-      "enumRef": "STORAGE_USAGE_FLAG"
     }
   }
 }

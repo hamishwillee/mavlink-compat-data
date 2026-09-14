@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_GUIDED_SUBMODE_STANDARD",
-  "value": 4000,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -11,6 +10,5 @@
     "ardupilot": {
       "frames": {}
     }
-  },
-  "params": {}
+  }
 }

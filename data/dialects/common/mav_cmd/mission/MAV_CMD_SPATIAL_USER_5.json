@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SPATIAL_USER_5",
-  "value": 31009,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_User defined": {
-      "enumRef": null
-    },
-    "2_User defined": {
-      "enumRef": null
-    },
-    "3_User defined": {
-      "enumRef": null
-    },
-    "4_User defined": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Altitude": {
-      "enumRef": null
     }
   }
 }

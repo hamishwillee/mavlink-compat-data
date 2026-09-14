@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_ILLUMINATOR_CONFIGURE",
+  "value": 406,
+  "dialect": "common",
+  "params": {
+    "1_Mode": {
+      "enumRef": "ILLUMINATOR_MODE"
+    },
+    "2_Brightness": {
+      "enumRef": null
+    },
+    "3_Strobe Period": {
+      "enumRef": null
+    },
+    "4_Strobe Duty": {
+      "enumRef": null
+    }
+  }
+}

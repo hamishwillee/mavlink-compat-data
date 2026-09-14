@@ -109,7 +109,7 @@
           "additionalProperties": { "$ref": "#/$defs/supportStatementOrHistory" }
         },
         "sentinel_compliance": {
-          "description": "Does this frame correctly enforce the sentinel-value contract (unused param NACKs any non-sentinel value; used param tolerates the sentinel)? Keyed by 'default' (required) plus optional '<index>_<name>' overrides for params that diverge from the default -- gated the same way as 'params'.",
+          "description": "Does this frame correctly enforce the sentinel-value contract (unused param NACKs any non-sentinel value; used param tolerates the sentinel)? Keyed by 'default' (required) plus optional '<index>_<name>' overrides for params that diverge from the default -- gated the same way as 'params'. Unlike 'params', a reserved '<index>_Empty' key IS a valid override here: its only legal value is the sentinel, so its own NACK-on-non-sentinel behavior is exactly the kind of fact this field exists to record.",
           "type": "object",
           "additionalProperties": false,
           "required": ["default"],

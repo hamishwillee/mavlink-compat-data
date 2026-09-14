@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_SET_GUIDED_SUBMODE_CIRCLE",
-  "value": 4001,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,26 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Radius": {
-      "enumRef": null
-    },
-    "2_User defined": {
-      "enumRef": null
-    },
-    "3_User defined": {
-      "enumRef": null
-    },
-    "4_User defined": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
     }
   }
 }

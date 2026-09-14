@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_GRIPPER",
-  "value": 211,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Gripper ID": {
-      "enumRef": null
-    },
-    "2_Action": {
-      "enumRef": "GRIPPER_ACTIONS"
-    },
-    "3_Empty": {
-      "enumRef": null
-    },
-    "4_Empty": {
-      "enumRef": null
-    },
-    "5_Empty": {
-      "enumRef": null
-    },
-    "6_Empty": {
-      "enumRef": null
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

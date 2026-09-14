@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_SET_YAW_SPEED",
+  "value": 213,
+  "dialect": "common",
+  "params": {
+    "1_Yaw": {
+      "enumRef": null
+    },
+    "2_Speed": {
+      "enumRef": null
+    },
+    "3_Angle": {
+      "enumRef": "MAV_BOOL"
+    },
+    "4_Empty": {
+      "enumRef": null
+    },
+    "5_Empty": {
+      "enumRef": null
+    },
+    "6_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

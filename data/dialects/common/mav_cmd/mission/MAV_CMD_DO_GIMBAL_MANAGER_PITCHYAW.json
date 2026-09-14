@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_GIMBAL_MANAGER_PITCHYAW",
-  "value": 1000,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,26 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Pitch angle": {
-      "enumRef": null
-    },
-    "2_Yaw angle": {
-      "enumRef": null
-    },
-    "3_Pitch rate": {
-      "enumRef": null
-    },
-    "4_Yaw rate": {
-      "enumRef": null
-    },
-    "5_Gimbal manager flags": {
-      "enumRef": "GIMBAL_MANAGER_FLAGS"
-    },
-    "7_Gimbal device ID": {
-      "enumRef": null
     }
   }
 }

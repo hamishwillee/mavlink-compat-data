@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_VTOL_TRANSITION",
-  "value": 3000,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_State": {
-      "enumRef": "MAV_VTOL_STATE"
-    },
-    "2_Immediate": {
-      "enumRef": null
     }
   }
 }

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_REPOSITION",
+  "value": 192,
+  "dialect": "common",
+  "params": {
+    "1_Speed": {
+      "enumRef": null
+    },
+    "2_Bitmask": {
+      "enumRef": "MAV_DO_REPOSITION_FLAGS"
+    },
+    "3_Radius": {
+      "enumRef": null
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

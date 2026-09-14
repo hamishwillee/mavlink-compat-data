@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_NAV_LOITER_TURNS",
-  "value": 18,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Turns": {
-      "enumRef": null
-    },
-    "2_Heading Required": {
-      "enumRef": "MAV_BOOL"
-    },
-    "3_Radius": {
-      "enumRef": null
-    },
-    "4_Xtrack Location": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Altitude": {
-      "enumRef": null
     }
   }
 }

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_TAKEOFF_LOCAL",
+  "value": 24,
+  "dialect": "common",
+  "params": {
+    "1_Pitch": {
+      "enumRef": null
+    },
+    "2_Empty": {
+      "enumRef": null
+    },
+    "3_Ascend Rate": {
+      "enumRef": null
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Y Position": {
+      "enumRef": null
+    },
+    "6_X Position": {
+      "enumRef": null
+    },
+    "7_Z Position": {
+      "enumRef": null
+    }
+  }
+}

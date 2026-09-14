@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_LOGGING_START",
-  "value": 2510,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Format": {
-      "enumRef": null
-    },
-    "2_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "3_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "4_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "5_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "6_Reserved (set to 0)": {
-      "enumRef": null
-    },
-    "7_Reserved (set to 0)": {
-      "enumRef": null
     }
   }
 }

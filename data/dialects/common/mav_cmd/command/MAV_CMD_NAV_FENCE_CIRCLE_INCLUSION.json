@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_NAV_FENCE_CIRCLE_INCLUSION",
-  "value": 5003,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Radius": {
-      "enumRef": null
-    },
-    "2_Inclusion Group": {
-      "enumRef": null
-    },
-    "3_Reserved": {
-      "enumRef": null
-    },
-    "4_Reserved": {
-      "enumRef": null
-    },
-    "5_Latitude": {
-      "enumRef": null
-    },
-    "6_Longitude": {
-      "enumRef": null
-    },
-    "7_Reserved": {
-      "enumRef": null
     }
   }
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_ORBIT",
-  "value": 34,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Radius": {
-      "enumRef": null
-    },
-    "2_Velocity": {
-      "enumRef": null
-    },
-    "3_Yaw Behavior": {
-      "enumRef": "ORBIT_YAW_BEHAVIOUR"
-    },
-    "4_Orbits": {
-      "enumRef": null
-    },
-    "5_Latitude/X": {
-      "enumRef": null
-    },
-    "6_Longitude/Y": {
-      "enumRef": null
-    },
-    "7_Altitude/Z": {
-      "enumRef": null
     }
   }
 }

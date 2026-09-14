@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_MOTOR_TEST",
-  "value": 209,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Instance": {
-      "enumRef": null
-    },
-    "2_Throttle Type": {
-      "enumRef": "MOTOR_TEST_THROTTLE_TYPE"
-    },
-    "3_Throttle": {
-      "enumRef": null
-    },
-    "4_Timeout": {
-      "enumRef": null
-    },
-    "5_Motor Count": {
-      "enumRef": null
-    },
-    "6_Test Order": {
-      "enumRef": "MOTOR_TEST_ORDER"
-    },
-    "7_Empty": {
-      "enumRef": null
     }
   }
 }

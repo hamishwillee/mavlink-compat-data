@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_DIGICAM_CONTROL",
-  "value": 203,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Session Control": {
-      "enumRef": null
-    },
-    "2_Zoom Absolute": {
-      "enumRef": null
-    },
-    "3_Zoom Relative": {
-      "enumRef": null
-    },
-    "4_Focus": {
-      "enumRef": null
-    },
-    "5_Shoot Command": {
-      "enumRef": null
-    },
-    "6_Command Identity": {
-      "enumRef": null
-    },
-    "7_Shot ID": {
-      "enumRef": null
     }
   }
 }

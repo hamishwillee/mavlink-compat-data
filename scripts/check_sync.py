@@ -40,7 +40,8 @@ from generate_stubs import (
     gated_command_param_stub_targets,
     gated_sub_compatibility,
     load_vocab,
-    rename_command_param_key,
+    rename_context_param_references,
+    rename_definition_param_key,
 )
 
 
@@ -145,63 +146,81 @@ def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: 
 
 
 def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
-    for context in ("mission", "command"):
-        base = DATA_DIR / "common" / "mav_cmd" / context
-        for cmd in commands:
-            path = base / f"{cmd.name}.json"
-            if not path.exists():
-                drifts.append(Drift("new_entity", path, f"command {cmd.name} ({context}) has no stub (run generate_stubs.py)"))
-                continue
+    def_base = DATA_DIR / "common" / "mav_cmd" / "definitions"
+    context_bases = {ctx: DATA_DIR / "common" / "mav_cmd" / ctx for ctx in ("mission", "command")}
 
-            doc = load_json(path)
-            params = doc.get("params", {})
-            # params is keyed "<index>_<name>" -- recover the (key, name) for
-            # each index so additions/renames/removals can be detected the
-            # same way as before.
-            stored_by_index: dict[int, tuple[str, str]] = {}
-            for key in params:
-                idx_str, _, name = key.partition("_")
-                stored_by_index[int(idx_str)] = (key, name)
-            upstream_by_index = {p.index: p for p in cmd.params}
-            changed = False
+    for cmd in commands:
+        def_path = def_base / f"{cmd.name}.json"
+        context_paths = {ctx: base / f"{cmd.name}.json" for ctx, base in context_bases.items()}
 
-            for idx, u in upstream_by_index.items():
-                if idx not in stored_by_index:
-                    drifts.append(Drift("addition", path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
-                    if fix:
-                        new_key = f"{u.index}_{u.name}"
-                        params[new_key] = {"enumRef": u.enum_ref}
-                        if u.name != "Empty":
-                            # A reserved/undocumented slot never carries compatibility,
-                            # regardless of parent status — see CLAUDE.md.
+        missing = [p for p in (def_path, *context_paths.values()) if not p.exists()]
+        if missing:
+            for p in missing:
+                drifts.append(Drift("new_entity", p, f"command {cmd.name} has no stub here (run generate_stubs.py)"))
+            continue
+
+        def_doc = load_json(def_path)
+        context_docs = {ctx: load_json(p) for ctx, p in context_paths.items()}
+
+        # Params identity lives once in the shared definitions doc; a rename
+        # or addition there must also propagate into whichever of the two
+        # context docs' compatibility.<stack>.frames.<frame> blocks already
+        # reference that param, since both share the same key format.
+        params = def_doc.get("params", {})
+        stored_by_index: dict[int, tuple[str, str]] = {}
+        for key in params:
+            idx_str, _, name = key.partition("_")
+            stored_by_index[int(idx_str)] = (key, name)
+        upstream_by_index = {p.index: p for p in cmd.params}
+
+        def_changed = False
+        context_changed = {ctx: False for ctx in context_docs}
+
+        for idx, u in upstream_by_index.items():
+            if idx not in stored_by_index:
+                drifts.append(Drift("addition", def_path, f"params[index={idx}] {u.name!r} present upstream, missing locally", fixed=fix))
+                if fix:
+                    new_key = f"{u.index}_{u.name}"
+                    params[new_key] = {"enumRef": u.enum_ref}
+                    def_changed = True
+                    if u.name != "Empty":
+                        # A reserved/undocumented slot never carries compatibility,
+                        # regardless of parent status — see CLAUDE.md.
+                        for ctx, doc in context_docs.items():
                             for stack, frame_name in gated_command_param_stub_targets(doc.get("compatibility", {})):
                                 frame_status = doc["compatibility"][stack]["frames"][frame_name]
                                 frame_status.setdefault("params", {})[new_key] = {"supported": None, "basis": "unknown"}
-                        stored_by_index[idx] = (new_key, u.name)
-                        changed = True
-                    continue
-                sk, sname = stored_by_index[idx]
-                if sname != u.name:
-                    drifts.append(Drift("rename", path, f"params[index={idx}].name: {sname!r} -> {u.name!r}", fixed=fix))
-                    if fix:
-                        rename_command_param_key(doc, idx, sname, u.name)
-                        sk = f"{idx}_{u.name}"
-                        stored_by_index[idx] = (sk, u.name)
-                        changed = True
-                sp = params[sk]
-                if sp.get("enumRef") != u.enum_ref:
-                    drifts.append(Drift("rename", path, f"params[index={idx}].enumRef: {sp.get('enumRef')!r} -> {u.enum_ref!r}", fixed=fix))
-                    if fix:
-                        sp["enumRef"] = u.enum_ref
-                        changed = True
+                                context_changed[ctx] = True
+                    stored_by_index[idx] = (new_key, u.name)
+                continue
+            sk, sname = stored_by_index[idx]
+            if sname != u.name:
+                drifts.append(Drift("rename", def_path, f"params[index={idx}].name: {sname!r} -> {u.name!r}", fixed=fix))
+                if fix:
+                    rename_definition_param_key(def_doc, idx, sname, u.name)
+                    def_changed = True
+                    for ctx, doc in context_docs.items():
+                        if rename_context_param_references(doc, idx, sname, u.name):
+                            context_changed[ctx] = True
+                    sk = f"{idx}_{u.name}"
+                    stored_by_index[idx] = (sk, u.name)
+            sp = params[sk]
+            if sp.get("enumRef") != u.enum_ref:
+                drifts.append(Drift("rename", def_path, f"params[index={idx}].enumRef: {sp.get('enumRef')!r} -> {u.enum_ref!r}", fixed=fix))
+                if fix:
+                    sp["enumRef"] = u.enum_ref
+                    def_changed = True
 
-            for idx, (sk, sname) in stored_by_index.items():
-                if idx not in upstream_by_index:
-                    drifts.append(Drift("removed", path, f"params[index={idx}] {sname!r} no longer present upstream"))
+        for idx, (sk, sname) in stored_by_index.items():
+            if idx not in upstream_by_index:
+                drifts.append(Drift("removed", def_path, f"params[index={idx}] {sname!r} no longer present upstream"))
 
+        if def_changed:
+            def_doc["params"] = params
+            save_json(def_path, def_doc)
+        for ctx, changed in context_changed.items():
             if changed:
-                doc["params"] = params
-                save_json(path, doc)
+                save_json(context_paths[ctx], context_docs[ctx])
 
 
 def check_removed_entities(dialects: dict, drifts: list[Drift]) -> None:
@@ -217,8 +236,8 @@ def check_removed_entities(dialects: dict, drifts: list[Drift]) -> None:
                 drifts.append(Drift("removed_entity", path, f"enum {path.stem} no longer defined in {dialect_name}.xml"))
 
     upstream_commands = {c.name for c in dialects["common"].commands}
-    for context in ("mission", "command"):
-        base = DATA_DIR / "common" / "mav_cmd" / context
+    for sub in ("definitions", "mission", "command"):
+        base = DATA_DIR / "common" / "mav_cmd" / sub
         if not base.exists():
             continue
         for path in sorted(base.glob("*.json")):

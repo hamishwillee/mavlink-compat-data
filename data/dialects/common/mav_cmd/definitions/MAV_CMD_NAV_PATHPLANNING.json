@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_PATHPLANNING",
+  "value": 81,
+  "dialect": "common",
+  "params": {
+    "1_Local Ctrl": {
+      "enumRef": null
+    },
+    "2_Global Ctrl": {
+      "enumRef": null
+    },
+    "3_Empty": {
+      "enumRef": null
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude/X": {
+      "enumRef": null
+    },
+    "6_Longitude/Y": {
+      "enumRef": null
+    },
+    "7_Altitude/Z": {
+      "enumRef": null
+    }
+  }
+}

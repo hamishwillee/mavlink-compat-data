@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_GUIDED_CHANGE_HEADING",
-  "value": 43002,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,17 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Heading Type": {
-      "enumRef": "HEADING_TYPE"
-    },
-    "2_Heading Target": {
-      "enumRef": null
-    },
-    "3_Heading Rate of Change": {
-      "enumRef": null
     }
   }
 }

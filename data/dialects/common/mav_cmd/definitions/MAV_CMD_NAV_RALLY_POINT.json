@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_RALLY_POINT",
+  "value": 5100,
+  "dialect": "common",
+  "params": {
+    "1_Reserved": {
+      "enumRef": null
+    },
+    "2_Reserved": {
+      "enumRef": null
+    },
+    "3_Reserved": {
+      "enumRef": null
+    },
+    "4_Reserved": {
+      "enumRef": null
+    },
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

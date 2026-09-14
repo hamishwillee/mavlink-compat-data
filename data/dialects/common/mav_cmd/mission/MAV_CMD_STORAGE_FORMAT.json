@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_STORAGE_FORMAT",
-  "value": 526,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,20 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Storage ID": {
-      "enumRef": null
-    },
-    "2_Format": {
-      "enumRef": "MAV_BOOL"
-    },
-    "3_Reset Image Log": {
-      "enumRef": "MAV_BOOL"
-    },
-    "4_Reserved (all remaining params)": {
-      "enumRef": null
     }
   }
 }

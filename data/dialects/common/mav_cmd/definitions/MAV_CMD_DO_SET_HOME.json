@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_SET_HOME",
+  "value": 179,
+  "dialect": "common",
+  "params": {
+    "1_Use Current": {
+      "enumRef": "MAV_BOOL"
+    },
+    "2_Roll": {
+      "enumRef": null
+    },
+    "3_Pitch": {
+      "enumRef": null
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

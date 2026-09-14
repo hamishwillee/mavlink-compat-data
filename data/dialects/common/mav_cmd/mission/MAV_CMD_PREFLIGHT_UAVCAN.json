@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_PREFLIGHT_UAVCAN",
-  "value": 243,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Actuator ID": {
-      "enumRef": null
-    },
-    "2_Reserved": {
-      "enumRef": null
-    },
-    "3_Reserved": {
-      "enumRef": null
-    },
-    "4_Reserved": {
-      "enumRef": null
-    },
-    "5_Reserved": {
-      "enumRef": null
-    },
-    "6_Reserved": {
-      "enumRef": null
-    },
-    "7_Reserved": {
-      "enumRef": null
     }
   }
 }

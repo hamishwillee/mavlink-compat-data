@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_WINCH",
-  "value": 42600,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,29 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Instance": {
-      "enumRef": null
-    },
-    "2_Action": {
-      "enumRef": "WINCH_ACTIONS"
-    },
-    "3_Length": {
-      "enumRef": null
-    },
-    "4_Rate": {
-      "enumRef": null
-    },
-    "5_Empty.": {
-      "enumRef": null
-    },
-    "6_Empty.": {
-      "enumRef": null
-    },
-    "7_Empty.": {
-      "enumRef": null
     }
   }
 }

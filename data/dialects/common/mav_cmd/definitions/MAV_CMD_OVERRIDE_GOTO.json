@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_OVERRIDE_GOTO",
+  "value": 252,
+  "dialect": "common",
+  "params": {
+    "1_Continue": {
+      "enumRef": "MAV_GOTO"
+    },
+    "2_Position": {
+      "enumRef": "MAV_GOTO"
+    },
+    "3_Frame": {
+      "enumRef": "MAV_FRAME"
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude/X": {
+      "enumRef": null
+    },
+    "6_Longitude/Y": {
+      "enumRef": null
+    },
+    "7_Altitude/Z": {
+      "enumRef": null
+    }
+  }
+}

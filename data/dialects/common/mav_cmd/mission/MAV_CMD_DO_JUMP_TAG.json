@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_JUMP_TAG",
-  "value": 601,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Tag": {
-      "enumRef": null
-    },
-    "2_Repeat": {
-      "enumRef": null
     }
   }
 }

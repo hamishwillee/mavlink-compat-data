@@ -1,7 +1,6 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_RESET_CAMERA_SETTINGS",
-  "value": 529,
   "dialect": "common",
   "context": "command",
   "compatibility": {
@@ -10,14 +9,6 @@
     },
     "ardupilot": {
       "frames": {}
-    }
-  },
-  "params": {
-    "1_Reset": {
-      "enumRef": "MAV_BOOL"
-    },
-    "2_Target Camera ID": {
-      "enumRef": null
     }
   }
 }

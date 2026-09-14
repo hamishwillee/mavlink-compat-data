@@ -31,6 +31,7 @@ DOC_TYPES = {
     "enums": "enum.schema.json",
     "mission": "command.schema.json",
     "command": "command.schema.json",
+    "definitions": "mav_cmd_definition.schema.json",
 }
 
 
@@ -55,13 +56,17 @@ def build_validators() -> dict[str, Draft202012Validator]:
 def iter_data_files():
     for path in sorted(DATA_DIR.rglob("*.json")):
         rel_parts = path.relative_to(DATA_DIR).parts
-        # <dialect>/(messages|enums)/<name>.json  or  <dialect>/mav_cmd/<mission|command>/<name>.json
+        # <dialect>/(messages|enums)/<name>.json  or
+        # <dialect>/mav_cmd/(mission|command|definitions)/<name>.json
         if len(rel_parts) == 3:
             dialect, kind, _ = rel_parts
             context = None
         elif len(rel_parts) == 4 and rel_parts[1] == "mav_cmd":
-            dialect, _, context, _ = rel_parts
-            kind = context
+            dialect, _, sub, _ = rel_parts
+            if sub == "definitions":
+                kind, context = "definitions", None
+            else:
+                kind, context = sub, sub
         else:
             yield path, None, None, None
             continue
@@ -199,7 +204,7 @@ def _check_statement_or_history(statement_or_history, stack: str, versions: dict
             check_supported_object(supported, stack, versions, errors, where)
 
 
-def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str], where: str, valid_param_keys: set[str], mav_frame_names: set[str]) -> None:
+def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str], where: str, valid_param_keys: set[str], all_param_keys: set[str], mav_frame_names: set[str]) -> None:
     if frame.get("basis") not in ("unknown", "code-inspection", "testing", "verified"):
         errors.append(f"{where}: unknown basis {frame.get('basis')!r}")
     impl_url = frame.get("impl_url")
@@ -234,9 +239,13 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
         if not frame_implemented:
             errors.append(f"{where}: has sentinel_compliance but frame is not confirmed implemented")
         else:
+            # Unlike `params`, a reserved "Empty" param key IS a valid override
+            # here: its only legal value is the sentinel, so "does this frame
+            # correctly NACK a non-sentinel value here" is exactly the kind of
+            # fact sentinel_compliance exists to record for it.
             for key, sstat in sentinel.items():
-                if key != "default" and key not in valid_param_keys:
-                    errors.append(f"{where}: sentinel_compliance key {key!r} does not match a current non-reserved param")
+                if key != "default" and key not in all_param_keys:
+                    errors.append(f"{where}: sentinel_compliance key {key!r} does not match a current param")
                 _check_statement_or_history(sstat, stack, versions, errors, f"{where}: sentinel_compliance.{key}", allow_not_applicable=False)
 
     mav_frames = frame.get("mav_frames")
@@ -254,17 +263,24 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
             _check_statement_or_history(rejects, stack, versions, errors, f"{where}: mav_frames.rejects_unsupported", allow_not_applicable=False)
 
 
-def check_command_compatibility(compat: dict, params_obj: dict, vocab: dict, versions: dict, errors: list[str], where: str, mav_frame_names: set[str]) -> None:
-    # params_obj is doc["params"] itself (a dict keyed "<index>_<name>"). Duplicate
-    # indices (two keys sharing the same numeric prefix) can't be ruled out by the
-    # object-keyed schema alone, so check it here.
+def check_mav_cmd_definition(doc: dict, errors: list[str], where: str) -> None:
+    """Checks the one thing schema/mav_cmd_definition.schema.json can't rule
+    out structurally: two params keys sharing the same numeric index prefix."""
     seen_indices: dict[str, str] = {}
-    for key in params_obj:
+    for key in doc.get("params", {}):
         idx = key.split("_", 1)[0]
         if idx in seen_indices:
             errors.append(f"{where}: params keys {seen_indices[idx]!r} and {key!r} share index {idx}")
         seen_indices[idx] = key
+
+
+def check_command_compatibility(compat: dict, params_obj: dict, vocab: dict, versions: dict, errors: list[str], where: str, mav_frame_names: set[str]) -> None:
+    # params_obj comes from the sibling mav_cmd_definition doc (a dict keyed
+    # "<index>_<name>") -- see main(). Its own internal consistency (duplicate
+    # indices) is checked once via check_mav_cmd_definition when that doc is
+    # visited, not repeated here for every context file that references it.
     valid_param_keys = {k for k in params_obj if not k.endswith("_Empty")}
+    all_param_keys = set(params_obj)
 
     for stack, stack_status in compat.items():
         if stack not in vocab["stacks"]:
@@ -289,7 +305,7 @@ def check_command_compatibility(compat: dict, params_obj: dict, vocab: dict, ver
             if frame_name not in valid_frames:
                 errors.append(f"{where}: {stack}: unknown frame {frame_name!r} (not in schema/vocab.json frames.{stack})")
                 continue
-            check_frame_status(frame_status, stack, versions, errors, f"{where}: {stack}.{frame_name}", valid_param_keys, mav_frame_names)
+            check_frame_status(frame_status, stack, versions, errors, f"{where}: {stack}.{frame_name}", valid_param_keys, all_param_keys, mav_frame_names)
 
 
 def main() -> int:
@@ -330,11 +346,20 @@ def main() -> int:
         else:
             seen_names[dup_key] = path
 
+        if kind == "definitions":
+            check_mav_cmd_definition(doc, errors, str(rel))
+
         is_command = kind in ("mission", "command")
         compat = doc.get("compatibility")
         if isinstance(compat, dict):
             if is_command:
-                check_command_compatibility(compat, doc.get("params", {}), vocab, versions, errors, f"{rel}: compatibility", mav_frame_names)
+                def_path = path.parent.parent / "definitions" / path.name
+                if def_path.exists():
+                    params_obj = load_json(def_path).get("params", {})
+                else:
+                    errors.append(f"{rel}: missing sibling definitions file {def_path.relative_to(REPO_ROOT)}")
+                    params_obj = {}
+                check_command_compatibility(compat, params_obj, vocab, versions, errors, f"{rel}: compatibility", mav_frame_names)
             else:
                 check_compatibility(compat, vocab, versions, errors, f"{rel}: compatibility", allow_not_applicable=False)
 
