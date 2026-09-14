@@ -20,31 +20,23 @@
             "1_Geometry": {
               "supported": {
                 "added_version": "1.11.0"
-              },
-              "basis": "testing",
-              "notes": "1.11.0 via code-inspection, not live-tested"
+              }
             },
             "2_UseAltitude": {
-              "supported": false,
-              "basis": "testing"
+              "supported": false
             },
             "5_Latitude": {
               "supported": {
                 "added_version": "1.11.0"
-              },
-              "basis": "testing",
-              "notes": "1.11.0 via code-inspection, not live-tested"
+              }
             },
             "6_Longitude": {
               "supported": {
                 "added_version": "1.11.0"
-              },
-              "basis": "testing",
-              "notes": "1.11.0 via code-inspection, not live-tested"
+              }
             },
             "7_Altitude": {
               "supported": false,
-              "basis": "testing",
               "notes": "Ignored (UseAltitude always false)"
             }
           }

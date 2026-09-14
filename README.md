@@ -66,14 +66,16 @@ Commands (`MAV_CMD`) use a per-vehicle-frame shape instead — testing happens i
   "compatibility": {
     "ardupilot": {
       "frames": {
-        "copter": { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": false, "basis": "verified" } } },
-        "plane":  { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": { "added_version": true }, "basis": "verified" } } }
+        "copter": { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": false } } },
+        "plane":  { "supported": { "added_version": true }, "basis": "verified", "params": { "1_Pitch": { "supported": { "added_version": true } } } }
       }
     },
     "px4": { "frames": {} }
   }
 }
 ```
+
+A param's own `basis` is optional (as above, omitted on `1_Pitch` in both frames) — it inherits the enclosing frame's `basis`; write one only when it genuinely differs.
 
 - `frames`: `{}` (untested) | `false` (confirmed unsupported on every frame) | an object keyed by frame name (from `schema/vocab.json`'s `frames` list) with **no fallback between frames** — every known frame is written out in full.
 - A frame's own `params.<index>_<name>` (keyed the same way as the definitions doc's roster) may exist only if that frame's `supported` is confirmed-implemented, and then every non-`"Empty"` param must appear.
@@ -102,7 +104,7 @@ python scripts/check_sync.py [--fix]    # report (or fix) drift vs upstream MAVL
 
 - Every file under `data/` is valid JSON and matches its type's JSON Schema.
 - Filename matches the doc's `name`; `dialect`/`context` fields match their directory.
-- Every `basis` value is in `schema/vocab.json`.
+- Every `basis` value present is in `schema/vocab.json` (required everywhere except inside a command frame's `params`/`sentinel_compliance`/`mav_frames.rejects_unsupported`, where it's optional — omitted means "same as the frame's own `basis`").
 - `added_version`/`deprecated_version`/`removed_version` are `true`/`"main"`/a version string as applicable; `last_checked_version`/`earliest_checked_version` are a version string only (`"main"` not allowed there). Any concrete version exists in `schema/versions.json` for that stack.
 - `impl_url`, if present, is a well-formed `http(s)://` URL.
 - No duplicate entity files in the same directory.

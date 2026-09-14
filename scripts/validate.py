@@ -187,11 +187,19 @@ def check_compatibility(compat: dict, vocab: dict, versions: dict, errors: list[
                     check_supported_object(supported, stack, versions, errors, f"{where}: {stack}.{variant}")
 
 
-def _check_statement_or_history(statement_or_history, stack: str, versions: dict, errors: list[str], where: str, *, allow_not_applicable: bool) -> None:
+def _check_statement_or_history(statement_or_history, stack: str, versions: dict, errors: list[str], where: str, *, allow_not_applicable: bool, basis_required: bool = True) -> None:
+    """basis_required=False covers a command frame's params/sentinel_compliance/
+    mav_frames.rejects_unsupported entries, where a missing 'basis' means 'same
+    basis as the enclosing frame' -- a documentation convention this function
+    doesn't resolve, just permits (see CLAUDE.md and
+    schema/compatibility-entry.schema.json's frameSubStatement)."""
     statements = statement_or_history if isinstance(statement_or_history, list) else [statement_or_history]
     for statement in statements:
         basis = statement.get("basis")
-        if basis not in ("unknown", "code-inspection", "testing", "verified"):
+        if basis is None:
+            if basis_required:
+                errors.append(f"{where}: unknown basis {basis!r}")
+        elif basis not in ("unknown", "code-inspection", "testing", "verified"):
             errors.append(f"{where}: unknown basis {basis!r}")
         impl_url = statement.get("impl_url")
         if impl_url is not None and not URL_PATTERN.match(impl_url):
@@ -227,7 +235,7 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
         for key, pstat in params.items():
             if key not in valid_param_keys:
                 errors.append(f"{where}: params key {key!r} does not match a current non-reserved param")
-            _check_statement_or_history(pstat, stack, versions, errors, f"{where}: params.{key}", allow_not_applicable=True)
+            _check_statement_or_history(pstat, stack, versions, errors, f"{where}: params.{key}", allow_not_applicable=True, basis_required=False)
         if frame_implemented:
             for key in valid_param_keys - set(params):
                 errors.append(f"{where}: missing params[{key!r}] (frame is confirmed implemented)")
@@ -246,7 +254,7 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
             for key, sstat in sentinel.items():
                 if key != "default" and key not in all_param_keys:
                     errors.append(f"{where}: sentinel_compliance key {key!r} does not match a current param")
-                _check_statement_or_history(sstat, stack, versions, errors, f"{where}: sentinel_compliance.{key}", allow_not_applicable=False)
+                _check_statement_or_history(sstat, stack, versions, errors, f"{where}: sentinel_compliance.{key}", allow_not_applicable=False, basis_required=False)
 
     mav_frames = frame.get("mav_frames")
     if mav_frames is not None:
@@ -260,7 +268,7 @@ def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str
             errors.append(f"{where}: mav_frames.default_frame_command_long {default_frame!r} is not a known MAV_FRAME value")
         rejects = mav_frames.get("rejects_unsupported")
         if rejects is not None:
-            _check_statement_or_history(rejects, stack, versions, errors, f"{where}: mav_frames.rejects_unsupported", allow_not_applicable=False)
+            _check_statement_or_history(rejects, stack, versions, errors, f"{where}: mav_frames.rejects_unsupported", allow_not_applicable=False, basis_required=False)
 
 
 def check_mav_cmd_definition(doc: dict, errors: list[str], where: str) -> None:

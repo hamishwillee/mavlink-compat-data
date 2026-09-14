@@ -16,38 +16,32 @@
           "params": {
             "1_Pitch": {
               "supported": false,
-              "basis": "verified",
               "notes": "No field in the internal mission-item message; never stored, any vehicle type"
             },
             "3_Flags": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
             },
             "5_Latitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "6_Longitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "7_Altitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "NaN (\"use default altitude\") accepted"
             }
           }
@@ -62,38 +56,32 @@
           "params": {
             "1_Pitch": {
               "supported": false,
-              "basis": "verified",
               "notes": "No field in the internal mission-item message; never stored, any vehicle type"
             },
             "3_Flags": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
             },
             "5_Latitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "6_Longitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "7_Altitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "NaN (\"use default altitude\") accepted"
             }
           }
@@ -108,38 +96,32 @@
           "params": {
             "1_Pitch": {
               "supported": false,
-              "basis": "verified",
               "notes": "No field in the internal mission-item message; never stored, any vehicle type"
             },
             "3_Flags": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored; non-default value now rejected outright (mask-validated, was silently accepted+zeroed before)"
             },
             "4_Yaw": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "Stored/wrapped to [0,360) correctly, but takeoff setpoint generation forces yaw to NaN regardless"
             },
             "5_Latitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "6_Longitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             },
             "7_Altitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "NaN (\"use default altitude\") accepted"
             }
           }
@@ -158,38 +140,32 @@
           "params": {
             "1_Pitch": {
               "supported": false,
-              "basis": "verified",
               "notes": "Stored faithfully but never read at takeoff (multicopter-specific, per XML)"
             },
             "3_Flags": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored, any vehicle type"
             },
             "4_Yaw": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored, any vehicle type"
             },
             "5_Latitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
             },
             "6_Longitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
             },
             "7_Altitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             }
           }
         },
@@ -205,38 +181,32 @@
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "Used as climb-out minimum pitch"
             },
             "3_Flags": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored, any vehicle type"
             },
             "4_Yaw": {
               "supported": false,
-              "basis": "verified",
               "notes": "Never stored, any vehicle type"
             },
             "5_Latitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
             },
             "6_Longitude": {
               "supported": {
                 "added_version": true
               },
-              "basis": "verified",
               "notes": "INT32_MAX (\"use current position\") rejected -- spec violation"
             },
             "7_Altitude": {
               "supported": {
                 "added_version": true
-              },
-              "basis": "verified"
+              }
             }
           }
         }
