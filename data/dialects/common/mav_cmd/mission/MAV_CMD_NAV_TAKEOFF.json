@@ -34,7 +34,7 @@
             },
             "4_Yaw": {
               "supported": false,
-              "notes": "Stored/wrapped to [0,360) correctly, but forced to NaN at execution -- confirmed no effect on heading (commanded 137°, actual 9.1°)"
+              "notes": "Stored/wrapped to [0,360) correctly, but forced to NaN at execution"
             },
             "5_Latitude": {
               "supported": false,
@@ -69,18 +69,15 @@
             },
             "4_Yaw": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "5_Latitude": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "6_Longitude": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "7_Altitude": {
               "supported": {
@@ -107,18 +104,15 @@
             },
             "4_Yaw": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "5_Latitude": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "6_Longitude": {
               "supported": null,
-              "basis": "unknown",
-              "notes": "Prior claim retracted (was assumed same as multicopter)"
+              "basis": "unknown"
             },
             "7_Altitude": {
               "supported": {
