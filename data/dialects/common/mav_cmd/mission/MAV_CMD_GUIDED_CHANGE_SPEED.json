@@ -1,38 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_GUIDED_CHANGE_SPEED",
-  "value": 43000,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "speed type",
-      "enumRef": "SPEED_TYPE"
-    },
-    {
-      "index": 2,
-      "name": "speed target",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "speed rate-of-change",
-      "enumRef": null
-    }
-  ]
+  }
 }

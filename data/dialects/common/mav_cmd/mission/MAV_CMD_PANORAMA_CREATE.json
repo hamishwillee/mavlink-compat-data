@@ -1,43 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_PANORAMA_CREATE",
-  "value": 2800,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Horizontal Angle",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Vertical Angle",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "Horizontal Speed",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Vertical Speed",
-      "enumRef": null
-    }
-  ]
+  }
 }

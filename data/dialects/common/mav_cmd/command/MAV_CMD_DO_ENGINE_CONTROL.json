@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_ENGINE_CONTROL",
-  "value": 223,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Start Engine",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 2,
-      "name": "Cold Start",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 3,
-      "name": "Height Delay",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Options",
-      "enumRef": "ENGINE_CONTROL_OPTIONS"
-    },
-    {
-      "index": 5,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Empty",
-      "enumRef": null
-    }
-  ]
+  }
 }

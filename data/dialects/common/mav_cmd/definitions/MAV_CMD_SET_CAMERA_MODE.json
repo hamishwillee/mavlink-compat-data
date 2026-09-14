@@ -1,0 +1,23 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_SET_CAMERA_MODE",
+  "value": 530,
+  "dialect": "common",
+  "params": {
+    "1_id": {
+      "enumRef": null
+    },
+    "2_Camera Mode": {
+      "enumRef": "CAMERA_MODE"
+    },
+    "3_Empty": {
+      "enumRef": null
+    },
+    "4_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

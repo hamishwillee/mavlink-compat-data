@@ -1,22 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_RUN_PREARM_CHECKS",
-  "value": 401,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": []
+  }
 }

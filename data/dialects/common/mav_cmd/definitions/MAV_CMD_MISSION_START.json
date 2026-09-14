@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_MISSION_START",
+  "value": 300,
+  "dialect": "common",
+  "params": {
+    "1_First Item": {
+      "enumRef": null
+    },
+    "2_Last Item": {
+      "enumRef": null
+    }
+  }
+}

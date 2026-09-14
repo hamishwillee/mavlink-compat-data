@@ -1,38 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_SET_GLOBAL_ORIGIN",
-  "value": 611,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 5,
-      "name": "Latitude",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Longitude",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Altitude",
-      "enumRef": null
-    }
-  ]
+  }
 }

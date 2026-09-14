@@ -1,43 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_NAV_ARC_WAYPOINT",
-  "value": 36,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Arc Angle",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Latitude",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Longitude",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Altitude",
-      "enumRef": null
-    }
-  ]
+  }
 }

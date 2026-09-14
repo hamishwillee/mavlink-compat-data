@@ -1,0 +1,17 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_SET_GLOBAL_ORIGIN",
+  "value": 611,
+  "dialect": "common",
+  "params": {
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

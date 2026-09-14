@@ -1,8 +1,8 @@
 {
   "stacks": ["px4", "ardupilot"],
-  "variants": {
+  "frames": {
     "px4": ["multicopter", "fixedwing", "vtol", "rover", "submarine", "airship"],
-    "ardupilot": ["copter", "plane", "rover", "sub", "tracker", "blimp"]
+    "ardupilot": ["copter", "plane", "standard_quadplane", "rover", "sub", "tracker", "blimp"]
   },
   "basis": ["unknown", "code-inspection", "testing", "verified"],
   "dialects": ["minimal", "common", "standard"]

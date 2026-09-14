@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_PREFLIGHT_CALIBRATION",
+  "value": 241,
+  "dialect": "common",
+  "params": {
+    "1_Gyro Temperature": {
+      "enumRef": null
+    },
+    "2_Magnetometer": {
+      "enumRef": "PREFLIGHT_CALIBRATION_MAGNETOMETER"
+    },
+    "3_Ground Pressure": {
+      "enumRef": "MAV_BOOL"
+    },
+    "4_Remote Control": {
+      "enumRef": null
+    },
+    "5_Accelerometer": {
+      "enumRef": "PREFLIGHT_CALIBRATION_ACCELEROMETER"
+    },
+    "6_Compmot or Airspeed": {
+      "enumRef": null
+    },
+    "7_ESC or Baro": {
+      "enumRef": null
+    }
+  }
+}

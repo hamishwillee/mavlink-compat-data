@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mav_cmd_definition.schema.json",
+  "description": "Static, purely upstream-derived identity for one MAV_CMD_* entry -- name, numeric value, and param roster (index/name/enumRef). Shared by that command's mission/ and command/ compatibility docs (schema/command.schema.json), which carry no identity of their own beyond 'name' and 'context'. Kept in sync with upstream MAVLink XML by scripts/generate_stubs.py (initial creation) and scripts/check_sync.py (additions/renames) -- never hand-edited beyond what those produce, since it holds no human-entered compatibility data.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "value", "dialect", "params"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "pattern": "^MAV_CMD_[A-Z0-9_]*$" },
+    "value": { "type": "integer", "minimum": 0 },
+    "dialect": { "const": "common" },
+    "params": {
+      "description": "Keyed by '<index>_<name>' (e.g. '1_Pitch') -- index and name are encoded in the key, not repeated as separate fields. May be empty for a command with no upstream params at all.",
+      "type": "object",
+      "propertyNames": { "pattern": "^[1-7]_.+$" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["enumRef"],
+        "properties": {
+          "enumRef": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

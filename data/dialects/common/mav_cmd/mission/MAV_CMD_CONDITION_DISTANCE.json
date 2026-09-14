@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CONDITION_DISTANCE",
-  "value": 114,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Distance",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Empty",
-      "enumRef": null
-    }
-  ]
+  }
 }

@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_OBLIQUE_SURVEY",
-  "value": 260,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Distance",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Shutter",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "Min Interval",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Positions",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Roll Angle",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Pitch Angle",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Empty",
-      "enumRef": null
-    }
-  ]
+  }
 }

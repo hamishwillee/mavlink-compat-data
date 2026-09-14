@@ -1,118 +1,52 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_CONDITION_GATE",
-  "value": 4501,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": {
-          "added_version": "1.11.0",
-          "partial_implementation": true
-        },
-        "basis": "testing",
-        "notes": [
-          "Alt not used (UseAltitude=false)",
-          "1.11.0 confirmed via code-inspection only, not live-tested",
-          "Live-testable from 1.14.0 (no sihsim SITL before that)"
-        ],
-        "last_checked_version": "1.17.0"
+      "frames": {
+        "multicopter": {
+          "supported": {
+            "added_version": "1.11.0"
+          },
+          "basis": "testing",
+          "last_checked_version": "1.17.0",
+          "notes": [
+            "1.11.0 confirmed via code-inspection only, not live-tested",
+            "Live-testable from 1.14.0 (no sihsim SITL before that)"
+          ],
+          "params": {
+            "1_Geometry": {
+              "supported": {
+                "added_version": "1.11.0"
+              }
+            },
+            "2_UseAltitude": {
+              "supported": false
+            },
+            "5_Latitude": {
+              "supported": {
+                "added_version": "1.11.0"
+              }
+            },
+            "6_Longitude": {
+              "supported": {
+                "added_version": "1.11.0"
+              }
+            },
+            "7_Altitude": {
+              "supported": false,
+              "notes": "Ignored (UseAltitude always false)"
+            }
+          }
+        }
       }
     },
     "ardupilot": {
-      "default": {
-        "supported": false,
-        "basis": "verified",
-        "last_checked_version": "4.7.0"
-      }
+      "frames": false,
+      "basis": "verified",
+      "last_checked_version": "4.7.0"
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Geometry",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 2,
-      "name": "UseAltitude",
-      "enumRef": "MAV_BOOL",
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": false,
-            "basis": "testing"
-          }
-        }
-      }
-    },
-    {
-      "index": 3,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Latitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 6,
-      "name": "Longitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": {
-              "added_version": "1.11.0"
-            },
-            "basis": "testing",
-            "notes": "1.11.0 via code-inspection, not live-tested"
-          }
-        }
-      }
-    },
-    {
-      "index": 7,
-      "name": "Altitude",
-      "enumRef": null,
-      "compatibility": {
-        "px4": {
-          "default": {
-            "supported": false,
-            "basis": "testing",
-            "notes": "Ignored (UseAltitude always false)"
-          }
-        }
-      }
-    }
-  ]
+  }
 }

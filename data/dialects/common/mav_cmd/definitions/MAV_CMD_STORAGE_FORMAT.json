@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_STORAGE_FORMAT",
+  "value": 526,
+  "dialect": "common",
+  "params": {
+    "1_Storage ID": {
+      "enumRef": null
+    },
+    "2_Format": {
+      "enumRef": "MAV_BOOL"
+    },
+    "3_Reset Image Log": {
+      "enumRef": "MAV_BOOL"
+    },
+    "4_Reserved (all remaining params)": {
+      "enumRef": null
+    }
+  }
+}

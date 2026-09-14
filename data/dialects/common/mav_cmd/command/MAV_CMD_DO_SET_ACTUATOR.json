@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_SET_ACTUATOR",
-  "value": 187,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Actuator 1",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Actuator 2",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "Actuator 3",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Actuator 4",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Actuator 5",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Actuator 6",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Index",
-      "enumRef": null
-    }
-  ]
+  }
 }

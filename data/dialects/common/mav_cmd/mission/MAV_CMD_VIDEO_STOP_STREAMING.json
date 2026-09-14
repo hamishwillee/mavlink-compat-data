@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_VIDEO_STOP_STREAMING",
-  "value": 2503,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Stream ID",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Target Camera ID",
-      "enumRef": null
-    }
-  ]
+  }
 }

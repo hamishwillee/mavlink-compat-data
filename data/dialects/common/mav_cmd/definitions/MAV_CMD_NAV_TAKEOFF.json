@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_TAKEOFF",
+  "value": 22,
+  "dialect": "common",
+  "params": {
+    "1_Pitch": {
+      "enumRef": null
+    },
+    "2_Empty": {
+      "enumRef": null
+    },
+    "3_Flags": {
+      "enumRef": "NAV_TAKEOFF_FLAGS"
+    },
+    "4_Yaw": {
+      "enumRef": null
+    },
+    "5_Latitude": {
+      "enumRef": null
+    },
+    "6_Longitude": {
+      "enumRef": null
+    },
+    "7_Altitude": {
+      "enumRef": null
+    }
+  }
+}

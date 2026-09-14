@@ -1,31 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "command.schema.json",
+  "description": "Compatibility data for one MAV_CMD_* entry in one wire context (mission item or direct command). Identity (value, param roster) lives in the sibling mav_cmd_definition.schema.json doc of the same name, not here -- see CLAUDE.md.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["name", "value", "dialect", "context", "compatibility", "params"],
+  "required": ["name", "dialect", "context", "compatibility"],
   "properties": {
     "$schema": { "type": "string" },
     "name": { "type": "string", "pattern": "^MAV_CMD_[A-Z0-9_]*$" },
-    "value": { "type": "integer", "minimum": 0 },
     "dialect": { "const": "common" },
     "context": { "enum": ["mission", "command"] },
     "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
-    "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" },
-    "params": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["index", "name", "enumRef"],
-        "properties": {
-          "index": { "type": "integer", "minimum": 1, "maximum": 7 },
-          "name": { "type": "string", "minLength": 1 },
-          "enumRef": { "type": ["string", "null"] },
-          "notes": { "$ref": "compatibility-entry.schema.json#/$defs/notes" },
-          "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/compatibility" }
-        }
-      }
-    }
+    "compatibility": { "$ref": "compatibility-entry.schema.json#/$defs/commandCompatibility" }
   }
 }

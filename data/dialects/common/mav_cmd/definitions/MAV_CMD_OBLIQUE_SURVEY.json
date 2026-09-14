@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_OBLIQUE_SURVEY",
+  "value": 260,
+  "dialect": "common",
+  "params": {
+    "1_Distance": {
+      "enumRef": null
+    },
+    "2_Shutter": {
+      "enumRef": null
+    },
+    "3_Min Interval": {
+      "enumRef": null
+    },
+    "4_Positions": {
+      "enumRef": null
+    },
+    "5_Roll Angle": {
+      "enumRef": null
+    },
+    "6_Pitch Angle": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

@@ -55,6 +55,64 @@ def gated_sub_compatibility(entity_compat: dict, stacks: list[str]) -> dict:
     return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks if is_stack_implemented(entity_compat, stack)}
 
 
+def command_default_compatibility(stacks: list[str]) -> dict:
+    """Every command stack starts fully untested -- frames: {} -- since there's
+    no per-frame FrameStatus to write yet for a brand-new command."""
+    return {stack: {"frames": {}} for stack in stacks}
+
+
+def is_frame_implemented(frame_status: dict | None) -> bool:
+    return isinstance((frame_status or {}).get("supported"), dict)
+
+
+def gated_command_param_stub_targets(entity_compat: dict) -> list[tuple[str, str]]:
+    """(stack, frame_name) pairs where the frame is already confirmed
+    implemented -- i.e. where a newly-discovered param must be stubbed into
+    frames.<frame>.params. A stack with frames == {} or frames == False
+    contributes nothing (no per-frame breakdown to attach to); a frame not yet
+    mentioned under an object 'frames' contributes nothing either — absence
+    always means untested, never inherited."""
+    targets = []
+    for stack, stack_status in (entity_compat or {}).items():
+        frames = (stack_status or {}).get("frames")
+        if isinstance(frames, dict):
+            targets += [(stack, f) for f, fs in frames.items() if is_frame_implemented(fs)]
+    return targets
+
+
+def rename_definition_param_key(definition_doc: dict, index: int, old_name: str, new_name: str) -> bool:
+    """Rewrites '<index>_<old_name>' -> '<index>_<new_name>' in the shared
+    mav_cmd_definition doc's own params roster. Returns True iff it changed."""
+    old_key, new_key = f"{index}_{old_name}", f"{index}_{new_name}"
+    params = definition_doc.get("params", {})
+    if old_key not in params:
+        return False
+    params[new_key] = params.pop(old_key)
+    return True
+
+
+def rename_context_param_references(context_doc: dict, index: int, old_name: str, new_name: str) -> bool:
+    """Rewrites '<index>_<old_name>' -> '<index>_<new_name>' everywhere it's
+    referenced in one mission/command compatibility doc: every
+    compatibility.<stack>.frames.<frame>.params and .sentinel_compliance map.
+    (The doc carries no identity of its own to rename -- that lives in the
+    shared definitions doc, see rename_definition_param_key.) Returns True iff
+    anything changed."""
+    old_key, new_key = f"{index}_{old_name}", f"{index}_{new_name}"
+    changed = False
+    for stack_status in context_doc.get("compatibility", {}).values():
+        frames = (stack_status or {}).get("frames")
+        if not isinstance(frames, dict):
+            continue
+        for frame_status in frames.values():
+            for block_key in ("params", "sentinel_compliance"):
+                block = (frame_status or {}).get(block_key)
+                if isinstance(block, dict) and old_key in block:
+                    block[new_key] = block.pop(old_key)
+                    changed = True
+    return changed
+
+
 def message_stub(msg: mavlink_xml.Message, dialect: str, stacks: list[str]) -> dict:
     return {
         "$schema": "../../../../schema/message.schema.json",
@@ -88,22 +146,29 @@ def enum_stub(enum: mavlink_xml.Enum, dialect: str, stacks: list[str]) -> dict:
     }
 
 
+def command_definition_stub(cmd: mavlink_xml.Command) -> dict:
+    """The static, purely upstream-derived identity shared by a command's
+    mission/ and command/ compatibility docs -- see
+    schema/mav_cmd_definition.schema.json."""
+    return {
+        "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+        "name": cmd.name,
+        "value": cmd.value,
+        "dialect": "common",
+        "params": {
+            f"{p.index}_{p.name}": {"enumRef": p.enum_ref}
+            for p in cmd.params
+        },
+    }
+
+
 def command_stub(cmd: mavlink_xml.Command, context: str, stacks: list[str]) -> dict:
     return {
         "$schema": "../../../../../schema/command.schema.json",
         "name": cmd.name,
-        "value": cmd.value,
         "dialect": "common",
         "context": context,
-        "compatibility": default_compatibility(stacks),
-        "params": [
-            {
-                "index": p.index,
-                "name": p.name,
-                "enumRef": p.enum_ref,
-            }
-            for p in cmd.params
-        ],
+        "compatibility": command_default_compatibility(stacks),
     }
 
 
@@ -142,6 +207,11 @@ def generate(cache_dir: Path | None, dry_run: bool) -> None:
                 skipped += 1
 
         for cmd in dialect.commands:
+            def_path = base / "mav_cmd" / "definitions" / f"{cmd.name}.json"
+            if write_if_missing(def_path, command_definition_stub(cmd), dry_run):
+                created += 1
+            else:
+                skipped += 1
             for context in ("mission", "command"):
                 path = base / "mav_cmd" / context / f"{cmd.name}.json"
                 if write_if_missing(path, command_stub(cmd, context, stacks), dry_run):

@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_PAUSE_CONTINUE",
-  "value": 193,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Continue",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 2,
-      "name": "Reserved",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "Reserved",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Reserved",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Reserved",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Reserved",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Reserved",
-      "enumRef": null
-    }
-  ]
+  }
 }

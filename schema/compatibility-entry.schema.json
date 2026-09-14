@@ -42,8 +42,7 @@
           "properties": {
             "added_version": { "$ref": "#/$defs/versionOrTrue" },
             "deprecated_version": { "$ref": "#/$defs/versionOrMain" },
-            "removed_version": { "$ref": "#/$defs/versionOrMain" },
-            "partial_implementation": { "type": "boolean" }
+            "removed_version": { "$ref": "#/$defs/versionOrMain" }
           }
         }
       ]
@@ -75,8 +74,36 @@
         }
       ]
     },
+    "frameSubStatement": {
+      "description": "Like supportStatement, but 'basis' is optional -- used only inside a command frame's own params/sentinel_compliance/mav_frames.rejects_unsupported, where an omitted basis means 'same basis as the enclosing frame' (scripts/validate.py does not resolve this into a value; it's a documentation convention, not a computed fact -- see CLAUDE.md).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported"],
+      "properties": {
+        "supported": { "$ref": "#/$defs/supported" },
+        "basis": {
+          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        },
+        "notes": { "$ref": "#/$defs/notes" },
+        "impl_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
+      }
+    },
+    "frameSubStatementOrHistory": {
+      "oneOf": [
+        { "$ref": "#/$defs/frameSubStatement" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/frameSubStatement" },
+          "minItems": 1
+        }
+      ]
+    },
     "compatibility": {
-      "description": "Object keyed by stack, then by 'default' or a variant name. Stack/variant key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema.",
+      "description": "Object keyed by stack, then by 'default' or a variant name. Stack/variant key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema. Used by messages/enums; commands use commandCompatibility below instead.",
       "type": "object",
       "minProperties": 1,
       "additionalProperties": {
@@ -84,6 +111,93 @@
         "minProperties": 1,
         "additionalProperties": { "$ref": "#/$defs/supportStatementOrHistory" }
       }
+    },
+    "frameStatus": {
+      "description": "compatibility.<stack>.frames.<frame> for a command doc (context: mission/command only). No 'default' fallback -- every field here is that frame's own explicit fact.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported", "basis"],
+      "properties": {
+        "supported": { "$ref": "#/$defs/supported" },
+        "basis": {
+          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        },
+        "notes": { "$ref": "#/$defs/notes" },
+        "impl_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "last_checked_version": { "$ref": "#/$defs/releasedVersion" },
+        "earliest_checked_version": { "$ref": "#/$defs/releasedVersion" },
+        "params": {
+          "description": "Keyed by '<index>_<name>' matching the command's top-level params object. Present only if this frame's own 'supported' is a confirmed-implemented object -- see scripts/validate.py's check_frame_status. A param's 'basis' is optional -- omitted means the same basis as this frame's own.",
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^[1-7]_.+$" },
+          "additionalProperties": { "$ref": "#/$defs/frameSubStatementOrHistory" }
+        },
+        "sentinel_compliance": {
+          "description": "Does this frame correctly enforce the sentinel-value contract (unused param NACKs any non-sentinel value; used param tolerates the sentinel)? Keyed by 'default' (required) plus optional '<index>_<name>' overrides for params that diverge from the default -- gated the same way as 'params'. Unlike 'params', a reserved '<index>_Empty' key IS a valid override here: its only legal value is the sentinel, so its own NACK-on-non-sentinel behavior is exactly the kind of fact this field exists to record. 'basis' is optional throughout -- omitted means the same basis as this frame's own.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["default"],
+          "properties": {
+            "default": { "$ref": "#/$defs/frameSubStatementOrHistory" }
+          },
+          "patternProperties": {
+            "^[1-7]_.+$": { "$ref": "#/$defs/frameSubStatementOrHistory" }
+          }
+        },
+        "mav_frames": {
+          "description": "Coordinate-frame (MAV_FRAME) support for this vehicle frame -- deliberately a separate key from the vehicle-type 'frames' above, since they're unrelated MAVLink concepts that happen to share an English name.",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "supported": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "pattern": "^MAV_FRAME_[A-Z0-9_]*$" }
+            },
+            "rejects_unsupported": { "$ref": "#/$defs/frameSubStatementOrHistory" },
+            "default_frame_command_long": { "type": "string", "pattern": "^MAV_FRAME_[A-Z0-9_]*$" }
+          }
+        }
+      }
+    },
+    "commandFrames": {
+      "description": "compatibility.<stack>.frames for a command doc. {} = untested, nothing evaluated for any frame yet. false = confirmed unsupported on every frame (a blanket negative fact -- see sibling basis/notes/last_checked_version on the enclosing commandStackStatus). Object = per-frame breakdown keyed by a frame name from schema/vocab.json's frames list for that stack. No 'default' fallback -- every known frame is written out explicitly.",
+      "oneOf": [
+        { "const": false },
+        {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/frameStatus" }
+        }
+      ]
+    },
+    "commandStackStatus": {
+      "description": "compatibility.<stack> for a command doc. basis/notes/impl_url/last_checked_version here describe the blanket 'frames: false' case only; when frames is an object each frame carries its own -- enforced by scripts/validate.py, not this schema.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frames"],
+      "properties": {
+        "frames": { "$ref": "#/$defs/commandFrames" },
+        "basis": {
+          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        },
+        "notes": { "$ref": "#/$defs/notes" },
+        "impl_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
+      }
+    },
+    "commandCompatibility": {
+      "description": "compatibility for command docs (context: mission/command). Object keyed by stack -> commandStackStatus. Distinct from 'compatibility' above, which messages/enums still use (variant-keyed default+override). Stack key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/commandStackStatus" }
     }
   }
 }

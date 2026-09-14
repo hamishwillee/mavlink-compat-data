@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_GUIDED_CHANGE_ALTITUDE",
+  "value": 43001,
+  "dialect": "common",
+  "params": {
+    "3_alt rate-of-change": {
+      "enumRef": null
+    },
+    "7_target alt": {
+      "enumRef": null
+    }
+  }
+}

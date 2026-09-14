@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_RESET_CAMERA_SETTINGS",
-  "value": 529,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Reset",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 2,
-      "name": "Target Camera ID",
-      "enumRef": null
-    }
-  ]
+  }
 }

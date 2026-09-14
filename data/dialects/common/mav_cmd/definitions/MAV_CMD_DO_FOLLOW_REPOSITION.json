@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_DO_FOLLOW_REPOSITION",
+  "value": 33,
+  "dialect": "common",
+  "params": {
+    "1_Camera Q1": {
+      "enumRef": null
+    },
+    "2_Camera Q2": {
+      "enumRef": null
+    },
+    "3_Camera Q3": {
+      "enumRef": null
+    },
+    "4_Camera Q4": {
+      "enumRef": null
+    },
+    "5_Altitude Offset": {
+      "enumRef": null
+    },
+    "6_X Offset": {
+      "enumRef": null
+    },
+    "7_Y Offset": {
+      "enumRef": null
+    }
+  }
+}

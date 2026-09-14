@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_PREFLIGHT_STORAGE",
+  "value": 245,
+  "dialect": "common",
+  "params": {
+    "1_Parameter Storage": {
+      "enumRef": "PREFLIGHT_STORAGE_PARAMETER_ACTION"
+    },
+    "2_Reserved": {
+      "enumRef": null
+    },
+    "3_Logging Rate": {
+      "enumRef": null
+    },
+    "4_Reserved": {
+      "enumRef": null
+    },
+    "5_Empty": {
+      "enumRef": null
+    },
+    "6_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

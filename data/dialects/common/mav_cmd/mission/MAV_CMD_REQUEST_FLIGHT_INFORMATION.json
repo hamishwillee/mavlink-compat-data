@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_REQUEST_FLIGHT_INFORMATION",
-  "value": 528,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Flight Information",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 2,
-      "name": "Reserved (all remaining params)",
-      "enumRef": null
-    }
-  ]
+  }
 }

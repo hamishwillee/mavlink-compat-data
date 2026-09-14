@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_REPOSITION",
-  "value": 192,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Speed",
-      "enumRef": null
-    },
-    {
-      "index": 2,
-      "name": "Bitmask",
-      "enumRef": "MAV_DO_REPOSITION_FLAGS"
-    },
-    {
-      "index": 3,
-      "name": "Radius",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Yaw",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "Latitude",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "Longitude",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "Altitude",
-      "enumRef": null
-    }
-  ]
+  }
 }

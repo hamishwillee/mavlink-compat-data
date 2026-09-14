@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_NAV_DELAY",
+  "value": 93,
+  "dialect": "common",
+  "params": {
+    "1_Delay": {
+      "enumRef": null
+    },
+    "2_Hour": {
+      "enumRef": null
+    },
+    "3_Minute": {
+      "enumRef": null
+    },
+    "4_Second": {
+      "enumRef": null
+    },
+    "5_Empty": {
+      "enumRef": null
+    },
+    "6_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_IMAGE_START_CAPTURE",
+  "value": 2000,
+  "dialect": "common",
+  "params": {
+    "1_Target Camera ID": {
+      "enumRef": null
+    },
+    "2_Interval": {
+      "enumRef": null
+    },
+    "3_Total Images": {
+      "enumRef": null
+    },
+    "4_Sequence Number": {
+      "enumRef": null
+    },
+    "5_Empty": {
+      "enumRef": null
+    },
+    "6_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

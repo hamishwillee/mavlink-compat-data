@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_GUIDED_CHANGE_ALTITUDE",
-  "value": 43001,
   "dialect": "common",
   "context": "mission",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 3,
-      "name": "alt rate-of-change",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "target alt",
-      "enumRef": null
-    }
-  ]
+  }
 }

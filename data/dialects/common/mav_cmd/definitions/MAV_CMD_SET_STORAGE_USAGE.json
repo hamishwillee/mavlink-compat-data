@@ -1,0 +1,14 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_SET_STORAGE_USAGE",
+  "value": 533,
+  "dialect": "common",
+  "params": {
+    "1_Storage ID": {
+      "enumRef": null
+    },
+    "2_Usage": {
+      "enumRef": "STORAGE_USAGE_FLAG"
+    }
+  }
+}

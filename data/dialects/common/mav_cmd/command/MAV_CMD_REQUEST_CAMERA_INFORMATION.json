@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_REQUEST_CAMERA_INFORMATION",
-  "value": 521,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "Capabilities",
-      "enumRef": "MAV_BOOL"
-    },
-    {
-      "index": 2,
-      "name": "Reserved (all remaining params)",
-      "enumRef": null
-    }
-  ]
+  }
 }

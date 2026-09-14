@@ -1,58 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_SET_ROI",
-  "value": 201,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "ROI Mode",
-      "enumRef": "MAV_ROI"
-    },
-    {
-      "index": 2,
-      "name": "WP Index",
-      "enumRef": null
-    },
-    {
-      "index": 3,
-      "name": "ROI Index",
-      "enumRef": null
-    },
-    {
-      "index": 4,
-      "name": "Empty",
-      "enumRef": null
-    },
-    {
-      "index": 5,
-      "name": "MAV_ROI_WPNEXT: pitch offset from next waypoint, MAV_ROI_LOCATION: latitude",
-      "enumRef": null
-    },
-    {
-      "index": 6,
-      "name": "MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude",
-      "enumRef": null
-    },
-    {
-      "index": 7,
-      "name": "MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude",
-      "enumRef": null
-    }
-  ]
+  }
 }

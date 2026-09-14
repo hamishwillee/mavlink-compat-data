@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../../schema/mav_cmd_definition.schema.json",
+  "name": "MAV_CMD_CONDITION_LAST",
+  "value": 159,
+  "dialect": "common",
+  "params": {
+    "1_Empty": {
+      "enumRef": null
+    },
+    "2_Empty": {
+      "enumRef": null
+    },
+    "3_Empty": {
+      "enumRef": null
+    },
+    "4_Empty": {
+      "enumRef": null
+    },
+    "5_Empty": {
+      "enumRef": null
+    },
+    "6_Empty": {
+      "enumRef": null
+    },
+    "7_Empty": {
+      "enumRef": null
+    }
+  }
+}

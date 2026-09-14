@@ -1,33 +1,14 @@
 {
   "$schema": "../../../../../schema/command.schema.json",
   "name": "MAV_CMD_DO_VTOL_TRANSITION",
-  "value": 3000,
   "dialect": "common",
   "context": "command",
   "compatibility": {
     "px4": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "default": {
-        "supported": null,
-        "basis": "unknown"
-      }
+      "frames": {}
     }
-  },
-  "params": [
-    {
-      "index": 1,
-      "name": "State",
-      "enumRef": "MAV_VTOL_STATE"
-    },
-    {
-      "index": 2,
-      "name": "Immediate",
-      "enumRef": null
-    }
-  ]
+  }
 }
