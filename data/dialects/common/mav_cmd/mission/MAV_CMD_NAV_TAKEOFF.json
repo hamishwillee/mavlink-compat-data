@@ -26,8 +26,7 @@
             "3_Flags": {
               "supported": false,
               "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": true,
-              "notes": "Previously silently accepted and read back as zero"
+              "nacks_on_non_sentinel_value": true
             },
             "4_Yaw": {
               "supported": false,
@@ -66,8 +65,7 @@
             },
             "3_Flags": {
               "supported": false,
-              "nacks_on_non_sentinel_value": true,
-              "notes": "Previously silently accepted and read back as zero"
+              "nacks_on_non_sentinel_value": true
             },
             "4_Yaw": {
               "supported": null,
