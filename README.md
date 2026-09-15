@@ -79,8 +79,9 @@ A param's own `basis` is optional (as above, omitted on `1_Pitch` in both frames
 
 - `frames`: `{}` (untested) | `false` (confirmed unsupported on every frame) | an object keyed by frame name (from `schema/vocab.json`'s `frames` list) with **no fallback between frames** — every known frame is written out in full.
 - A frame's own `params.<index>_<name>` (keyed the same way as the definitions doc's roster) may exist only if that frame's `supported` is confirmed-implemented, and then every non-`"Empty"` param must appear.
-- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — it still gets an entry in `definitions/<NAME>.json`, but its key never appears in any frame's `params`, for any stack, until upstream gives it a real name.
-- Full field reference and rationale, including `sentinel_compliance`/`mav_frames`/`earliest_checked_version`: [CLAUDE.md](CLAUDE.md).
+- A command param named `"Empty"` is a reserved/undocumented upstream slot, not a feature — it still gets an entry in `definitions/<NAME>.json`, and it's still normally absent from a frame's `params`, but it may appear there with `supported: "not-applicable"` purely to carry the two sentinel-value facts below.
+- `accept_nan_or_int32max`/`nacks_on_non_sentinel_value`: sentinel-value facts about one param — does it accept its sentinel (`NaN`/`INT32_MAX`), does it correctly reject a real non-sentinel value when unsupported. Live inline on that param's own entry (nested inside `supported` when that's the confirmed-implemented object form, otherwise as top-level siblings) rather than in a separate structure.
+- Full field reference and rationale, including `mav_frames`/`earliest_checked_version`: [CLAUDE.md](CLAUDE.md).
 
 ## Scripts
 
@@ -104,7 +105,7 @@ python scripts/check_sync.py [--fix]    # report (or fix) drift vs upstream MAVL
 
 - Every file under `data/` is valid JSON and matches its type's JSON Schema.
 - Filename matches the doc's `name`; `dialect`/`context` fields match their directory.
-- Every `basis` value present is in `schema/vocab.json` (required everywhere except inside a command frame's `params`/`sentinel_compliance`/`mav_frames.rejects_unsupported`, where it's optional — omitted means "same as the frame's own `basis`").
+- Every `basis` value present is in `schema/vocab.json` (required everywhere except inside a command frame's `params`/`mav_frames.rejects_unsupported`, where it's optional — omitted means "same as the frame's own `basis`").
 - `added_version`/`deprecated_version`/`removed_version` are `true`/`"main"`/a version string as applicable; `last_checked_version`/`earliest_checked_version` are a version string only (`"main"` not allowed there). Any concrete version exists in `schema/versions.json` for that stack.
 - `impl_url`, if present, is a well-formed `http(s)://` URL.
 - No duplicate entity files in the same directory.
@@ -119,6 +120,7 @@ Commands (`MAV_CMD`):
 - Every `compatibility` stack key is in `schema/vocab.json`; every `frames` key is a valid frame name for that stack.
 - `basis`/`notes`/`impl_url`/`last_checked_version` are only present alongside `frames: false`, never alongside an object `frames`.
 - `supported` (frame's own, or a param's) is exactly `false`, `null`, `"not-applicable"`, or a valid object.
-- A frame's `params`/`sentinel_compliance` entries are present for a param if and only if that frame's own `supported` is confirmed implemented — same both-directions check as messages/enums, applied within one frame, cross-referencing the sibling `definitions/<NAME>.json` for the valid param set.
+- A frame's `params` entries are present for a non-`"Empty"` param if and only if that frame's own `supported` is confirmed implemented — same both-directions check as messages/enums, applied within one frame, cross-referencing the sibling `definitions/<NAME>.json` for the valid param set.
 - `mav_frames.supported`/`default_frame_command_long` values are known `MAV_FRAME` enum names.
-- A param named `"Empty"` (reserved/undocumented upstream) never appears as a key in any frame's `params` — but it may appear in `sentinel_compliance`, since a reserved slot's only legal value is the sentinel.
+- A param named `"Empty"` (reserved/undocumented upstream) never appears as an ordinary key in any frame's `params` — but it may appear with `supported: "not-applicable"` purely to carry `accept_nan_or_int32max`/`nacks_on_non_sentinel_value`, since a reserved slot's only legal value is the sentinel.
+- `nacks_on_non_sentinel_value` is only valid when `supported` is not the confirmed-implemented object form; `accept_nan_or_int32max` belongs inside `supported` when it is that form, not as a top-level sibling.

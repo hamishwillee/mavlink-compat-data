@@ -94,10 +94,10 @@ def rename_definition_param_key(definition_doc: dict, index: int, old_name: str,
 def rename_context_param_references(context_doc: dict, index: int, old_name: str, new_name: str) -> bool:
     """Rewrites '<index>_<old_name>' -> '<index>_<new_name>' everywhere it's
     referenced in one mission/command compatibility doc: every
-    compatibility.<stack>.frames.<frame>.params and .sentinel_compliance map.
-    (The doc carries no identity of its own to rename -- that lives in the
-    shared definitions doc, see rename_definition_param_key.) Returns True iff
-    anything changed."""
+    compatibility.<stack>.frames.<frame>.params map. (The doc carries no
+    identity of its own to rename -- that lives in the shared definitions
+    doc, see rename_definition_param_key.) Returns True iff anything
+    changed."""
     old_key, new_key = f"{index}_{old_name}", f"{index}_{new_name}"
     changed = False
     for stack_status in context_doc.get("compatibility", {}).values():
@@ -105,11 +105,10 @@ def rename_context_param_references(context_doc: dict, index: int, old_name: str
         if not isinstance(frames, dict):
             continue
         for frame_status in frames.values():
-            for block_key in ("params", "sentinel_compliance"):
-                block = (frame_status or {}).get(block_key)
-                if isinstance(block, dict) and old_key in block:
-                    block[new_key] = block.pop(old_key)
-                    changed = True
+            params = (frame_status or {}).get("params")
+            if isinstance(params, dict) and old_key in params:
+                params[new_key] = params.pop(old_key)
+                changed = True
     return changed
 
 

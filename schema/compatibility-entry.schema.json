@@ -75,7 +75,7 @@
       ]
     },
     "frameSubStatement": {
-      "description": "Like supportStatement, but 'basis' is optional -- used only inside a command frame's own params/sentinel_compliance/mav_frames.rejects_unsupported, where an omitted basis means 'same basis as the enclosing frame' (scripts/validate.py does not resolve this into a value; it's a documentation convention, not a computed fact -- see CLAUDE.md).",
+      "description": "Like supportStatement, but 'basis' is optional -- used only inside a command frame's own mav_frames.rejects_unsupported, where an omitted basis means 'same basis as the enclosing frame' (scripts/validate.py does not resolve this into a value; it's a documentation convention, not a computed fact -- see CLAUDE.md).",
       "type": "object",
       "additionalProperties": false,
       "required": ["supported"],
@@ -98,6 +98,55 @@
         {
           "type": "array",
           "items": { "$ref": "#/$defs/frameSubStatement" },
+          "minItems": 1
+        }
+      ]
+    },
+    "paramSupported": {
+      "description": "Like 'supported', but the confirmed-implemented object form also allows accept_nan_or_int32max: does this param's sentinel value (NaN for a float-encoded param, INT32_MAX for an int32-encoded one) get accepted -- a fact about wire-level input validation, independent of whether the param's own function works.",
+      "oneOf": [
+        { "const": false },
+        { "const": null },
+        { "const": "not-applicable" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["added_version"],
+          "properties": {
+            "added_version": { "$ref": "#/$defs/versionOrTrue" },
+            "deprecated_version": { "$ref": "#/$defs/versionOrMain" },
+            "removed_version": { "$ref": "#/$defs/versionOrMain" },
+            "accept_nan_or_int32max": { "type": "boolean" }
+          }
+        }
+      ]
+    },
+    "paramStatement": {
+      "description": "frameStatus.params.<key>'s own statement. 'supported' allows a nested accept_nan_or_int32max when it's the confirmed-implemented object form (see paramSupported); accept_nan_or_int32max and nacks_on_non_sentinel_value may ALSO appear as top-level siblings of 'supported' here, used when 'supported' is a bare scalar (false/null/'not-applicable') and there's no object to nest a peer field into. nacks_on_non_sentinel_value only makes sense when 'supported' is not the confirmed-implemented object form -- scripts/validate.py enforces this. A reserved '<index>_Empty' key is allowed here (unlike an ordinary param) specifically to carry these two sentinel facts, with 'supported' fixed to 'not-applicable' -- see CLAUDE.md.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported"],
+      "properties": {
+        "supported": { "$ref": "#/$defs/paramSupported" },
+        "basis": {
+          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        },
+        "notes": { "$ref": "#/$defs/notes" },
+        "impl_url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "last_checked_version": { "$ref": "#/$defs/releasedVersion" },
+        "accept_nan_or_int32max": { "type": "boolean" },
+        "nacks_on_non_sentinel_value": { "type": "boolean" }
+      }
+    },
+    "paramStatementOrHistory": {
+      "oneOf": [
+        { "$ref": "#/$defs/paramStatement" },
+        {
+          "type": "array",
+          "items": { "$ref": "#/$defs/paramStatement" },
           "minItems": 1
         }
       ]
@@ -130,23 +179,11 @@
         "last_checked_version": { "$ref": "#/$defs/releasedVersion" },
         "earliest_checked_version": { "$ref": "#/$defs/releasedVersion" },
         "params": {
-          "description": "Keyed by '<index>_<name>' matching the command's top-level params object. Present only if this frame's own 'supported' is a confirmed-implemented object -- see scripts/validate.py's check_frame_status. A param's 'basis' is optional -- omitted means the same basis as this frame's own.",
+          "description": "Keyed by '<index>_<name>' matching the command's top-level params object. An ordinary (non-Empty) param may exist here only if this frame's own 'supported' is a confirmed-implemented object -- see scripts/validate.py's check_frame_status; every such param must then appear. A reserved '<index>_Empty' key is exempt from that gating and may appear regardless (see paramStatement) purely to carry sentinel facts. A param's 'basis' is optional -- omitted means the same basis as this frame's own.",
           "type": "object",
           "minProperties": 1,
           "propertyNames": { "pattern": "^[1-7]_.+$" },
-          "additionalProperties": { "$ref": "#/$defs/frameSubStatementOrHistory" }
-        },
-        "sentinel_compliance": {
-          "description": "Does this frame correctly enforce the sentinel-value contract (unused param NACKs any non-sentinel value; used param tolerates the sentinel)? Keyed by 'default' (required) plus optional '<index>_<name>' overrides for params that diverge from the default -- gated the same way as 'params'. Unlike 'params', a reserved '<index>_Empty' key IS a valid override here: its only legal value is the sentinel, so its own NACK-on-non-sentinel behavior is exactly the kind of fact this field exists to record. 'basis' is optional throughout -- omitted means the same basis as this frame's own.",
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["default"],
-          "properties": {
-            "default": { "$ref": "#/$defs/frameSubStatementOrHistory" }
-          },
-          "patternProperties": {
-            "^[1-7]_.+$": { "$ref": "#/$defs/frameSubStatementOrHistory" }
-          }
+          "additionalProperties": { "$ref": "#/$defs/paramStatementOrHistory" }
         },
         "mav_frames": {
           "description": "Coordinate-frame (MAV_FRAME) support for this vehicle frame -- deliberately a separate key from the vehicle-type 'frames' above, since they're unrelated MAVLink concepts that happen to share an English name.",
