@@ -8,7 +8,83 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Instance": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_PWM": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Count": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Time": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "plane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Instance": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_PWM": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Count": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Time": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "standard_quadplane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Instance": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_PWM": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Count": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Time": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

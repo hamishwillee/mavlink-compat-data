@@ -5,10 +5,144 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "multicopter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_transmission_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_processing_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_accuracy": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Latitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Longitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Altitude": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "fixedwing": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_transmission_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_processing_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_accuracy": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Latitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Longitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Altitude": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "vtol": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_transmission_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_processing_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_accuracy": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Latitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Longitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Altitude": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_transmission_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_processing_time": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_accuracy": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Latitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Longitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Altitude": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

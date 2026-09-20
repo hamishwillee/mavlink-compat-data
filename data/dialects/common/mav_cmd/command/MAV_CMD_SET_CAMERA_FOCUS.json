@@ -8,7 +8,29 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Focus Type": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Focus Value": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Target Camera ID": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

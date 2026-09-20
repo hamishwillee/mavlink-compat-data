@@ -8,7 +8,71 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Custom Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Custom Submode": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "plane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Custom Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Custom Submode": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "standard_quadplane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Custom Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Custom Submode": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

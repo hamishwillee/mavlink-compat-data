@@ -8,7 +8,41 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_ROI Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_WP Index": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_ROI Index": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_MAV_ROI_WPNEXT: pitch offset from next waypoint, MAV_ROI_LOCATION: latitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

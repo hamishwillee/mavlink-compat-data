@@ -8,7 +8,29 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_device id": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_primary source": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_secondary source": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

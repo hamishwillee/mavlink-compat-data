@@ -8,7 +8,45 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1",
+          "params": {
+            "1_Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Stabilize Roll": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Stabilize Pitch": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Stabilize Yaw": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Roll Input Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Pitch Input Mode": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Yaw Input Mode": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -5,7 +5,119 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "multicopter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_Message ID": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Interval": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Req Param 3": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Req Param 4": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Req Param 5": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Req Param 6": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Response Target": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "fixedwing": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_Message ID": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Interval": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Req Param 3": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Req Param 4": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Req Param 5": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Req Param 6": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Response Target": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        },
+        "vtol": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0",
+          "params": {
+            "1_Message ID": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "2_Interval": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "3_Req Param 3": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "4_Req Param 4": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "5_Req Param 5": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "6_Req Param 6": {
+              "supported": null,
+              "basis": "unknown"
+            },
+            "7_Response Target": {
+              "supported": null,
+              "basis": "unknown"
+            }
+          }
+        }
+      }
     },
     "ardupilot": {
       "frames": {}
