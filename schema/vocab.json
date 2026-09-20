@@ -4,6 +4,6 @@
     "px4": ["multicopter", "fixedwing", "vtol", "rover", "submarine", "airship"],
     "ardupilot": ["copter", "plane", "standard_quadplane", "rover", "sub", "tracker", "blimp"]
   },
-  "basis": ["unknown", "code-inspection", "testing", "verified"],
+  "basis": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"],
   "dialects": ["minimal", "common", "standard"]
 }

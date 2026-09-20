@@ -41,7 +41,7 @@ Messages and enums use a `default`+variant-override shape:
 - `supported`: `false` (not implemented) | `null` (not yet evaluated) | `{ added_version, deprecated_version?, removed_version? }`.
   - `added_version`: `true` (implemented, version unknown) | `"main"` (dev branch only) | `"X.Y.Z"`.
   - Optional fields are **omitted**, not `null`, when unset.
-- `basis`: `"unknown" | "code-inspection" | "testing" | "verified"`.
+- `basis`: `"unknown" | "code-inspection" | "testing" | "verified" | "autopilot_docs"` (`autopilot_docs`: stated by the stack's own documentation; no version evidence).
 - `last_checked_version`: optional, `"X.Y.Z"` only (never `"main"` — it must be a fixed baseline to check staleness against future releases) — the version a `false` (or other) statement was last confirmed against. Distinct from `added_version`.
 - `notes`, `impl_url`: optional. `notes` is a single terse fragment or an array of them (one per distinct fact) — see CLAUDE.md for the terseness rule. `impl_url` is a tracking-issue or PR link.
 - A field/value only carries `compatibility` for a `(stack, variant)` where the parent entity is confirmed implemented there — otherwise it's omitted entirely, not `unknown`.

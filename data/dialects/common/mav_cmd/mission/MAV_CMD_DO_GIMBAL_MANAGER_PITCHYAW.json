@@ -8,7 +8,29 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs",
+          "notes": "Camera/gimbal must be enabled"
+        },
+        "plane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs",
+          "notes": "Camera/gimbal must be enabled"
+        },
+        "standard_quadplane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs",
+          "notes": "Camera/gimbal must be enabled"
+        }
+      }
     }
   }
 }

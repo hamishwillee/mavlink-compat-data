@@ -8,7 +8,26 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs"
+        },
+        "plane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs"
+        },
+        "standard_quadplane": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs"
+        }
+      }
     }
   }
 }
