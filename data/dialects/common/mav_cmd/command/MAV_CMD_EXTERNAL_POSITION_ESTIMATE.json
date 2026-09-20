@@ -5,10 +5,40 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "multicopter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        },
+        "fixedwing": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        },
+        "vtol": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        }
+      }
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "4.7.1"
+        }
+      }
     }
   }
 }

@@ -5,7 +5,23 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "multicopter": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "1.17.0"
+        },
+        "fixedwing": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "1.17.0"
+        },
+        "vtol": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "1.17.0"
+        }
+      }
     },
     "ardupilot": {
       "frames": {}

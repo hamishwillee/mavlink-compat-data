@@ -5,10 +5,34 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "vtol": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        }
+      }
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "4.7.1"
+        },
+        "plane": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "4.7.1"
+        },
+        "standard_quadplane": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "4.7.1"
+        }
+      }
     }
   }
 }
