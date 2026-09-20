@@ -42,9 +42,11 @@
           "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
         },
         "copter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": {
+            "added_version": true
+          },
+          "basis": "autopilot_docs",
+          "notes": "UNSUPPORTED to COMMAND_INT and COMMAND_LONG in 4.7.1 testing"
         }
       }
     }
