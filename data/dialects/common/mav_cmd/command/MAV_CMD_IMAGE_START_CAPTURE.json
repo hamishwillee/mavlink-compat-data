@@ -30,25 +30,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Target Camera ID": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Interval": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Total Images": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Sequence Number": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

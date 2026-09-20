@@ -11,51 +11,21 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "1.17.0",
-          "params": {
-            "1_First Item": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Last Item": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "1.17.0"
         },
         "fixedwing": {
           "supported": {
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "1.17.0",
-          "params": {
-            "1_First Item": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Last Item": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "1.17.0"
         },
         "vtol": {
           "supported": {
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "1.17.0",
-          "params": {
-            "1_First Item": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Last Item": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "1.17.0"
         }
       }
     },

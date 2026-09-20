@@ -30,17 +30,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Number": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Reset Mission": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

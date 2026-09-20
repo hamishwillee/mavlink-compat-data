@@ -30,37 +30,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Continue": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "5_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "6_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "7_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

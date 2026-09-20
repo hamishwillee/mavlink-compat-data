@@ -11,33 +11,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "1.17.0",
-          "params": {
-            "1_Major Radius": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Minor Radius": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Orientation": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "5_Latitude/X": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "6_Longitude/Y": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "7_Altitude/Z": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "1.17.0"
         }
       }
     },

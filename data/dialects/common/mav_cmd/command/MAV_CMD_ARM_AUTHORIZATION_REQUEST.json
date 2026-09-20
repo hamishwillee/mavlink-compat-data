@@ -3,34 +3,13 @@
   "name": "MAV_CMD_ARM_AUTHORIZATION_REQUEST",
   "dialect": "common",
   "context": "command",
+  "notes": "Not testable: emitted by flight stack only",
   "compatibility": {
     "px4": {
-      "frames": {
-        "multicopter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
-        },
-        "fixedwing": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
-        },
-        "vtol": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
-        }
-      }
+      "frames": {}
     },
     "ardupilot": {
-      "frames": {
-        "copter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
-        }
-      }
+      "frames": {}
     }
   }
 }

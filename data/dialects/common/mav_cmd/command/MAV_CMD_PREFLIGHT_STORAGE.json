@@ -14,25 +14,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Parameter Storage": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Logging Rate": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Reserved": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }
