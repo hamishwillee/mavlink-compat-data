@@ -212,6 +212,8 @@ def generate(cache_dir: Path | None, dry_run: bool) -> None:
             else:
                 skipped += 1
             for context in ("mission", "command"):
+                if not cmd.supports_context(context):
+                    continue  # upstream doesn't allow this MAV_CMD in this context
                 path = base / "mav_cmd" / context / f"{cmd.name}.json"
                 if write_if_missing(path, command_stub(cmd, context, stacks), dry_run):
                     created += 1
