@@ -3,6 +3,7 @@
   "name": "MAV_CMD_ARM_AUTHORIZATION_REQUEST",
   "dialect": "common",
   "context": "command",
+  "notes": "Not testable: emitted by flight stack only",
   "compatibility": {
     "px4": {
       "frames": {}
