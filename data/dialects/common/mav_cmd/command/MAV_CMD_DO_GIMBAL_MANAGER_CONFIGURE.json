@@ -14,29 +14,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_sysid primary control": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_compid primary control": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_sysid secondary control": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_compid secondary control": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "7_Gimbal device ID": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

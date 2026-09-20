@@ -14,37 +14,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "5_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "6_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "7_Reserved (set to 0)": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

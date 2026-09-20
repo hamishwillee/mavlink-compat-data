@@ -14,17 +14,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Stream ID": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Target Camera ID": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

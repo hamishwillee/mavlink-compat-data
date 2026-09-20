@@ -14,33 +14,7 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Pitch angle": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Yaw angle": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Pitch rate": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "4_Yaw rate": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "5_Gimbal manager flags": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "7_Gimbal device ID": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }

@@ -14,63 +14,21 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Speed Type": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Speed": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Throttle": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         },
         "plane": {
           "supported": {
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Speed Type": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Speed": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Throttle": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         },
         "standard_quadplane": {
           "supported": {
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1",
-          "params": {
-            "1_Speed Type": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "2_Speed": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "3_Throttle": {
-              "supported": null,
-              "basis": "unknown"
-            }
-          }
+          "earliest_checked_version": "4.7.1"
         }
       }
     }
