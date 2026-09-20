@@ -7,38 +7,38 @@
     "px4": {
       "frames": {
         "multicopter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SIH sim; may need payload hardware"
         },
         "fixedwing": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SIH sim; may need payload hardware"
         },
         "vtol": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SIH sim; may need payload hardware"
         }
       }
     },
     "ardupilot": {
       "frames": {
         "copter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SITL sim; may need payload hardware"
         },
         "plane": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SITL sim; may need payload hardware"
         },
         "standard_quadplane": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SITL sim; may need payload hardware"
         }
       }
     }
