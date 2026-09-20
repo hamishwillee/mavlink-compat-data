@@ -5,10 +5,48 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "multicopter": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        },
+        "fixedwing": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        },
+        "vtol": {
+          "supported": {
+            "added_version": true
+          },
+          "basis": "testing",
+          "earliest_checked_version": "1.17.0"
+        }
+      }
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        },
+        "plane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        },
+        "standard_quadplane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        }
+      }
     }
   }
 }
