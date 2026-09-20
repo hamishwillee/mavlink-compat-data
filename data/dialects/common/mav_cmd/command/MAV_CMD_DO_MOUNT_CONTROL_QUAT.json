@@ -10,9 +10,9 @@
     "ardupilot": {
       "frames": {
         "copter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SITL sim; may need gimbal"
         }
       }
     }
