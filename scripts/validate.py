@@ -199,7 +199,7 @@ def _check_statement_or_history(statement_or_history, stack: str, versions: dict
         if basis is None:
             if basis_required:
                 errors.append(f"{where}: unknown basis {basis!r}")
-        elif basis not in ("unknown", "code-inspection", "testing", "verified"):
+        elif basis not in ("unknown", "code-inspection", "testing", "verified", "autopilot_docs"):
             errors.append(f"{where}: unknown basis {basis!r}")
         impl_url = statement.get("impl_url")
         if impl_url is not None and not URL_PATTERN.match(impl_url):
@@ -233,7 +233,7 @@ def check_param_statement(key: str, statement_or_history, stack: str, versions: 
 
 
 def check_frame_status(frame: dict, stack: str, versions: dict, errors: list[str], where: str, valid_param_keys: set[str], all_param_keys: set[str], mav_frame_names: set[str]) -> None:
-    if frame.get("basis") not in ("unknown", "code-inspection", "testing", "verified"):
+    if frame.get("basis") not in ("unknown", "code-inspection", "testing", "verified", "autopilot_docs"):
         errors.append(f"{where}: unknown basis {frame.get('basis')!r}")
     impl_url = frame.get("impl_url")
     if impl_url is not None and not URL_PATTERN.match(impl_url):

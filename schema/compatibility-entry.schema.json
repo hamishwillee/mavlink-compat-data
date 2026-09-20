@@ -54,7 +54,7 @@
       "properties": {
         "supported": { "$ref": "#/$defs/supported" },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "enum": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"]
         },
         "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
@@ -82,7 +82,7 @@
       "properties": {
         "supported": { "$ref": "#/$defs/supported" },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "enum": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"]
         },
         "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
@@ -129,7 +129,7 @@
       "properties": {
         "supported": { "$ref": "#/$defs/paramSupported" },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "enum": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"]
         },
         "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
@@ -169,7 +169,7 @@
       "properties": {
         "supported": { "$ref": "#/$defs/supported" },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "enum": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"]
         },
         "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
@@ -220,7 +220,7 @@
       "properties": {
         "frames": { "$ref": "#/$defs/commandFrames" },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "enum": ["unknown", "code-inspection", "testing", "verified", "autopilot_docs"]
         },
         "notes": { "$ref": "#/$defs/notes" },
         "impl_url": {
