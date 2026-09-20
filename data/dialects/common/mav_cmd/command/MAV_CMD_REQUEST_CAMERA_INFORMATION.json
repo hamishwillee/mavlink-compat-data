@@ -8,7 +8,13 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "copter": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "UNSUPPORTED in SITL sim; may need camera"
+        }
+      }
     }
   }
 }

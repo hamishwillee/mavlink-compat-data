@@ -37,6 +37,16 @@
               "basis": "unknown"
             }
           }
+        },
+        "plane": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "4.7.1"
+        },
+        "standard_quadplane": {
+          "supported": false,
+          "basis": "testing",
+          "last_checked_version": "4.7.1"
         }
       }
     }
