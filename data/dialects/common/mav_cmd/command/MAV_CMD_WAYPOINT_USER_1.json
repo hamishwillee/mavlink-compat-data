@@ -8,7 +8,18 @@
       "frames": {}
     },
     "ardupilot": {
-      "frames": {}
+      "frames": {
+        "plane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        },
+        "standard_quadplane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        }
+      }
     }
   }
 }

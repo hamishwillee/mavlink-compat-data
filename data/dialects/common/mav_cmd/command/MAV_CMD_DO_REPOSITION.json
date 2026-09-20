@@ -14,7 +14,18 @@
             "added_version": true
           },
           "basis": "testing",
-          "earliest_checked_version": "4.7.1"
+          "earliest_checked_version": "4.7.1",
+          "notes": "COMMAND_INT only; COMMAND_LONG UNSUPPORTED"
+        },
+        "plane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
+        },
+        "standard_quadplane": {
+          "supported": null,
+          "basis": "unknown",
+          "notes": "No ACK to COMMAND_INT or COMMAND_LONG"
         }
       }
     }
