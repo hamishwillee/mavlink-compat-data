@@ -50,6 +50,15 @@ class Command:
     name: str
     value: int
     params: list[Param] = field(default_factory=list)
+    # Usage-context attributes on the upstream <entry>: where this MAV_CMD may be used.
+    mission: bool = False
+    command: bool = False
+    frame: bool = False
+    rally: bool = False
+
+    def supports_context(self, context: str) -> bool:
+        """True iff upstream marks this command usable as a mission item / direct command."""
+        return {"mission": self.mission, "command": self.command}[context]
 
 
 @dataclass
@@ -119,6 +128,10 @@ def parse_dialect(name: str, xml_text: str) -> Dialect:
                         name=entry_el.get("name"),
                         value=int(entry_el.get("value")),
                         params=params,
+                        mission=entry_el.get("mission") == "true",
+                        command=entry_el.get("command") == "true",
+                        frame=entry_el.get("frame") == "true",
+                        rally=entry_el.get("rally") == "true",
                     )
                 )
             continue

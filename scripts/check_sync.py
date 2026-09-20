@@ -15,6 +15,11 @@ Three categories of drift:
                      entirely otherwise, per CLAUDE.md's sub-entity gating
                      rule) — every existing compatibility block is left
                      untouched.
+  - context_removed: a command's mission/ or command/ compatibility doc exists,
+                     but upstream no longer marks the MAV_CMD usable in that
+                     context (mission="true"/command="true" attribute).
+                     Auto-fixed with --fix by deleting that context file;
+                     the shared definitions/ file is kept.
   - removed/removed_entity: a field/value/param/entity that used to exist
                      upstream no longer does. Never auto-fixed or deleted —
                      flagged for a human to decide (record as removed, or
@@ -151,7 +156,15 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
 
     for cmd in commands:
         def_path = def_base / f"{cmd.name}.json"
-        context_paths = {ctx: base / f"{cmd.name}.json" for ctx, base in context_bases.items()}
+        all_context_paths = {ctx: base / f"{cmd.name}.json" for ctx, base in context_bases.items()}
+
+        # Context docs only exist for contexts upstream allows this command in.
+        for ctx, p in all_context_paths.items():
+            if not cmd.supports_context(ctx) and p.exists():
+                drifts.append(Drift("context_removed", p, f"command {cmd.name} is not marked {ctx}=\"true\" upstream", fixed=fix))
+                if fix:
+                    p.unlink()
+        context_paths = {ctx: p for ctx, p in all_context_paths.items() if cmd.supports_context(ctx)}
 
         missing = [p for p in (def_path, *context_paths.values()) if not p.exists()]
         if missing:
@@ -249,6 +262,7 @@ CATEGORY_LABELS = {
     "new_entity": "New entities upstream (run generate_stubs.py to add stubs)",
     "addition": "New fields/params/values on existing entities",
     "rename": "Renamed fields/params/values (e.g. a reserved param gaining a real name)",
+    "context_removed": "Command docs for contexts upstream no longer allows (mission/command attribute)",
     "removed": "Fields/params/values no longer present upstream (needs manual review)",
     "removed_entity": "Entities no longer present upstream (needs manual review)",
 }
@@ -261,7 +275,7 @@ def report(drifts: list[Drift]) -> None:
     by_category: dict[str, list[Drift]] = {}
     for d in drifts:
         by_category.setdefault(d.category, []).append(d)
-    for cat in ("new_entity", "addition", "rename", "removed", "removed_entity"):
+    for cat in ("new_entity", "addition", "rename", "context_removed", "removed", "removed_entity"):
         items = by_category.get(cat)
         if not items:
             continue
@@ -279,7 +293,7 @@ def main() -> None:
     parser.add_argument(
         "--fix",
         action="store_true",
-        help="Apply safe fixes (renames, additions within existing entities). Never deletes files or touches compatibility data.",
+        help="Apply safe fixes (renames, additions within existing entities). Deletes only mission/command docs for contexts upstream doesn't allow; never touches other compatibility data.",
     )
     args = parser.parse_args()
 

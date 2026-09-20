@@ -93,7 +93,7 @@ python scripts/validate.py              # validate data/ — run before every PR
 python scripts/check_sync.py [--fix]    # report (or fix) drift vs upstream MAVLink XML
 ```
 
-`check_sync.py` catches structural drift against the upstream MAVLink XML — e.g. a command param that was `"Empty"`/reserved gaining a real name. With `--fix` it patches identity fields (`name`/`enumRef`) or appends new fields/params/values in place (with fresh `compatibility` only for stacks the parent already confirms implemented, per the gating rule above), never touching existing `compatibility` data, and never deletes anything (removals are only ever reported). Runs automatically on a weekly schedule via `.github/workflows/sync-check.yml`, opening a PR with any fixes.
+`check_sync.py` catches structural drift against the upstream MAVLink XML — e.g. a command param that was `"Empty"`/reserved gaining a real name. With `--fix` it patches identity fields (`name`/`enumRef`) or appends new fields/params/values in place (with fresh `compatibility` only for stacks the parent already confirms implemented, per the gating rule above), never touching existing `compatibility` data. The one deletion it performs is a command's `mission/` or `command/` doc when upstream's `mission="true"`/`command="true"` attribute no longer allows that context; other removals are only ever reported. `generate_stubs.py` only creates context docs for contexts upstream allows. Runs automatically on a weekly schedule via `.github/workflows/sync-check.yml`, opening a PR with any fixes.
 
 ## Contributing
 
