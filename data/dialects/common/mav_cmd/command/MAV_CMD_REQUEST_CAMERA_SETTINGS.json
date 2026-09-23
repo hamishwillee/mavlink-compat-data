@@ -7,28 +7,36 @@
     "px4": {
       "frames": {
         "multicopter": {
-          "supported": null,
-          "basis": "unknown",
-          "notes": "UNSUPPORTED in SIH sim; may need camera"
+          "supported": {
+            "version_added": null,
+            "basis": "unknown",
+            "notes": "UNSUPPORTED in SIH sim; may need camera"
+          }
         },
         "fixedwing": {
-          "supported": null,
-          "basis": "unknown",
-          "notes": "UNSUPPORTED in SIH sim; may need camera"
+          "supported": {
+            "version_added": null,
+            "basis": "unknown",
+            "notes": "UNSUPPORTED in SIH sim; may need camera"
+          }
         },
         "vtol": {
-          "supported": null,
-          "basis": "unknown",
-          "notes": "UNSUPPORTED in SIH sim; may need camera"
+          "supported": {
+            "version_added": null,
+            "basis": "unknown",
+            "notes": "UNSUPPORTED in SIH sim; may need camera"
+          }
         }
       }
     },
     "ardupilot": {
       "frames": {
         "copter": {
-          "supported": null,
-          "basis": "unknown",
-          "notes": "UNSUPPORTED in SITL sim; may need camera"
+          "supported": {
+            "version_added": null,
+            "basis": "unknown",
+            "notes": "UNSUPPORTED in SITL sim; may need camera"
+          }
         }
       }
     }

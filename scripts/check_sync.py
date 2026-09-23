@@ -10,11 +10,11 @@ Three categories of drift:
                      entity (e.g. a reserved param gaining a real name).
                      Safe to auto-fix with --fix: only the identity field
                      (name/enumRef) is patched, or the new sub-entity is
-                     appended with fresh "unknown" compatibility for whichever
-                     stacks the parent already confirms implemented (omitted
-                     entirely otherwise, per CLAUDE.md's sub-entity gating
-                     rule) — every existing compatibility block is left
-                     untouched.
+                     appended with no compatibility (a command param only in
+                     the shared definitions doc) — an absent field/value/param
+                     compatibility entry already means unknown. Every
+                     existing compatibility block is left untouched (a
+                     renamed param's key is rewritten, its data kept).
   - context_removed: a command's mission/ or command/ compatibility doc exists,
                      but upstream no longer marks the MAV_CMD usable in that
                      context (mission="true"/command="true" attribute).
@@ -42,9 +42,6 @@ import mavlink_xml
 from generate_stubs import (
     DATA_DIR,
     REPO_ROOT,
-    gated_command_param_stub_targets,
-    gated_sub_compatibility,
-    load_vocab,
     rename_context_param_references,
     rename_definition_param_key,
 )
@@ -59,14 +56,14 @@ class Drift:
 
 
 def load_json(path: Path) -> dict:
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def save_json(path: Path, doc: dict) -> None:
-    path.write_text(json.dumps(doc, indent=2, sort_keys=False) + "\n")
+    path.write_text(json.dumps(doc, indent=2, sort_keys=False, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def check_messages(dialect_name: str, messages, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+def check_messages(dialect_name: str, messages, fix: bool, drifts: list[Drift]) -> None:
     base = DATA_DIR / dialect_name / "messages"
     for msg in messages:
         path = base / f"{msg.name}.json"
@@ -82,11 +79,7 @@ def check_messages(dialect_name: str, messages, stacks: list[str], fix: bool, dr
             if i >= len(stored_fields):
                 drifts.append(Drift("addition", path, f"fields[{i}] {f.name!r} present upstream, missing locally", fixed=fix))
                 if fix:
-                    new_field = {"name": f.name, "enumRef": f.enum_ref}
-                    sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
-                    if sub_compat:
-                        new_field["compatibility"] = sub_compat
-                    stored_fields.append(new_field)
+                    stored_fields.append({"name": f.name, "enumRef": f.enum_ref})
                     changed = True
                 continue
             sf = stored_fields[i]
@@ -109,7 +102,7 @@ def check_messages(dialect_name: str, messages, stacks: list[str], fix: bool, dr
             save_json(path, doc)
 
 
-def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+def check_enums(dialect_name: str, enums, fix: bool, drifts: list[Drift]) -> None:
     base = DATA_DIR / dialect_name / "enums"
     for enum in enums:
         path = base / f"{enum.name}.json"
@@ -127,11 +120,7 @@ def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: 
             if val not in stored_by_value:
                 drifts.append(Drift("addition", path, f"values[value={val}] {u.name!r} present upstream, missing locally", fixed=fix))
                 if fix:
-                    new_value = {"name": u.name, "value": u.value}
-                    sub_compat = gated_sub_compatibility(doc.get("compatibility", {}), stacks)
-                    if sub_compat:
-                        new_value["compatibility"] = sub_compat
-                    stored_values.append(new_value)
+                    stored_values.append({"name": u.name, "value": u.value})
                     changed = True
             elif stored_by_value[val].get("name") != u.name:
                 sv = stored_by_value[val]
@@ -150,7 +139,7 @@ def check_enums(dialect_name: str, enums, stacks: list[str], fix: bool, drifts: 
             save_json(path, doc)
 
 
-def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) -> None:
+def check_commands(commands, fix: bool, drifts: list[Drift]) -> None:
     def_base = DATA_DIR / "common" / "mav_cmd" / "definitions"
     context_bases = {ctx: DATA_DIR / "common" / "mav_cmd" / ctx for ctx in ("mission", "command")}
 
@@ -176,9 +165,10 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
         context_docs = {ctx: load_json(p) for ctx, p in context_paths.items()}
 
         # Params identity lives once in the shared definitions doc; a rename
-        # or addition there must also propagate into whichever of the two
-        # context docs' compatibility.<stack>.frames.<frame> blocks already
-        # reference that param, since both share the same key format.
+        # there must also propagate into whichever of the two context docs'
+        # compatibility.<stack>.frames.<frame>.params maps already reference
+        # that param, since both share the same key format. An addition needs
+        # nothing in the context docs: an absent param already means unknown.
         params = def_doc.get("params", {})
         stored_by_index: dict[int, tuple[str, str]] = {}
         for key in params:
@@ -196,14 +186,6 @@ def check_commands(commands, stacks: list[str], fix: bool, drifts: list[Drift]) 
                     new_key = f"{u.index}_{u.name}"
                     params[new_key] = {"enumRef": u.enum_ref}
                     def_changed = True
-                    if u.name != "Empty":
-                        # A reserved/undocumented slot never carries compatibility,
-                        # regardless of parent status — see CLAUDE.md.
-                        for ctx, doc in context_docs.items():
-                            for stack, frame_name in gated_command_param_stub_targets(doc.get("compatibility", {})):
-                                frame_status = doc["compatibility"][stack]["frames"][frame_name]
-                                frame_status.setdefault("params", {})[new_key] = {"supported": None, "basis": "unknown"}
-                                context_changed[ctx] = True
                     stored_by_index[idx] = (new_key, u.name)
                 continue
             sk, sname = stored_by_index[idx]
@@ -297,16 +279,14 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    vocab = load_vocab()
-    stacks = vocab["stacks"]
     dialects = mavlink_xml.load_all_dialects(args.cache_dir)
 
     drifts: list[Drift] = []
     for dialect_name, dialect in dialects.items():
-        check_messages(dialect_name, dialect.messages, stacks, args.fix, drifts)
-        check_enums(dialect_name, dialect.enums, stacks, args.fix, drifts)
+        check_messages(dialect_name, dialect.messages, args.fix, drifts)
+        check_enums(dialect_name, dialect.enums, args.fix, drifts)
         if dialect_name == "common":
-            check_commands(dialect.commands, stacks, args.fix, drifts)
+            check_commands(dialect.commands, args.fix, drifts)
     check_removed_entities(dialects, drifts)
 
     report(drifts)

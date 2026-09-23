@@ -10,14 +10,18 @@
     "ardupilot": {
       "frames": {
         "plane": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "4.7.1"
+          }
         },
         "standard_quadplane": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "4.7.1"
+          }
         }
       }
     }

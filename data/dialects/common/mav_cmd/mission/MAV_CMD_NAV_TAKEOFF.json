@@ -8,80 +8,88 @@
       "frames": {
         "multicopter": {
           "supported": {
-            "added_version": true
+            "version_added": "≤1.17.0",
+            "basis": "verified"
           },
-          "basis": "verified",
-          "earliest_checked_version": "1.17.0",
+          "accept_nan_or_int32max": {
+            "version_added": "≤1.17.0"
+          },
+          "nacks_on_non_sentinel_value": {
+            "version_added": false,
+            "last_checked_version": "1.17.0"
+          },
           "params": {
             "1_Pitch": {
-              "supported": false,
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
             },
             "2_Empty": {
-              "supported": "not-applicable",
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": false
+              "supported": {
+                "version_added": "not-applicable"
+              }
             },
             "3_Flags": {
-              "supported": false,
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": true
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              },
+              "nacks_on_non_sentinel_value": {
+                "version_added": "≤1.17.0"
+              }
             },
             "4_Yaw": {
-              "supported": false,
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
             },
             "5_Latitude": {
-              "supported": false,
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": false,
-              "notes": "Takes off at current position to specified altitude"
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0",
+                "notes": "Takes off at current position to specified altitude"
+              }
             },
             "6_Longitude": {
-              "supported": false,
-              "accept_nan_or_int32max": true,
-              "nacks_on_non_sentinel_value": false,
-              "notes": "Takes off at current position to specified altitude"
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0",
+                "notes": "Takes off at current position to specified altitude"
+              }
             },
             "7_Altitude": {
               "supported": {
-                "added_version": true,
-                "accept_nan_or_int32max": true
+                "version_added": "≤1.17.0"
               }
             }
           }
         },
         "fixedwing": {
           "supported": {
-            "added_version": true
+            "version_added": "≤1.17.0",
+            "basis": "verified"
           },
-          "basis": "verified",
-          "earliest_checked_version": "1.17.0",
           "params": {
             "1_Pitch": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
             },
             "3_Flags": {
-              "supported": false,
-              "nacks_on_non_sentinel_value": true
-            },
-            "4_Yaw": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "5_Latitude": {
-              "supported": null,
-              "basis": "unknown"
-            },
-            "6_Longitude": {
-              "supported": null,
-              "basis": "unknown"
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              },
+              "nacks_on_non_sentinel_value": {
+                "version_added": "≤1.17.0"
+              }
             },
             "7_Altitude": {
               "supported": {
-                "added_version": true
+                "version_added": "≤1.17.0"
               }
             }
           }
@@ -92,81 +100,116 @@
       "frames": {
         "copter": {
           "supported": {
-            "added_version": true
+            "version_added": "≤4.7.1",
+            "basis": "verified"
           },
-          "basis": "verified",
-          "earliest_checked_version": "4.7.1",
           "params": {
             "1_Pitch": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "2_Empty": {
-              "supported": "not-applicable",
-              "accept_nan_or_int32max": false
+              "supported": {
+                "version_added": "not-applicable"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "3_Flags": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "4_Yaw": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "5_Latitude": {
               "supported": {
-                "added_version": true,
-                "accept_nan_or_int32max": false
+                "version_added": "≤4.7.1"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
               }
             },
             "6_Longitude": {
               "supported": {
-                "added_version": true,
-                "accept_nan_or_int32max": false
+                "version_added": "≤4.7.1"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
               }
             },
             "7_Altitude": {
               "supported": {
-                "added_version": true
+                "version_added": "≤4.7.1"
               }
             }
           }
         },
         "plane": {
           "supported": {
-            "added_version": true
+            "version_added": "≤4.7.1",
+            "basis": "verified"
           },
-          "basis": "verified",
-          "earliest_checked_version": "4.7.1",
           "params": {
             "1_Pitch": {
               "supported": {
-                "added_version": true
-              },
-              "notes": "Used as climb-out minimum pitch"
+                "version_added": "≤4.7.1",
+                "notes": "Used as climb-out minimum pitch"
+              }
             },
             "2_Empty": {
-              "supported": "not-applicable",
-              "accept_nan_or_int32max": false
+              "supported": {
+                "version_added": "not-applicable"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "3_Flags": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "4_Yaw": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
+              }
             },
             "5_Latitude": {
               "supported": {
-                "added_version": true,
-                "accept_nan_or_int32max": false
+                "version_added": "≤4.7.1"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
               }
             },
             "6_Longitude": {
               "supported": {
-                "added_version": true,
-                "accept_nan_or_int32max": false
+                "version_added": "≤4.7.1"
+              },
+              "accept_nan_or_int32max": {
+                "version_added": false,
+                "last_checked_version": "4.7.1"
               }
             },
             "7_Altitude": {
               "supported": {
-                "added_version": true
+                "version_added": "≤4.7.1"
               }
             }
           }

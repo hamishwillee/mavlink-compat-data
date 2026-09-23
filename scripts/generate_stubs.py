@@ -25,59 +25,17 @@ def load_vocab() -> dict:
     return json.loads((SCHEMA_DIR / "vocab.json").read_text())
 
 
+UNKNOWN_STATEMENT = {"version_added": None, "basis": "unknown"}
+
+
 def default_compatibility(stacks: list[str]) -> dict:
-    return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks}
-
-
-def _is_implemented(statement) -> bool:
-    """True iff a support-statement (or the last entry of a history array) is
-    a confirmed-implemented object, as opposed to false/null/not-applicable."""
-    if isinstance(statement, list):
-        statement = statement[-1] if statement else None
-    return isinstance(statement, dict) and isinstance(statement.get("supported"), dict)
-
-
-def is_stack_implemented(entity_compat: dict, stack: str) -> bool:
-    """True iff entity_compat's *default* variant for this stack is confirmed
-    implemented. Used to decide whether a sub-entity (field/param/value) may
-    carry its own compatibility for this stack — see CLAUDE.md's sub-entity
-    gating rule. Only looks at "default"; deliberate variant overrides are a
-    human judgment call made when filling in the data, not something the
-    generators infer."""
-    return _is_implemented((entity_compat.get(stack) or {}).get("default"))
-
-
-def gated_sub_compatibility(entity_compat: dict, stacks: list[str]) -> dict:
-    """default_compatibility(), filtered to stacks the parent already confirms
-    implemented. A sub-entity gets no entry (and no "compatibility" key at
-    all, if this comes back empty) for a stack the parent hasn't confirmed —
-    there's nothing to evaluate yet."""
-    return {stack: {"default": {"supported": None, "basis": "unknown"}} for stack in stacks if is_stack_implemented(entity_compat, stack)}
+    return {stack: {"default": dict(UNKNOWN_STATEMENT)} for stack in stacks}
 
 
 def command_default_compatibility(stacks: list[str]) -> dict:
     """Every command stack starts fully untested -- frames: {} -- since there's
     no per-frame FrameStatus to write yet for a brand-new command."""
     return {stack: {"frames": {}} for stack in stacks}
-
-
-def is_frame_implemented(frame_status: dict | None) -> bool:
-    return isinstance((frame_status or {}).get("supported"), dict)
-
-
-def gated_command_param_stub_targets(entity_compat: dict) -> list[tuple[str, str]]:
-    """(stack, frame_name) pairs where the frame is already confirmed
-    implemented -- i.e. where a newly-discovered param must be stubbed into
-    frames.<frame>.params. A stack with frames == {} or frames == False
-    contributes nothing (no per-frame breakdown to attach to); a frame not yet
-    mentioned under an object 'frames' contributes nothing either — absence
-    always means untested, never inherited."""
-    targets = []
-    for stack, stack_status in (entity_compat or {}).items():
-        frames = (stack_status or {}).get("frames")
-        if isinstance(frames, dict):
-            targets += [(stack, f) for f, fs in frames.items() if is_frame_implemented(fs)]
-    return targets
 
 
 def rename_definition_param_key(definition_doc: dict, index: int, old_name: str, new_name: str) -> bool:
@@ -177,7 +135,7 @@ def write_if_missing(path: Path, doc: dict, dry_run: bool) -> bool:
         return False
     if not dry_run:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(doc, indent=2, sort_keys=False) + "\n")
+        path.write_text(json.dumps(doc, indent=2, sort_keys=False, ensure_ascii=False) + "\n", encoding="utf-8")
     return True
 
 
