@@ -8,36 +8,42 @@
       "frames": {
         "multicopter": {
           "supported": {
-            "added_version": "1.11.0"
+            "version_added": "1.11.0",
+            "basis": "testing",
+            "last_checked_version": "1.17.0",
+            "notes": [
+              "1.11.0 confirmed via code-inspection only, not live-tested",
+              "Live-testable from 1.14.0 (no sihsim SITL before that)"
+            ]
           },
-          "basis": "testing",
-          "last_checked_version": "1.17.0",
-          "notes": [
-            "1.11.0 confirmed via code-inspection only, not live-tested",
-            "Live-testable from 1.14.0 (no sihsim SITL before that)"
-          ],
           "params": {
             "1_Geometry": {
               "supported": {
-                "added_version": "1.11.0"
+                "version_added": "1.11.0"
               }
             },
             "2_UseAltitude": {
-              "supported": false
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
             },
             "5_Latitude": {
               "supported": {
-                "added_version": "1.11.0"
+                "version_added": "1.11.0"
               }
             },
             "6_Longitude": {
               "supported": {
-                "added_version": "1.11.0"
+                "version_added": "1.11.0"
               }
             },
             "7_Altitude": {
-              "supported": false,
-              "notes": "Ignored (UseAltitude always false)"
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0",
+                "notes": "Ignored (UseAltitude always false)"
+              }
             }
           }
         }

@@ -8,33 +8,32 @@
       "frames": {
         "multicopter": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "1.17.0"
+            "version_added": "≤1.17.0",
+            "basis": "testing"
+          }
         },
         "fixedwing": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "1.17.0"
+            "version_added": "≤1.17.0",
+            "basis": "testing"
+          }
         },
         "vtol": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "1.17.0"
+            "version_added": "≤1.17.0",
+            "basis": "testing"
+          }
         }
       }
     },
     "ardupilot": {
       "frames": {
         "copter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "4.7.1"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "4.7.1"
+          }
         }
       }
     }

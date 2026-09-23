@@ -7,19 +7,25 @@
     "px4": {
       "frames": {
         "multicopter": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "1.17.0"
+          }
         },
         "fixedwing": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "1.17.0"
+          }
         },
         "vtol": {
-          "supported": false,
-          "basis": "testing",
-          "last_checked_version": "1.17.0"
+          "supported": {
+            "version_added": false,
+            "basis": "testing",
+            "last_checked_version": "1.17.0"
+          }
         }
       }
     },
@@ -27,24 +33,21 @@
       "frames": {
         "copter": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "4.7.1"
+            "version_added": "≤4.7.1",
+            "basis": "testing"
+          }
         },
         "plane": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "4.7.1"
+            "version_added": "≤4.7.1",
+            "basis": "testing"
+          }
         },
         "standard_quadplane": {
           "supported": {
-            "added_version": true
-          },
-          "basis": "testing",
-          "earliest_checked_version": "4.7.1"
+            "version_added": "≤4.7.1",
+            "basis": "testing"
+          }
         }
       }
     }

@@ -4,149 +4,138 @@
   "$defs": {
     "notes": {
       "oneOf": [
-        { "type": "string", "minLength": 1 },
+        {
+          "type": "string",
+          "minLength": 1
+        },
         {
           "type": "array",
-          "items": { "type": "string", "minLength": 1 },
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
           "minItems": 1
         }
       ]
     },
-    "versionOrTrue": {
-      "oneOf": [
-        { "const": true },
-        { "const": "main" },
-        { "type": "string", "pattern": "^\\d+(\\.\\d+){0,2}$" }
+    "basis": {
+      "enum": [
+        "unknown",
+        "code-inspection",
+        "testing",
+        "verified"
       ]
+    },
+    "implUrl": {
+      "type": "string",
+      "pattern": "^https?://"
     },
     "versionOrMain": {
       "oneOf": [
-        { "const": "main" },
-        { "type": "string", "pattern": "^\\d+(\\.\\d+){0,2}$" }
+        {
+          "const": "main"
+        },
+        {
+          "type": "string",
+          "pattern": "^\\d+(\\.\\d+){0,2}$"
+        }
       ]
     },
     "releasedVersion": {
-      "description": "A specific released version only -- not 'main'. Used where the value must be a fixed baseline comparable against future releases (see last_checked_version below), unlike added_version/deprecated_version/removed_version where 'main' legitimately means 'happened on the dev branch, not yet released'.",
+      "description": "A specific released version only -- not 'main'. Used where the value must be a fixed baseline comparable against future releases (see last_checked_version below), unlike version_added/version_deprecated/version_removed where 'main' legitimately means 'happened on the dev branch, not yet released'.",
       "type": "string",
       "pattern": "^\\d+(\\.\\d+){0,2}$"
     },
-    "supported": {
+    "versionAdded": {
+      "description": "'X.Y.Z' = known first version. '≤X.Y.Z' = present as of that release, earlier releases not checked (a lower bound, mdn/browser-compat-data style). 'main' = dev branch only. false = not supported. null = not yet evaluated. 'not-applicable' = doesn't apply here (commands only -- scripts/validate.py rejects it on messages/enums).",
       "oneOf": [
-        { "const": false },
-        { "const": null },
-        { "const": "not-applicable" },
         {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["added_version"],
-          "properties": {
-            "added_version": { "$ref": "#/$defs/versionOrTrue" },
-            "deprecated_version": { "$ref": "#/$defs/versionOrMain" },
-            "removed_version": { "$ref": "#/$defs/versionOrMain" }
-          }
+          "const": false
+        },
+        {
+          "const": null
+        },
+        {
+          "const": "not-applicable"
+        },
+        {
+          "const": "main"
+        },
+        {
+          "type": "string",
+          "pattern": "^≤?\\d+(\\.\\d+){0,2}$"
         }
       ]
     },
-    "supportStatement": {
+    "subStatement": {
+      "description": "One support statement: a single version range (version_added up to version_removed, if any), plus how it was established. 'basis' is optional here -- used directly for a command frame's params, sentinel subfeatures and mav_frames.rejects_unsupported, where an omitted basis means 'same basis as the enclosing frame' (a documentation convention scripts/validate.py permits but doesn't resolve). version_deprecated/version_removed only valid when version_added is a real version; last_checked_version not valid alongside version_removed -- both enforced by scripts/validate.py.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["supported", "basis"],
+      "required": [
+        "version_added"
+      ],
       "properties": {
-        "supported": { "$ref": "#/$defs/supported" },
+        "version_added": {
+          "$ref": "#/$defs/versionAdded"
+        },
+        "version_deprecated": {
+          "$ref": "#/$defs/versionOrMain"
+        },
+        "version_removed": {
+          "$ref": "#/$defs/versionOrMain"
+        },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "$ref": "#/$defs/basis"
         },
-        "notes": { "$ref": "#/$defs/notes" },
+        "last_checked_version": {
+          "$ref": "#/$defs/releasedVersion"
+        },
+        "notes": {
+          "$ref": "#/$defs/notes"
+        },
         "impl_url": {
-          "type": "string",
-          "pattern": "^https?://"
-        },
-        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
+          "$ref": "#/$defs/implUrl"
+        }
       }
     },
-    "supportStatementOrHistory": {
+    "statement": {
+      "description": "subStatement with 'basis' required -- used for messages/enums and each command frame's own 'supported'.",
+      "allOf": [
+        {
+          "$ref": "#/$defs/subStatement"
+        },
+        {
+          "required": [
+            "basis"
+          ]
+        }
+      ]
+    },
+    "statementOrHistory": {
+      "description": "A single statement, or a history array of them (newest first, non-overlapping) for an added -> removed -> re-added timeline. In an array every entry must have a real version_added -- ordering/overlap checked by scripts/validate.py.",
       "oneOf": [
-        { "$ref": "#/$defs/supportStatement" },
+        {
+          "$ref": "#/$defs/statement"
+        },
         {
           "type": "array",
-          "items": { "$ref": "#/$defs/supportStatement" },
+          "items": {
+            "$ref": "#/$defs/statement"
+          },
           "minItems": 1
         }
       ]
     },
-    "frameSubStatement": {
-      "description": "Like supportStatement, but 'basis' is optional -- used only inside a command frame's own mav_frames.rejects_unsupported, where an omitted basis means 'same basis as the enclosing frame' (scripts/validate.py does not resolve this into a value; it's a documentation convention, not a computed fact -- see CLAUDE.md).",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["supported"],
-      "properties": {
-        "supported": { "$ref": "#/$defs/supported" },
-        "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
-        },
-        "notes": { "$ref": "#/$defs/notes" },
-        "impl_url": {
-          "type": "string",
-          "pattern": "^https?://"
-        },
-        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
-      }
-    },
-    "frameSubStatementOrHistory": {
+    "subStatementOrHistory": {
       "oneOf": [
-        { "$ref": "#/$defs/frameSubStatement" },
+        {
+          "$ref": "#/$defs/subStatement"
+        },
         {
           "type": "array",
-          "items": { "$ref": "#/$defs/frameSubStatement" },
-          "minItems": 1
-        }
-      ]
-    },
-    "paramSupported": {
-      "description": "Like 'supported', but the confirmed-implemented object form also allows accept_nan_or_int32max: does this param's sentinel value (NaN for a float-encoded param, INT32_MAX for an int32-encoded one) get accepted -- a fact about wire-level input validation, independent of whether the param's own function works.",
-      "oneOf": [
-        { "const": false },
-        { "const": null },
-        { "const": "not-applicable" },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "required": ["added_version"],
-          "properties": {
-            "added_version": { "$ref": "#/$defs/versionOrTrue" },
-            "deprecated_version": { "$ref": "#/$defs/versionOrMain" },
-            "removed_version": { "$ref": "#/$defs/versionOrMain" },
-            "accept_nan_or_int32max": { "type": "boolean" }
-          }
-        }
-      ]
-    },
-    "paramStatement": {
-      "description": "frameStatus.params.<key>'s own statement. 'supported' allows a nested accept_nan_or_int32max when it's the confirmed-implemented object form (see paramSupported); accept_nan_or_int32max and nacks_on_non_sentinel_value may ALSO appear as top-level siblings of 'supported' here, used when 'supported' is a bare scalar (false/null/'not-applicable') and there's no object to nest a peer field into. nacks_on_non_sentinel_value only makes sense when 'supported' is not the confirmed-implemented object form -- scripts/validate.py enforces this. A reserved '<index>_Empty' key is allowed here (unlike an ordinary param) specifically to carry these two sentinel facts, with 'supported' fixed to 'not-applicable' -- see CLAUDE.md.",
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["supported"],
-      "properties": {
-        "supported": { "$ref": "#/$defs/paramSupported" },
-        "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
-        },
-        "notes": { "$ref": "#/$defs/notes" },
-        "impl_url": {
-          "type": "string",
-          "pattern": "^https?://"
-        },
-        "last_checked_version": { "$ref": "#/$defs/releasedVersion" },
-        "accept_nan_or_int32max": { "type": "boolean" },
-        "nacks_on_non_sentinel_value": { "type": "boolean" }
-      }
-    },
-    "paramStatementOrHistory": {
-      "oneOf": [
-        { "$ref": "#/$defs/paramStatement" },
-        {
-          "type": "array",
-          "items": { "$ref": "#/$defs/paramStatement" },
+          "items": {
+            "$ref": "#/$defs/subStatement"
+          },
           "minItems": 1
         }
       ]
@@ -158,32 +147,55 @@
       "additionalProperties": {
         "type": "object",
         "minProperties": 1,
-        "additionalProperties": { "$ref": "#/$defs/supportStatementOrHistory" }
+        "additionalProperties": {
+          "$ref": "#/$defs/statementOrHistory"
+        }
+      }
+    },
+    "paramStatus": {
+      "description": "compatibility.<stack>.frames.<frame>.params.<key>. Absent param = unknown. A reserved '<index>_Empty' param may only use supported.version_added 'not-applicable' (optional) -- see scripts/validate.py. accept_nan_or_int32max: is this param's sentinel value (NaN for a float-encoded param, INT32_MAX for an int32-encoded one) accepted. nacks_on_non_sentinel_value: is a real (non-sentinel) value correctly rejected -- only meaningful while the param isn't supported. Either may also be set on the enclosing frame as the default for every param without its own.",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "supported": {
+          "$ref": "#/$defs/subStatementOrHistory"
+        },
+        "accept_nan_or_int32max": {
+          "$ref": "#/$defs/subStatementOrHistory"
+        },
+        "nacks_on_non_sentinel_value": {
+          "$ref": "#/$defs/subStatementOrHistory"
+        }
       }
     },
     "frameStatus": {
-      "description": "compatibility.<stack>.frames.<frame> for a command doc (context: mission/command only). No 'default' fallback -- every field here is that frame's own explicit fact.",
+      "description": "compatibility.<stack>.frames.<frame> for a command doc (context: mission/command only). No 'default' fallback between frames -- every field here is that frame's own explicit fact. params/mav_frames/sentinel subfeatures only valid once some 'supported' range is a real version -- enforced by scripts/validate.py.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["supported", "basis"],
+      "required": [
+        "supported"
+      ],
       "properties": {
-        "supported": { "$ref": "#/$defs/supported" },
-        "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+        "supported": {
+          "$ref": "#/$defs/statementOrHistory"
         },
-        "notes": { "$ref": "#/$defs/notes" },
-        "impl_url": {
-          "type": "string",
-          "pattern": "^https?://"
+        "accept_nan_or_int32max": {
+          "$ref": "#/$defs/subStatementOrHistory"
         },
-        "last_checked_version": { "$ref": "#/$defs/releasedVersion" },
-        "earliest_checked_version": { "$ref": "#/$defs/releasedVersion" },
+        "nacks_on_non_sentinel_value": {
+          "$ref": "#/$defs/subStatementOrHistory"
+        },
         "params": {
-          "description": "Keyed by '<index>_<name>' matching the command's top-level params object. An ordinary (non-Empty) param may exist here only if this frame's own 'supported' is a confirmed-implemented object -- see scripts/validate.py's check_frame_status; every such param must then appear. A reserved '<index>_Empty' key is exempt from that gating and may appear regardless (see paramStatement) purely to carry sentinel facts. A param's 'basis' is optional -- omitted means the same basis as this frame's own.",
+          "description": "Keyed by '<index>_<name>' matching the sibling definitions doc's params roster. Only the params actually evaluated appear -- an absent param is unknown.",
           "type": "object",
           "minProperties": 1,
-          "propertyNames": { "pattern": "^[1-7]_.+$" },
-          "additionalProperties": { "$ref": "#/$defs/paramStatementOrHistory" }
+          "propertyNames": {
+            "pattern": "^[1-7]_.+$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/paramStatus"
+          }
         },
         "mav_frames": {
           "description": "Coordinate-frame (MAV_FRAME) support for this vehicle frame -- deliberately a separate key from the vehicle-type 'frames' above, since they're unrelated MAVLink concepts that happen to share an English name.",
@@ -194,21 +206,33 @@
             "supported": {
               "type": "array",
               "minItems": 1,
-              "items": { "type": "string", "pattern": "^MAV_FRAME_[A-Z0-9_]*$" }
+              "items": {
+                "type": "string",
+                "pattern": "^MAV_FRAME_[A-Z0-9_]*$"
+              }
             },
-            "rejects_unsupported": { "$ref": "#/$defs/frameSubStatementOrHistory" },
-            "default_frame_command_long": { "type": "string", "pattern": "^MAV_FRAME_[A-Z0-9_]*$" }
+            "rejects_unsupported": {
+              "$ref": "#/$defs/subStatementOrHistory"
+            },
+            "default_frame_command_long": {
+              "type": "string",
+              "pattern": "^MAV_FRAME_[A-Z0-9_]*$"
+            }
           }
         }
       }
     },
     "commandFrames": {
-      "description": "compatibility.<stack>.frames for a command doc. {} = untested, nothing evaluated for any frame yet. false = confirmed unsupported on every frame (a blanket negative fact -- see sibling basis/notes/last_checked_version on the enclosing commandStackStatus). Object = per-frame breakdown keyed by a frame name from schema/vocab.json's frames list for that stack. No 'default' fallback -- every known frame is written out explicitly.",
+      "description": "compatibility.<stack>.frames for a command doc. {} = untested, nothing evaluated for any frame yet. false = confirmed unsupported on every frame (a blanket negative fact -- see sibling basis/notes/last_checked_version on the enclosing commandStackStatus). Object = per-frame breakdown keyed by a frame name from schema/vocab.json's frames list for that stack. No 'default' fallback -- absent frame = unknown.",
       "oneOf": [
-        { "const": false },
+        {
+          "const": false
+        },
         {
           "type": "object",
-          "additionalProperties": { "$ref": "#/$defs/frameStatus" }
+          "additionalProperties": {
+            "$ref": "#/$defs/frameStatus"
+          }
         }
       ]
     },
@@ -216,25 +240,34 @@
       "description": "compatibility.<stack> for a command doc. basis/notes/impl_url/last_checked_version here describe the blanket 'frames: false' case only; when frames is an object each frame carries its own -- enforced by scripts/validate.py, not this schema.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["frames"],
+      "required": [
+        "frames"
+      ],
       "properties": {
-        "frames": { "$ref": "#/$defs/commandFrames" },
+        "frames": {
+          "$ref": "#/$defs/commandFrames"
+        },
         "basis": {
-          "enum": ["unknown", "code-inspection", "testing", "verified"]
+          "$ref": "#/$defs/basis"
         },
-        "notes": { "$ref": "#/$defs/notes" },
+        "notes": {
+          "$ref": "#/$defs/notes"
+        },
         "impl_url": {
-          "type": "string",
-          "pattern": "^https?://"
+          "$ref": "#/$defs/implUrl"
         },
-        "last_checked_version": { "$ref": "#/$defs/releasedVersion" }
+        "last_checked_version": {
+          "$ref": "#/$defs/releasedVersion"
+        }
       }
     },
     "commandCompatibility": {
-      "description": "compatibility for command docs (context: mission/command). Object keyed by stack -> commandStackStatus. Distinct from 'compatibility' above, which messages/enums still use (variant-keyed default+override). Stack key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema.",
+      "description": "compatibility for command docs (context: mission/command). Object keyed by stack -> commandStackStatus. Distinct from 'compatibility' above, which messages/enums use (variant-keyed default+override). Stack key validity against schema/vocab.json is checked by scripts/validate.py, not by this schema.",
       "type": "object",
       "minProperties": 1,
-      "additionalProperties": { "$ref": "#/$defs/commandStackStatus" }
+      "additionalProperties": {
+        "$ref": "#/$defs/commandStackStatus"
+      }
     }
   }
 }

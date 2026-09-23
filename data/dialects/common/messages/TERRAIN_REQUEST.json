@@ -6,13 +6,13 @@
   "compatibility": {
     "px4": {
       "default": {
-        "supported": null,
+        "version_added": null,
         "basis": "unknown"
       }
     },
     "ardupilot": {
       "default": {
-        "supported": null,
+        "version_added": null,
         "basis": "unknown"
       }
     }
