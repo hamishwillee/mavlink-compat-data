@@ -5,7 +5,64 @@
   "context": "command",
   "compatibility": {
     "px4": {
-      "frames": {}
+      "frames": {
+        "vtol": {
+          "supported": {
+            "version_added": "≤1.17.0",
+            "basis": "testing",
+            "last_checked_version": "1.17.0"
+          },
+          "accept_nan_or_int32max": {
+            "version_added": "≤1.17.0"
+          },
+          "params": {
+            "1_Pitch": {
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              },
+              "nacks_on_non_sentinel_value": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
+            },
+            "2_Empty": {
+              "supported": {
+                "version_added": "not-applicable"
+              },
+              "nacks_on_non_sentinel_value": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
+            },
+            "4_Yaw": {
+              "supported": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              },
+              "nacks_on_non_sentinel_value": {
+                "version_added": false,
+                "last_checked_version": "1.17.0"
+              }
+            },
+            "5_Latitude": {
+              "supported": {
+                "version_added": "≤1.17.0"
+              }
+            },
+            "6_Longitude": {
+              "supported": {
+                "version_added": "≤1.17.0"
+              }
+            },
+            "7_Altitude": {
+              "supported": {
+                "version_added": "≤1.17.0"
+              }
+            }
+          }
+        }
+      }
     },
     "ardupilot": {
       "frames": {
