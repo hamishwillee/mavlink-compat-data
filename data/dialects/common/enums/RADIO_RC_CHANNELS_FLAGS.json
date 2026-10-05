@@ -1,0 +1,29 @@
+{
+  "$schema": "../../../../schema/enum.schema.json",
+  "name": "RADIO_RC_CHANNELS_FLAGS",
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "version_added": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "version_added": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "values": [
+    {
+      "name": "RADIO_RC_CHANNELS_FLAGS_FAILSAFE",
+      "value": 1
+    },
+    {
+      "name": "RADIO_RC_CHANNELS_FLAGS_OUTDATED",
+      "value": 2
+    }
+  ]
+}
