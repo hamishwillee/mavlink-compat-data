@@ -1,0 +1,46 @@
+{
+  "$schema": "../../../../schema/message.schema.json",
+  "name": "RADIO_RC_CHANNELS",
+  "id": 420,
+  "dialect": "common",
+  "compatibility": {
+    "px4": {
+      "default": {
+        "version_added": null,
+        "basis": "unknown"
+      }
+    },
+    "ardupilot": {
+      "default": {
+        "version_added": null,
+        "basis": "unknown"
+      }
+    }
+  },
+  "fields": [
+    {
+      "name": "target_system",
+      "enumRef": null
+    },
+    {
+      "name": "target_component",
+      "enumRef": null
+    },
+    {
+      "name": "time_last_update_ms",
+      "enumRef": null
+    },
+    {
+      "name": "flags",
+      "enumRef": "RADIO_RC_CHANNELS_FLAGS"
+    },
+    {
+      "name": "count",
+      "enumRef": null
+    },
+    {
+      "name": "channels",
+      "enumRef": null
+    }
+  ]
+}
