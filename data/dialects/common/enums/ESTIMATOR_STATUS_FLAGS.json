@@ -64,6 +64,10 @@
     {
       "name": "ESTIMATOR_ACCEL_ERROR",
       "value": 2048
+    },
+    {
+      "name": "ESTIMATOR_UNINITIALIZED",
+      "value": 4096
     }
   ]
 }
