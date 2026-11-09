@@ -61,6 +61,10 @@
     {
       "name": "camera_device_id",
       "enumRef": null
+    },
+    {
+      "name": "stream_id",
+      "enumRef": null
     }
   ]
 }

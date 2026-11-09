@@ -36,6 +36,10 @@
     {
       "name": "VIDEO_STREAM_TYPE_WHEP",
       "value": 4
+    },
+    {
+      "name": "VIDEO_STREAM_TYPE_SRT",
+      "value": 5
     }
   ]
 }
