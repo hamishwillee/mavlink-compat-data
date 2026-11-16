@@ -7,13 +7,13 @@
     "1_Arc Angle": {
       "enumRef": null
     },
-    "5_Latitude": {
+    "5_Latitude/X": {
       "enumRef": null
     },
-    "6_Longitude": {
+    "6_Longitude/Y": {
       "enumRef": null
     },
-    "7_Altitude": {
+    "7_Altitude/Z": {
       "enumRef": null
     }
   }

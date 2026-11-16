@@ -45,17 +45,17 @@
                 "last_checked_version": "1.17.0"
               }
             },
-            "5_Latitude": {
+            "5_Latitude/X": {
               "supported": {
                 "version_added": "≤1.17.0"
               }
             },
-            "6_Longitude": {
+            "6_Longitude/Y": {
               "supported": {
                 "version_added": "≤1.17.0"
               }
             },
-            "7_Altitude": {
+            "7_Altitude/Z": {
               "supported": {
                 "version_added": "≤1.17.0"
               }

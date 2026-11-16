@@ -45,21 +45,21 @@
                 "last_checked_version": "1.17.0"
               }
             },
-            "5_Latitude": {
+            "5_Latitude/X": {
               "supported": {
                 "version_added": false,
                 "last_checked_version": "1.17.0",
                 "notes": "Takes off at current position to specified altitude"
               }
             },
-            "6_Longitude": {
+            "6_Longitude/Y": {
               "supported": {
                 "version_added": false,
                 "last_checked_version": "1.17.0",
                 "notes": "Takes off at current position to specified altitude"
               }
             },
-            "7_Altitude": {
+            "7_Altitude/Z": {
               "supported": {
                 "version_added": "≤1.17.0"
               }
@@ -87,7 +87,7 @@
                 "version_added": "≤1.17.0"
               }
             },
-            "7_Altitude": {
+            "7_Altitude/Z": {
               "supported": {
                 "version_added": "≤1.17.0"
               }
@@ -131,7 +131,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "5_Latitude": {
+            "5_Latitude/X": {
               "supported": {
                 "version_added": "≤4.7.1"
               },
@@ -140,7 +140,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "6_Longitude": {
+            "6_Longitude/Y": {
               "supported": {
                 "version_added": "≤4.7.1"
               },
@@ -149,7 +149,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "7_Altitude": {
+            "7_Altitude/Z": {
               "supported": {
                 "version_added": "≤4.7.1"
               }
@@ -189,7 +189,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "5_Latitude": {
+            "5_Latitude/X": {
               "supported": {
                 "version_added": "≤4.7.1"
               },
@@ -198,7 +198,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "6_Longitude": {
+            "6_Longitude/Y": {
               "supported": {
                 "version_added": "≤4.7.1"
               },
@@ -207,7 +207,7 @@
                 "last_checked_version": "4.7.1"
               }
             },
-            "7_Altitude": {
+            "7_Altitude/Z": {
               "supported": {
                 "version_added": "≤4.7.1"
               }
